@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">and_krakgo</string>
+    <string name="app_name">KrakGO</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Hasło</string>
+    <string name="forget_password_label">Zapomniałem Hasła</string>
+    <string name="log_in_label">Zaloguj się</string>
+    <string name="register_label">Zarejestruj się</string>
+    <string name="dont_have_account_label">Nie masz konta?</string>
+    <string name="repeat_password_label">Powtórz hasło</string>
+    <string name="dont_have_account_sign_label">Don\'t have an acount? Sign in!</string>
 </resources>

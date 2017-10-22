@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_logo_size">300dp</dimen>
+    <dimen name="logo_medium_size">240dp</dimen>
+    <dimen name="input_text_medium_width">248dp</dimen>
+    <dimen name="medium_button_width">248dp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_big">20sp</dimen>
+    <dimen name="logo_top_margin">94dp</dimen>
+    <dimen name="full_button_height">48dp</dimen>
+</resources>

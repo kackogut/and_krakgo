@@ -8,6 +8,6 @@ public class KrakGoApp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_krak_go_app);
+        setContentView(R.layout.fragment_login);
     }
 }
