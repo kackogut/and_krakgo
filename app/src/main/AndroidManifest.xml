@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeNoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".KrakGoApp"
                   android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -24,9 +24,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".sign_in.SignInActivity"
             android:configChanges="orientation"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
+        <activity android:name=".home.HomeMainActivity"/>
 
     </application>
 
