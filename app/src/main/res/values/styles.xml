@@ -33,6 +33,13 @@
         <item name="android:textColorHighlight">@color/colorWhite</item>
         <item name="android:textColorLink">@color/colorWhite</item>
     </style>
+    <style name="TextLabelStyle">
+        <item name="android:layout_width">@dimen/text_input_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">@dimen/text_input_margin_top</item>
+    </style>
     
     <style name="ButtonTransparentText">
         <item name="android:layout_height">wrap_content</item>
@@ -58,4 +65,6 @@
     </style>
 
     <dimen name="text_size_small">10dp</dimen>
+    <dimen name="text_input_margin_top">16dp</dimen>
+    <dimen name="text_input_width">248dp</dimen>
 </resources>

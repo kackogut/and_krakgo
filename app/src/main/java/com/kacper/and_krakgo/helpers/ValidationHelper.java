@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 public class ValidationHelper {
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+    private static final Pattern EMAIL_PATTERN = Patterns.EMAIL_ADDRESS;
 
     public static String validateText(Context context, String text, InputTypes inputType){
         if(text.length() > inputType.getmMaximumLength())
@@ -27,15 +28,17 @@ public class ValidationHelper {
     public static Pattern getPatternByType(InputTypes type){
         switch (type){
             case PASSWORD:
+            case RETYPEPASSWORD:
                 return Pattern.compile(PASSWORD_PATTERN);
             default:
             case EMAIL:
-                return Patterns.EMAIL_ADDRESS;
+                return EMAIL_PATTERN;
         }
     }
     public static int getMessageByType(InputTypes type){
         switch (type){
             case PASSWORD:
+            case RETYPEPASSWORD:
                 return R.string.password_field_error;
             case EMAIL:
                 return R.string.error_email_field;

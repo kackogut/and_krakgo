@@ -18,4 +18,7 @@ public class ToastMessageHelper {
     public static void showShortToast(Context context, String textToShow){
         showToast(context, textToShow, false);
     }
+    public static void showShortToast(Context context, int resourceId){
+        showShortToast(context, context.getString(resourceId));
+    }
 }

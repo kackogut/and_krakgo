@@ -52,14 +52,10 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new LoginPresenter(this);
-
-
     }
 
     @OnClick(R.id.login_button)
     void onLoginClicked() {
-
-
         if((mEmailInputLayout.getEditText().length() > 0 && mPasswordInputLayout.getEditText().length() > 0)
                 && (!mEmailInputLayout.isErrorEnabled() || !mPasswordInputLayout.isErrorEnabled())) {
             showProgress(true);

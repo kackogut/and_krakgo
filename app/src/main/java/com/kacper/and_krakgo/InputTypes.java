@@ -6,7 +6,10 @@ package com.kacper.and_krakgo;
 
 public enum InputTypes {
     PASSWORD(6,30),
-    EMAIL(4,70);
+    EMAIL(4,70),
+    NAME(1, 70),
+    SURNAME(1,70),
+    RETYPEPASSWORD(6,30);
 
     private int mMinimumLength;
     private int mMaximumLength;

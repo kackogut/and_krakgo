@@ -83,7 +83,6 @@
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/forgot_password_text_view"
             android:id="@+id/appCompatCheckBox"
-            android:layout_marginLeft="0dp"
             app:layout_constraintLeft_toLeftOf="@+id/forgot_password_text_view"/>
 
         <FrameLayout

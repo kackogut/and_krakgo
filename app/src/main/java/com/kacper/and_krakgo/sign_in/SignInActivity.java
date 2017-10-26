@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.kacper.and_krakgo.R;
 import com.kacper.and_krakgo.helpers.FragmentHelper;
 import com.kacper.and_krakgo.helpers.SnackbarHelper;
+import com.kacper.and_krakgo.rxbus.NextButtonEvent;
 import com.kacper.and_krakgo.sign_in.register.RegisterFragment;
 import com.kacper.and_krakgo.sign_in.login.LoginFragment;
 
@@ -45,6 +46,8 @@ public class SignInActivity extends AppCompatActivity{
         if(mFragment instanceof LoginFragment){
             mFragment = new RegisterFragment();
             FragmentHelper.changeFragments(getSupportFragmentManager(), mFragment, RegisterFragment.TAG);
+        } else if(mFragment instanceof RegisterFragment){
+            NextButtonEvent.publish(new Object());
         }
         verifyView();
     }

@@ -19,4 +19,13 @@
     <string name="error_default">Błąd</string>
     <string name="error_fields_empty_or_invalid">Niektóre pola są puste lub niepoprawne</string>
     <string name="remeber_me">Zapamiętaj mnie</string>
+    <string name="name_label">Imię</string>
+    <string name="surname_label">Nazwisko</string>
+    <string name="dob_label">Data urodzenia</string>
+    <string name="above_18_label">Mam ukończone 18 lat</string>
+    <string name="terms_of_condition">Regulamin</string>
+    <string name="terms_accepted_checkbox_label">Przeczytałem i akceptuje regulamin</string>
+    <string name="password_dont_match">Hasła się nie zgadzają</string>
+    <string name="you_have_to_be_above_18">Musisz mieć powyżej 18 lat aby założyć konto</string>
+    <string name="you_have_to_accept_terms">Musisz zakceptować regulamin</string>
 </resources>
