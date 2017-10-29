@@ -91,7 +91,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void onSignUpCompleted() {
-        FragmentHelper.changeFragments(getFragmentManager(), new RegisterPart2Fragment(), RegisterPart2Fragment.TAG);
+        FragmentHelper.removeAndChangeFragment(getFragmentManager(), new RegisterPart2Fragment());
     }
 
     @Override

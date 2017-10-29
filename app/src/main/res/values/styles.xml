@@ -64,7 +64,15 @@
         <item name="android:textSize">12dp</item>
     </style>
 
-    <dimen name="text_size_small">10dp</dimen>
-    <dimen name="text_input_margin_top">16dp</dimen>
-    <dimen name="text_input_width">248dp</dimen>
+    <style name="CircleCardImage">
+        <item name="android:layout_width">160dp</item>
+        <item name="android:layout_height">160dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:elevation">24dp</item>
+        <item name="android:innerRadius">0dp</item>
+        <item name="android:shape">ring</item>
+        <item name="android:thicknessRatio">1.9</item>
+    </style>
+
+
 </resources>

@@ -24,6 +24,12 @@ public class FragmentHelper {
                 .commit();
 
     }
+    public static void removeAndChangeFragment(FragmentManager fragmentManager, Fragment fragment){
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                .commit();
+    }
     public static Fragment getVisibleFragment(FragmentManager fragmentManager){
         return fragmentManager.findFragmentById(R.id.fragment_container);
     }

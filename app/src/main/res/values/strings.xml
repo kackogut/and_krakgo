@@ -28,4 +28,7 @@
     <string name="password_dont_match">Hasła się nie zgadzają</string>
     <string name="you_have_to_be_above_18">Musisz mieć powyżej 18 lat aby założyć konto</string>
     <string name="you_have_to_accept_terms">Musisz zakceptować regulamin</string>
+    <string name="error_gallery_request">You must allow application to access gallery before continuing</string>
+    <string name="error_no_avatar">Aby kontynuować musisz wybrać swoje zdjęcie</string>
+    <string name="account_created">Utworzono konto</string>
 </resources>
