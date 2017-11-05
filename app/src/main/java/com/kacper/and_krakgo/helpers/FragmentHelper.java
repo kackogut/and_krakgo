@@ -24,6 +24,9 @@ public class FragmentHelper {
                 .commit();
 
     }
+    public static void changeFragments(FragmentManager fragmentManager, Fragment fragment){
+        changeFragments(fragmentManager,fragment, fragment.getClass().getSimpleName());
+    }
     public static void removeAndChangeFragment(FragmentManager fragmentManager, Fragment fragment){
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)

@@ -31,4 +31,9 @@
     <string name="error_gallery_request">You must allow application to access gallery before continuing</string>
     <string name="error_no_avatar">Aby kontynuować musisz wybrać swoje zdjęcie</string>
     <string name="account_created">Utworzono konto</string>
+    <string name="map">Mapa</string>
+    <string name="chat">Chat</string>
+    <string name="favourites">Ulubione</string>
+    <string name="profile">Profil</string>
+    <string name="avatar_label">Awatar</string>
 </resources>
