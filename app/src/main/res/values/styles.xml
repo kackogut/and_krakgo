@@ -40,6 +40,10 @@
         <item name="android:textSize">20sp</item>
         <item name="android:layout_marginTop">@dimen/text_input_margin_top</item>
     </style>
+    <style name="TextLabelBigBold" parent="TextLabel">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     
     <style name="ButtonTransparentText">
         <item name="android:layout_height">wrap_content</item>

@@ -36,4 +36,10 @@
     <string name="favourites">Ulubione</string>
     <string name="profile">Profil</string>
     <string name="avatar_label">Awatar</string>
+    <string name="reset_password_label">Podaj swoj adres email, na który zostanie wysłane nowe hasło</string>
+    <string name="reset_password_button">Restartuj hasło</string>
+    <string name="password_change_success">Email z nowym hasłem został wysłany</string>
+    <string name="press_back_again_to_exit">Naciśnij jeszcze raz wstecz aby wyjść</string>
+    <string name="about_me">O mnie</string>
+    <string name="auto_login_error">Automatyczne logowanie nie powiodło się</string>
 </resources>

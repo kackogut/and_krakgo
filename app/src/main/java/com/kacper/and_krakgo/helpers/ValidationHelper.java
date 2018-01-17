@@ -25,7 +25,7 @@ public class ValidationHelper {
             return context.getString(getMessageByType(inputType));
         return null;
     }
-    public static Pattern getPatternByType(InputTypes type){
+    private static Pattern getPatternByType(InputTypes type){
         switch (type){
             case PASSWORD:
             case RETYPEPASSWORD:
@@ -35,7 +35,7 @@ public class ValidationHelper {
                 return EMAIL_PATTERN;
         }
     }
-    public static int getMessageByType(InputTypes type){
+    private static int getMessageByType(InputTypes type){
         switch (type){
             case PASSWORD:
             case RETYPEPASSWORD:
