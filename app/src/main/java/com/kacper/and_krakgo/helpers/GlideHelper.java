@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -19,17 +20,23 @@ import com.bumptech.glide.request.target.Target;
  */
 
 public class GlideHelper {
-    public static void loadWithProgress(Context context, ImageView imageView, ProgressBar progressBar, Uri photoUri){
+    public static void loadWithProgress(Context context, final ImageView imageView, final ProgressBar progressBar, Uri photoUri){
+        progressBar.setVisibility(View.VISIBLE);
+        imageView.setEnabled(false);
         Glide.with(context)
                 .load(photoUri)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        imageView.setEnabled(true);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        imageView.setEnabled(true);
                         return false;
                     }
                 })

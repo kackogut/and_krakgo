@@ -42,4 +42,9 @@
     <string name="press_back_again_to_exit">Naciśnij jeszcze raz wstecz aby wyjść</string>
     <string name="about_me">O mnie</string>
     <string name="auto_login_error">Automatyczne logowanie nie powiodło się</string>
+    <string name="log_out_label">Wyloguj się</string>
+    <string name="save_label">Zapisz</string>
+    <string name="map_status_visible">Widoczny</string>
+    <string name="map_status_invisible">Niewidoczny</string>
+    <string name="map_status_inviting">Zapraszam na piwko</string>
 </resources>

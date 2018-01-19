@@ -63,6 +63,22 @@
                 android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            style="@style/TextLabelStyle"
+            android:theme="@style/TextLabel"
+            android:id="@+id/register_dob_input"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_surname_input">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/EditTextNotEnabled"
+                android:hint="@string/dob_label"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

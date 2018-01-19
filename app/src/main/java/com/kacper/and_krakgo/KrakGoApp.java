@@ -39,4 +39,16 @@ public class KrakGoApp extends AppCompatActivity {
     public static Context getApplicationCtx(){
         return sInstance.getApplicationContext();
     }
+
+    public static FirebaseUser getCurrentUser(){
+        if(sUser == null)
+            sUser = FirebaseAuth.getInstance().getCurrentUser();
+        return sUser;
+    }
+
+    public static void logout(){
+        FirebaseAuth.getInstance().signOut();
+        sUser = null;
+        SharedPreferencesHelper.saveToSharedPreferences(SharedPreferencesHelper.REMEMBER_USER, false);
+    }
 }
