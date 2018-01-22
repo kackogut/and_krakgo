@@ -8,13 +8,15 @@ import android.net.Uri;
 
 public interface RegisterPart2Contract {
     interface Presenter {
-        void sendPictureToServer(Uri mPhotoUri);
+        void saveUserDetails(Uri mPhotoUri);
         void updateUserProfile(String name, Uri photoUrl);
+        void updateUserDetails(Long dobTime);
     }
 
     interface View {
         void photoUploadFinished(Uri downloadUrl);
         void userProfilUpdated();
+        void userDetailsUpdated();
         void showError(Exception e);
     }
 }

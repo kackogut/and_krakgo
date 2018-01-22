@@ -17,5 +17,9 @@
     <color name="colorTabRecent">#2687d6</color>
     <color name="colorTabFavourites">#dd2525</color>
 
+    <color name="mapStatusVisible">#0ead08</color>
+    <color name="mapStatusInvisible">#ea070e</color>
+    <color name="mapStatusInviting">#0262fc</color>
+
     <color name="tealTransparent">#00796BCC</color>
 </resources>

@@ -1,4 +1,10 @@
 <resources>
+
+    <plurals name="age_plural">
+        <item quantity="few">Wiek: %d lata</item>
+        <item quantity="other">Wiek: %d lat</item>
+    </plurals>
+
     <string name="app_name">KrakGO</string>
     <string name="email_label">Email</string>
     <string name="password_label">Hasło</string>
@@ -47,4 +53,6 @@
     <string name="map_status_visible">Widoczny</string>
     <string name="map_status_invisible">Niewidoczny</string>
     <string name="map_status_inviting">Zapraszam na piwko</string>
+    <string name="error_dob_not_picked">Aby korzystać z aplikacji musisz podać datę urodzenia</string>
+    <string name="user_details_saved">Dane użytkownika zapisane pomyślnie</string>
 </resources>

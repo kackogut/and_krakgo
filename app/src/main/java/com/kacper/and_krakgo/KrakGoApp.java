@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.kacper.and_krakgo.helpers.SharedPreferencesHelper;
 import com.kacper.and_krakgo.helpers.ToastMessageHelper;
 import com.kacper.and_krakgo.screens.home.HomeMainActivity;
@@ -15,11 +17,13 @@ import com.kacper.and_krakgo.screens.sign_in.SignInActivity;
 public class KrakGoApp extends AppCompatActivity {
     private static KrakGoApp sInstance;
     private static FirebaseUser sUser;
+    private static DatabaseReference sFirebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sInstance = this;
+        sFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
         Intent intent = null;
         if(SharedPreferencesHelper.getBoolean(SharedPreferencesHelper.REMEMBER_USER)) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -50,5 +54,8 @@ public class KrakGoApp extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         sUser = null;
         SharedPreferencesHelper.saveToSharedPreferences(SharedPreferencesHelper.REMEMBER_USER, false);
+    }
+    public static DatabaseReference getFirebaseReference(){
+        return sFirebaseDatabase;
     }
 }

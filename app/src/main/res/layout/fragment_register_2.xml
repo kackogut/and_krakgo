@@ -10,33 +10,35 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/textView"
+            style="@style/TextLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextLabel"
-            android:text="@string/avatar_label"
-            android:id="@+id/textView"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="@+id/register_name_input"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="32dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/avatar_label"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/register_name_input"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintRight_toRightOf="@+id/register_name_input"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_image"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:id="@+id/avatar_image"
-            android:src="@drawable/ic_user_logo_register"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="8dp"
+            android:src="@drawable/ic_user_logo_register"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_name_input"
             style="@style/TextLabelStyle"
             android:theme="@style/TextLabel"
-            android:id="@+id/register_name_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/avatar_image">
@@ -49,9 +51,9 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_surname_input"
             style="@style/TextLabelStyle"
             android:theme="@style/TextLabel"
-            android:id="@+id/register_surname_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/register_name_input">
@@ -63,31 +65,27 @@
                 android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            style="@style/TextLabelStyle"
+        <EditText
+            android:id="@+id/et_register_dob_input"
+            style="@style/EditTextNotEnabled"
+            android:layout_marginTop="24dp"
+            android:text="@string/dob_label"
             android:theme="@style/TextLabel"
-            android:id="@+id/register_dob_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/register_surname_input">
 
-            <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextNotEnabled"
-                android:hint="@string/dob_label"
-                android:inputType="text"/>
-        </android.support.design.widget.TextInputLayout>
+        </EditText>
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:id="@+id/progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

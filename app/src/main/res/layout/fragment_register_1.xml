@@ -66,16 +66,7 @@
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/above_18_label"
-            android:buttonTint="@color/colorWhite"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/register_retype_password_input"
-            android:id="@+id/above_18_checkbox"
-            app:layout_constraintLeft_toLeftOf="@+id/register_retype_password_input"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,8 +75,8 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_medium"
             android:id="@+id/terms_textview"
-            app:layout_constraintTop_toBottomOf="@+id/above_18_checkbox"
-            app:layout_constraintLeft_toLeftOf="@+id/above_18_checkbox"/>
+            app:layout_constraintTop_toBottomOf="@+id/register_retype_password_input"
+            app:layout_constraintLeft_toLeftOf="@+id/register_retype_password_input"/>
         <android.support.v7.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

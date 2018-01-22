@@ -1,5 +1,6 @@
 package com.kacper.and_krakgo.screens.sign_in.register_part2;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,14 +10,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.kacper.and_krakgo.R;
+import com.kacper.and_krakgo.helpers.DateHelper;
+import com.kacper.and_krakgo.helpers.PhotoHelper;
 import com.kacper.and_krakgo.helpers.ToastMessageHelper;
 import com.kacper.and_krakgo.screens.home.HomeMainActivity;
 import com.kacper.and_krakgo.rxbus.SignInEvents;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,17 +38,20 @@ import static android.app.Activity.RESULT_OK;
  * Created by kacper on 27/10/2017.
  */
 
-public class RegisterPart2Fragment extends Fragment implements RegisterPart2Contract.View {
+public class RegisterPart2Fragment extends Fragment implements RegisterPart2Contract.View,
+        DatePickerDialog.OnDateSetListener {
     @BindView(R.id.register_name_input) TextInputLayout mNameInputLayout;
     @BindView(R.id.register_surname_input) TextInputLayout mSurnameInputLayout;
     @BindView(R.id.avatar_image) CircleImageView mAvatarImageView;
     @BindView(R.id.progress_bar) ProgressBar mProgressBar;
+    @BindView(R.id.et_register_dob_input) EditText mDoBEditText;
 
     public static final String TAG = RegisterPart2Fragment.class.getSimpleName();
     private RegisterPart2Presenter mPresenter;
 
     private Uri mPhotoUri;
     private boolean isBottomButtonEnabled = true;
+    private Date mDateTime;
 
     @Nullable
     @Override
@@ -49,18 +60,6 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         ButterKnife.bind(this, rootView);
         setListeners();
         return rootView;
-    }
-
-    private void goToNextPage() {
-        if (mPhotoUri == null) {
-            ToastMessageHelper.showShortToast(R.string.error_no_avatar);
-        } else if (mNameInputLayout.isErrorEnabled() || mSurnameInputLayout.isErrorEnabled()) {
-            ToastMessageHelper.showShortToast(R.string.error_fields_empty_or_invalid);
-        } else {
-            isBottomButtonEnabled = false;
-            showProgress();
-            mPresenter.sendPictureToServer(mPhotoUri);
-        }
     }
 
     @Override
@@ -76,15 +75,39 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         });
     }
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        mDateTime = calendar.getTime();
+        mDoBEditText.setText(DateHelper.formatDate(mDateTime));
+    }
+
+    private void goToNextPage() {
+        if (mPhotoUri == null) {
+            ToastMessageHelper.showShortToast(R.string.error_no_avatar);
+        } else if (mNameInputLayout.isErrorEnabled() || mSurnameInputLayout.isErrorEnabled()) {
+            ToastMessageHelper.showShortToast(R.string.error_fields_empty_or_invalid);
+        } else if ( !(mDoBEditText.length() > 0)) {
+            ToastMessageHelper.showShortToast(R.string.error_dob_not_picked);
+        } else {
+            isBottomButtonEnabled = false;
+            showProgress();
+            mPresenter.saveUserDetails(mPhotoUri);
+        }
+    }
+
     private void setListeners() {
     }
 
     @OnClick(R.id.avatar_image)
     void onUploadAvatarClick() {
-        CropImage.activity()
-                .setCropShape(CropImageView.CropShape.OVAL)
-                .setAspectRatio(1, 1)
-                .start(getContext(), this);
+        PhotoHelper.startCircleCropPhoto(this);
+    }
+
+    @OnClick(R.id.et_register_dob_input)
+    void onChangeDateClicked() {
+        DateHelper.getDOBDialog(getContext(), this).show();
     }
 
     @Override
@@ -109,6 +132,11 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
 
     @Override
     public void userProfilUpdated() {
+        mPresenter.updateUserDetails(mDateTime.getTime());
+    }
+
+    @Override
+    public void userDetailsUpdated() {
         ToastMessageHelper.showShortToast(R.string.account_created);
         Intent intent = new Intent(getContext(), HomeMainActivity.class);
         startActivity(intent);
@@ -127,9 +155,12 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         mNameInputLayout.setEnabled(isBottomButtonEnabled);
         mSurnameInputLayout.setEnabled(isBottomButtonEnabled);
         mAvatarImageView.setEnabled(isBottomButtonEnabled);
+        mDoBEditText.setEnabled(isBottomButtonEnabled);
         if (isBottomButtonEnabled)
             mProgressBar.setVisibility(View.GONE);
         else
             mProgressBar.setVisibility(View.VISIBLE);
     }
+
+
 }

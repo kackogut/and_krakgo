@@ -42,6 +42,8 @@
         <item name="android:layout_marginTop">@dimen/text_input_margin_top</item>
     </style>
     <style name="EditTextNotEnabled">
+        <item name="android:layout_width">@dimen/text_input_width</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>

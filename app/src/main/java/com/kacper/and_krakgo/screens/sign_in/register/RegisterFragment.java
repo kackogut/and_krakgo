@@ -33,7 +33,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     @BindView(R.id.register_email_input) TextInputLayout mEmailInput;
     @BindView(R.id.register_password_input) TextInputLayout mPasswordInput;
     @BindView(R.id.register_retype_password_input) TextInputLayout mRetypePasswordInput;
-    @BindView(R.id.above_18_checkbox) AppCompatCheckBox mAbove18CheckBox;
     @BindView(R.id.terms_accepted_checkbox) AppCompatCheckBox mtermsAcceptedCheckbox;
     @BindView(R.id.progress_bar) ProgressBar mProgressBar;
 
@@ -66,8 +65,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         if (!(mEmailInput.getEditText().length() > 0 && mPasswordInput.getEditText().length() > 0 && mRetypePasswordInput.getEditText().length() > 0) ||
                 mEmailInput.isErrorEnabled() || mPasswordInput.isErrorEnabled() || mRetypePasswordInput.isErrorEnabled()) {
             ToastMessageHelper.showShortToast(R.string.error_fields_empty_or_invalid);
-        } else if (!mAbove18CheckBox.isChecked()) {
-            ToastMessageHelper.showShortToast(R.string.you_have_to_be_above_18);
         } else if (!mtermsAcceptedCheckbox.isChecked()) {
             ToastMessageHelper.showShortToast(R.string.you_have_to_accept_terms);
         } else if (isBottomButtonEnabled) {
@@ -82,7 +79,6 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         mEmailInput.setEnabled(isBottomButtonEnabled);
         mPasswordInput.setEnabled(isBottomButtonEnabled);
         mRetypePasswordInput.setEnabled(isBottomButtonEnabled);
-        mAbove18CheckBox.setEnabled(isBottomButtonEnabled);
         mtermsAcceptedCheckbox.setEnabled(isBottomButtonEnabled);
         if (isBottomButtonEnabled)
             mProgressBar.setVisibility(View.GONE);
