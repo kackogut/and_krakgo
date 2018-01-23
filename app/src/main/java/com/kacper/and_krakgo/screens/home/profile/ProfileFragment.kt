@@ -19,10 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 
 import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.R
-import com.kacper.and_krakgo.helpers.DateHelper
-import com.kacper.and_krakgo.helpers.GlideHelper
-import com.kacper.and_krakgo.helpers.PhotoHelper
-import com.kacper.and_krakgo.helpers.ToastMessageHelper
+import com.kacper.and_krakgo.helpers.*
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpFragment
 import com.kacper.and_krakgo.screens.sign_in.SignInActivity
@@ -50,6 +47,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         showProgress(true)
         setListener()
         inflateUserData()
+        SnackbarHelper.showError("heheheh", rl_profile_main_layout)
     }
     override fun userSaveComplete() {
         showProgress(false)
@@ -61,7 +59,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         showProgress(false)
         progress_bar_save.visibility = View.GONE
         progress_bar_logout.visibility = View.GONE
-        showError(error)
+
     }
 
     override fun showUserDetails(userDetails: UserDetails?) {
@@ -79,8 +77,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == RESULT_OK) {
+                showProgress(true)
                 mPresenter.updateUserAvatar(result.uri)
-                cv_profile_avatar.setImageURI(result.uri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 ToastMessageHelper.showShortToast(result.error.toString())
             }

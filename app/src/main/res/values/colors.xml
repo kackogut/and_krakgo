@@ -11,11 +11,8 @@
     <color name="colorHeart">#FF3C3C</color>
     <color name="colorHeartDark">#E52423</color>
 
-    <color name="colorTabMap">#12a832</color>
-    <color name="colorTabChat">#edd550</color>
-    <color name="colorTabProfile">#aa18ad</color>
-    <color name="colorTabRecent">#2687d6</color>
-    <color name="colorTabFavourites">#dd2525</color>
+    <color name="colorBottomTab">#10212d</color>
+    <color name="colorGreyUnselected">#365780</color>
 
     <color name="mapStatusVisible">#0ead08</color>
     <color name="mapStatusInvisible">#ea070e</color>

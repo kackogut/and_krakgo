@@ -2,6 +2,7 @@ package com.kacper.and_krakgo.mvp
 
 import android.support.v4.app.Fragment
 import android.os.Bundle
+import com.kacper.and_krakgo.helpers.SnackbarHelper
 import java.lang.Exception
 
 /**
@@ -22,7 +23,6 @@ abstract class MvpFragment<in V : MvpView, T : MvpPresenter<V>> : Fragment(), Mv
     }
 
     override fun showError(error: Exception) {
-
     }
 
     override fun showMessage(messageId: Int) {

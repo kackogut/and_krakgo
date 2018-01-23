@@ -37,10 +37,6 @@
     <string name="error_gallery_request">You must allow application to access gallery before continuing</string>
     <string name="error_no_avatar">Aby kontynuować musisz wybrać swoje zdjęcie</string>
     <string name="account_created">Utworzono konto</string>
-    <string name="map">Mapa</string>
-    <string name="chat">Chat</string>
-    <string name="favourites">Ulubione</string>
-    <string name="profile">Profil</string>
     <string name="avatar_label">Awatar</string>
     <string name="reset_password_label">Podaj swoj adres email, na który zostanie wysłane nowe hasło</string>
     <string name="reset_password_button">Restartuj hasło</string>
@@ -55,4 +51,9 @@
     <string name="map_status_inviting">Zapraszam na piwko</string>
     <string name="error_dob_not_picked">Aby korzystać z aplikacji musisz podać datę urodzenia</string>
     <string name="user_details_saved">Dane użytkownika zapisane pomyślnie</string>
+    <string name="recent">Ostatnie</string>
+    <string name="map">Mapa</string>
+    <string name="messages">Wiadomości</string>
+    <string name="favourites">Ulubione</string>
+    <string name="profile">Profil</string>
 </resources>

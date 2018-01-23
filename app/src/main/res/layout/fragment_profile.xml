@@ -1,290 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_profile_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorBottomTab">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/pb_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/margin_size_very_big"
-            android:layout_marginRight="@dimen/margin_size_very_big"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cv_profile_avatar"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="22dp"
-                android:src="@drawable/ic_user_logo_register"/>
-
-            <TextView
-                android:id="@+id/tv_profile_display_name"
-                style="@style/TextLabelBigBold"
+            <ProgressBar
+                android:id="@+id/pb_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_size_big"
-                tools:text="Jan Kowalski"/>
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/tv_profile_email"
-                style="@style/TextLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_size_big"
-                tools:text="jan_kowalski@gmail.com"/>
-
-
-            <View style="@style/separator"/>
-
-            <TextView
-                android:id="@+id/tv_profile_age"
-                style="@style/TextLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_size_big"
-                tools:text="Wiek: 23 lata"/>
-
-            <View style="@style/separator"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/ti_profile_dob_input"
-                style="@style/TextLabelStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:theme="@style/TextLabel">
-
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/about_me"
-                    android:inputType="textMultiLine"
-                    android:maxLines="5"
-                    android:theme="@style/EditTextNotEnabled"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
-                android:id="@+id/profile_expendable_main"
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/margin_size_very_big"
+                android:layout_marginRight="@dimen/margin_size_very_big"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/iv_profile_map_status_circle"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="@dimen/margin_size_big"
-                    android:layout_marginLeft="@dimen/margin_size_medium"
-                    android:layout_marginTop="@dimen/margin_size_big"
-                    android:src="@drawable/full_circle"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cv_profile_avatar"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="22dp"
+                    android:src="@drawable/ic_user_logo_register"/>
 
                 <TextView
-                    android:id="@+id/tv_profile_map_status_label"
+                    android:id="@+id/tv_profile_display_name"
+                    style="@style/TextLabelBigBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_size_big"
+                    tools:text="Jan Kowalski"/>
+
+                <TextView
+                    android:id="@+id/tv_profile_email"
                     style="@style/TextLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_gravity="center"
-                    tools:text="Dostępny"/>
-
-                <ImageView
-                    android:id="@+id/iv_profile_status_arrow"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/margin_size_medium"
-                    android:animateLayoutChanges="true"
-                    android:src="@drawable/arrow_down">
-                </ImageView>
-
-            </RelativeLayout>
-
-            <View style="@style/separator"/>
-
-            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-                android:id="@+id/profile_expendable_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:ael_duration="500"
-                app:ael_expanded="false"
-                app:ael_interpolator="bounce"
-                app:ael_orientation="vertical">
-                <LinearLayout
-                    android:id="@+id/ll_map_status_invisible"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ll_map_status_visible"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:text="@string/map_status_invisible"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:src="@drawable/full_circle"
-                            android:tint="@color/mapStatusInvisible"/>
-
-                    </RelativeLayout>
-
-                    <View style="@style/separator"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_map_status_visible"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:text="@string/map_status_visible"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:src="@drawable/full_circle"
-                            android:tint="@color/mapStatusVisible"/>
-
-                    </RelativeLayout>
-
-                    <View style="@style/separator"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_map_status_inviting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ll_map_status_invisible"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:text="@string/map_status_inviting"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_margin="@dimen/margin_size_medium"
-                            android:src="@drawable/full_circle"
-                            android:tint="@color/mapStatusInviting"/>
-
-                    </RelativeLayout>
-
-                    <View style="@style/separator"/>
-
-                </LinearLayout>
-            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+                    android:layout_margin="@dimen/margin_size_big"
+                    tools:text="jan_kowalski@gmail.com"/>
 
 
-            <FrameLayout
-                android:id="@+id/fl_save_button"
-                style="@style/RoundButton"
-                android:layout_width="@dimen/medium_button_width"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:padding="8dp">
+                <View style="@style/separator"/>
 
                 <TextView
-                    style="@style/ButtonTransparentText"
-                    android:text="@string/save_label"/>
+                    android:id="@+id/tv_profile_age"
+                    style="@style/TextLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_size_big"
+                    tools:text="Wiek: 23 lata"/>
 
-                <ProgressBar
-                    android:id="@+id/progress_bar_save"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center|right"
-                    android:visibility="gone"/>
-            </FrameLayout>
+                <View style="@style/separator"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ti_profile_dob_input"
+                    style="@style/TextLabelStyle"
+                    android:layout_width="match_parent"
+                    android:theme="@style/TextLabel">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/about_me"
+                        android:inputType="textMultiLine"
+                        android:maxLines="5"
+                        android:theme="@style/EditTextNotEnabled"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <RelativeLayout
+                    android:id="@+id/profile_expendable_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_profile_map_status_circle"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="@dimen/margin_size_big"
+                        android:layout_marginLeft="@dimen/margin_size_medium"
+                        android:layout_marginTop="@dimen/margin_size_big"
+                        android:src="@drawable/full_circle"/>
+
+                    <TextView
+                        android:id="@+id/tv_profile_map_status_label"
+                        style="@style/TextLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        tools:text="Dostępny"/>
+
+                    <ImageView
+                        android:id="@+id/iv_profile_status_arrow"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_size_medium"
+                        android:animateLayoutChanges="true"
+                        android:src="@drawable/arrow_down">
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <View style="@style/separator"/>
+
+                <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                    android:id="@+id/profile_expendable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:ael_duration="500"
+                    app:ael_expanded="false"
+                    app:ael_interpolator="bounce"
+                    app:ael_orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_map_status_invisible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_map_status_visible"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:text="@string/map_status_invisible"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:src="@drawable/full_circle"
+                                android:tint="@color/mapStatusInvisible"/>
+
+                        </RelativeLayout>
+
+                        <View style="@style/separator"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_map_status_visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:text="@string/map_status_visible"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:src="@drawable/full_circle"
+                                android:tint="@color/mapStatusVisible"/>
+
+                        </RelativeLayout>
+
+                        <View style="@style/separator"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_map_status_inviting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_map_status_invisible"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/TextLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:text="@string/map_status_inviting"/>
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="@dimen/margin_size_medium"
+                                android:src="@drawable/full_circle"
+                                android:tint="@color/mapStatusInviting"/>
+
+                        </RelativeLayout>
+
+                        <View style="@style/separator"/>
+
+                    </LinearLayout>
+                </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
 
-            <FrameLayout
-                android:id="@+id/fl_logout_button"
-                style="@style/RoundButton"
-                android:layout_width="@dimen/medium_button_width"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:padding="8dp">
+                <FrameLayout
+                    android:id="@+id/fl_save_button"
+                    style="@style/RoundButton"
+                    android:layout_width="@dimen/medium_button_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:padding="8dp">
 
-                <TextView
-                    style="@style/ButtonTransparentText"
-                    android:text="@string/log_out_label"/>
+                    <TextView
+                        style="@style/ButtonTransparentText"
+                        android:text="@string/save_label"/>
 
-                <ProgressBar
-                    android:id="@+id/progress_bar_logout"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center|right"
-                    android:visibility="gone"/>
-            </FrameLayout>
+                    <ProgressBar
+                        android:id="@+id/progress_bar_save"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center|right"
+                        android:visibility="gone"/>
+                </FrameLayout>
 
-        </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
+
+                <FrameLayout
+                    android:id="@+id/fl_logout_button"
+                    style="@style/RoundButton"
+                    android:layout_width="@dimen/medium_button_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:padding="8dp">
+
+                    <TextView
+                        style="@style/ButtonTransparentText"
+                        android:text="@string/log_out_label"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar_logout"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center|end"
+                        android:visibility="gone"/>
+                </FrameLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

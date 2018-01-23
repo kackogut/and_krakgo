@@ -88,7 +88,7 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
             ToastMessageHelper.showShortToast(R.string.error_no_avatar);
         } else if (mNameInputLayout.isErrorEnabled() || mSurnameInputLayout.isErrorEnabled()) {
             ToastMessageHelper.showShortToast(R.string.error_fields_empty_or_invalid);
-        } else if ( !(mDoBEditText.length() > 0)) {
+        } else if ( !(mDoBEditText.length() > 0) && !mDoBEditText.getText().toString().equals(getString(R.string.dob_label))) {
             ToastMessageHelper.showShortToast(R.string.error_dob_not_picked);
         } else {
             isBottomButtonEnabled = false;
