@@ -7,7 +7,7 @@
     android:id="@+id/rl_profile_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBottomTab">
+    android:background="@color/colorBackground">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -87,11 +87,18 @@
                         android:theme="@style/EditTextNotEnabled"/>
                 </android.support.design.widget.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/map_visibility_label"/>
+
                 <RelativeLayout
                     android:id="@+id/profile_expendable_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="4dp"
                     android:orientation="horizontal">
 
                     <ImageView

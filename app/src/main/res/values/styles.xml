@@ -57,7 +57,7 @@
     <style name="ButtonTransparentText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBackground</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textStyle">bold</item>
@@ -68,7 +68,7 @@
         <item name="android:layout_height">@dimen/full_button_height</item>
         <item name="android:background">@color/colorBeer</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBackground</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:textStyle">bold</item>
     </style>

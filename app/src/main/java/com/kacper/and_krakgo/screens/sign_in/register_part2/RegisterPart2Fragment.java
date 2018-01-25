@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.kacper.and_krakgo.R;
 import com.kacper.and_krakgo.helpers.DateHelper;
@@ -45,6 +46,7 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
     @BindView(R.id.avatar_image) CircleImageView mAvatarImageView;
     @BindView(R.id.progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.et_register_dob_input) EditText mDoBEditText;
+    @BindView(R.id.tv_dob_label) TextView mDOBLabel;
 
     public static final String TAG = RegisterPart2Fragment.class.getSimpleName();
     private RegisterPart2Presenter mPresenter;
@@ -80,6 +82,7 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         mDateTime = calendar.getTime();
+        mDOBLabel.setVisibility(View.VISIBLE);
         mDoBEditText.setText(DateHelper.formatDate(mDateTime));
     }
 

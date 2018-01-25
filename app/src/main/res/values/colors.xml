@@ -11,7 +11,7 @@
     <color name="colorHeart">#FF3C3C</color>
     <color name="colorHeartDark">#E52423</color>
 
-    <color name="colorBottomTab">#10212d</color>
+    <color name="colorBackground">#1e1e2b</color>
     <color name="colorGreyUnselected">#365780</color>
 
     <color name="mapStatusVisible">#0ead08</color>

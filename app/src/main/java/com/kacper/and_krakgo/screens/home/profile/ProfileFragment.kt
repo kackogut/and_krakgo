@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -35,8 +36,10 @@ import java.util.*
 
 class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presenter>(),
         DatePickerDialog.OnDateSetListener, ProfileContract.View {
+
     override var mPresenter: ProfileContract.Presenter = ProfilePresenter()
     private var mUserDetails: UserDetails? = null
+    private var mPhotoUri : Uri? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
@@ -47,7 +50,6 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         showProgress(true)
         setListener()
         inflateUserData()
-        SnackbarHelper.showError("heheheh", rl_profile_main_layout)
     }
     override fun userSaveComplete() {
         showProgress(false)
@@ -59,7 +61,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         showProgress(false)
         progress_bar_save.visibility = View.GONE
         progress_bar_logout.visibility = View.GONE
-
+        SnackbarHelper.showError(error.localizedMessage, rl_profile_main_layout)
     }
 
     override fun showUserDetails(userDetails: UserDetails?) {
@@ -78,11 +80,18 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
             val result = CropImage.getActivityResult(data)
             if (resultCode == RESULT_OK) {
                 showProgress(true)
+                mPhotoUri = result.uri
                 mPresenter.updateUserAvatar(result.uri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 ToastMessageHelper.showShortToast(result.error.toString())
             }
         }
+    }
+
+    override fun photoUploadSuccess() {
+        ToastMessageHelper.showShortToast(R.string.photo_change_succesfull)
+        cv_profile_avatar.setImageURI(mPhotoUri)
+        showProgress(false)
     }
 
     private fun setCurrentStatus(status: Long?) {

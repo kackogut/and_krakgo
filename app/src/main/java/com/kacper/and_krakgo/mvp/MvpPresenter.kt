@@ -2,6 +2,8 @@ package com.kacper.and_krakgo.mvp
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 
 /**
  * Created by kacper on 21/01/2018.
@@ -15,4 +17,6 @@ interface MvpPresenter<in V : MvpView> {
     fun getCurrentUser() : FirebaseUser
 
     fun getDatabaseReference() : DatabaseReference
+
+    fun getStorageReference() : StorageReference
 }

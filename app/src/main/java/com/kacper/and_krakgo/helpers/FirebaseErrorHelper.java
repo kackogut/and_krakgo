@@ -7,7 +7,7 @@ package com.kacper.and_krakgo.helpers;
 public class FirebaseErrorHelper {
     public static String getLoginErrorTranslation(Exception exception){
         String errorMessage = "";
-        switch (exception.toString()){
+        switch (exception.getClass().getClass().getName()){
 
         }
         return errorMessage;

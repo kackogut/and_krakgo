@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void showError(Exception error) {
         showProgress(false);
-        ToastMessageHelper.showShortToast(error.toString() + " " + error);
+        ToastMessageHelper.showShortToast(error.getMessage());
     }
 
     private void showProgress(boolean showProgress) {

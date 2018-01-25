@@ -16,6 +16,8 @@ object ProfileContract {
         fun userSaveComplete()
 
         fun onError(error: Exception)
+
+        fun photoUploadSuccess()
     }
 
     interface Presenter : MvpPresenter<View> {

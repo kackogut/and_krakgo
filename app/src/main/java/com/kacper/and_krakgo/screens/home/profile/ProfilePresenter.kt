@@ -1,9 +1,16 @@
 package com.kacper.and_krakgo.screens.home.profile
 
 import android.net.Uri
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.helpers.FirebaseDatabaseHelper
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpPresenterImpl
@@ -14,7 +21,21 @@ import com.kacper.and_krakgo.mvp.MvpPresenterImpl
 class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
         ProfileContract.Presenter{
     override fun updateUserAvatar(uri: Uri) {
+        val reference = getStorageReference().child("avatars/" + getCurrentUser().uid)
 
+        reference.delete()
+        val uploadTask = reference.putFile(uri)
+        uploadTask
+                .addOnCompleteListener { task -> updateUserPhoto(task.result.downloadUrl)}
+                .addOnFailureListener { e -> mView?.showError(e) }
+    }
+    private fun updateUserPhoto(uri:Uri?){
+        val profileChangeRequest = UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build()
+        KrakGoApp.getCurrentUser().updateProfile(profileChangeRequest)
+                .addOnCompleteListener { mView?.photoUploadSuccess() }
+                .addOnFailureListener { e -> mView?.showError(e) }
     }
 
     override fun saveUserDetails(userDetails: UserDetails) {

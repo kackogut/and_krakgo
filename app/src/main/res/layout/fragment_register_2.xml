@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorBackground">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -65,10 +65,24 @@
                 android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:id="@+id/tv_dob_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dob_label"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/et_register_dob_input"
+            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintLeft_toRightOf="@id/et_register_dob_input"
+            app:layout_constraintRight_toLeftOf="@id/register_surname_input"
+            app:layout_constraintTop_toBottomOf="@id/register_surname_input"
+            app:layout_constraintVertical_bias="1.0"/>
+
         <EditText
             android:id="@+id/et_register_dob_input"
             style="@style/EditTextNotEnabled"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:text="@string/dob_label"
             android:theme="@style/TextLabel"
             app:layout_constraintLeft_toLeftOf="parent"
