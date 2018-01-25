@@ -26,6 +26,5 @@ abstract class MvpFragment<in V : MvpView, T : MvpPresenter<V>> : Fragment(), Mv
     }
 
     override fun showMessage(messageId: Int) {
-
     }
 }

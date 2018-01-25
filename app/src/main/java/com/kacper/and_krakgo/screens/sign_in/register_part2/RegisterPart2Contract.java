@@ -2,6 +2,8 @@ package com.kacper.and_krakgo.screens.sign_in.register_part2;
 
 import android.net.Uri;
 
+import com.kacper.and_krakgo.model.UserDetails;
+
 /**
  * Created by kacper on 27/10/2017.
  */
@@ -9,13 +11,11 @@ import android.net.Uri;
 public interface RegisterPart2Contract {
     interface Presenter {
         void saveUserDetails(Uri mPhotoUri);
-        void updateUserProfile(String name, Uri photoUrl);
-        void updateUserDetails(Long dobTime);
+        void updateUserProfile(UserDetails userDetails);
     }
 
     interface View {
         void photoUploadFinished(Uri downloadUrl);
-        void userProfilUpdated();
         void userDetailsUpdated();
         void showError(Exception e);
     }

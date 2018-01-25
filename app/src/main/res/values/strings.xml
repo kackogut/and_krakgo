@@ -53,9 +53,10 @@
     <string name="user_details_saved">Dane użytkownika zapisane pomyślnie</string>
     <string name="recent">Ostatnie</string>
     <string name="map">Mapa</string>
-    <string name="messages">Wiadomości</string>
+    <string name="messages">Chat</string>
     <string name="favourites">Ulubione</string>
     <string name="profile">Profil</string>
     <string name="map_visibility_label">Widoczność na mapie</string>
-    <string name="photo_change_succesfull">Zmiana zdjęcia zakończona powodzeniem</string>
+    <string name="photo_change_succesfull">Zmiana zdjęcia zakończona powodzeniem zapisywanie zmian w profilu</string>
+    <string name="write_message">Napisz wiadomość</string>
 </resources>

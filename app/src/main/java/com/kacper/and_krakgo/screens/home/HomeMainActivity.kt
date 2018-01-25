@@ -1,7 +1,6 @@
 package com.kacper.and_krakgo.screens.home
 
 import android.os.Bundle
-import android.support.design.internal.BottomNavigationItemView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 
@@ -11,9 +10,8 @@ import com.kacper.and_krakgo.screens.home.favourites.FavouritesFragment
 import com.kacper.and_krakgo.screens.home.map.MapFragment
 import com.kacper.and_krakgo.screens.home.messages.MessagesFragment
 import com.kacper.and_krakgo.screens.home.profile.ProfileFragment
-import com.kacper.and_krakgo.screens.home.recent.RecentFragment
+import com.kacper.and_krakgo.screens.home.forum.ForumFragment
 
-import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.activity_home_main.*
 
 /**
@@ -38,7 +36,7 @@ class HomeMainActivity : AppCompatActivity() {
             mFragment = when(tabId.itemId){
                 R.id.tab_chat -> MessagesFragment()
                 R.id.tab_favourites -> FavouritesFragment()
-                R.id.tab_recent -> RecentFragment()
+                R.id.tab_recent -> ForumFragment()
                 R.id.tab_profile -> ProfileFragment()
                 R.id.tab_map -> MapFragment()
                 else -> ProfileFragment()

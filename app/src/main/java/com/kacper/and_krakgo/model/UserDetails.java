@@ -9,16 +9,20 @@ import io.reactivex.annotations.NonNull;
 public class UserDetails {
     private String about_me;
     private Long dob_time;
+    private String photo_url;
     private Long map_visibility;
     private Long longitude;
     private Long latitude;
-    private Long userID;
+    private String userID;
+    private String display_name;
 
     public UserDetails(){
     }
-    public UserDetails(long dob_time){
+    public UserDetails(String display_name, long dob_time, String photoUri){
         this.dob_time = dob_time;
+        this.photo_url = photoUri;
         this.map_visibility = 0L;
+        this.display_name = display_name;
     }
 
     public String getAbout_me() {
@@ -42,7 +46,7 @@ public class UserDetails {
         return latitude;
     }
 
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -66,7 +70,23 @@ public class UserDetails {
         this.latitude = latitude;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getPhoto_url() {
+        return photo_url;
+    }
+
+    public void setPhoto_url(String photo_url) {
+        this.photo_url = photo_url;
+    }
+
+    public String getDisplay_name() {
+        return display_name;
+    }
+
+    public void setDisplay_name(String display_name) {
+        this.display_name = display_name;
     }
 }

@@ -15,7 +15,15 @@ import com.kacper.and_krakgo.R;
 public class SnackbarHelper {
     public static void showError(String text, View parentLayout){
         showSnackbar(text,parentLayout, R.color.mapStatusInvisible);
-
+    }
+    public static void showSuccess(String text, View parentLayout){
+        showSnackbar(text, parentLayout, R.color.mapStatusVisible);
+    }
+    public static void showSuccess(int textResource, View parentLayout){
+        showSuccess(KrakGoApp.getApplicationCtx().getString(textResource), parentLayout);
+    }
+    public static void showError(int textResource, View parentLayout){
+        showError(KrakGoApp.getApplicationCtx().getString(textResource), parentLayout);
     }
     private static void showSnackbar(String text, View parentLayout, int color){
         Snackbar snackbar = Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG);

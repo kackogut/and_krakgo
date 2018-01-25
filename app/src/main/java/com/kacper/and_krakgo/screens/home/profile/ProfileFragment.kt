@@ -2,11 +2,9 @@ package com.kacper.and_krakgo.screens.home.profile
 
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +14,6 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.DatePicker
 import android.widget.ProgressBar
-import com.google.firebase.auth.FirebaseUser
 
 import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.R
@@ -54,14 +51,14 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     override fun userSaveComplete() {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
-        showMessage(R.string.user_details_saved)
+        SnackbarHelper.showSuccess(R.string.user_details_saved, main_layout)
     }
 
     override fun onError(error: Exception) {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
         progress_bar_logout.visibility = View.GONE
-        SnackbarHelper.showError(error.localizedMessage, rl_profile_main_layout)
+        SnackbarHelper.showError(error.localizedMessage, main_layout)
     }
 
     override fun showUserDetails(userDetails: UserDetails?) {
@@ -71,6 +68,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         tv_profile_age.text = resources.getQuantityString(R.plurals.age_plural,
                 DateHelper.getYearDifference(Date(userDetails!!.dob_time)),
                 DateHelper.getYearDifference(Date(userDetails.dob_time)))
+        tv_profile_display_name.text = mUserDetails?.display_name
+        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))
         showProgress(false)
     }
 
@@ -83,15 +82,16 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
                 mPhotoUri = result.uri
                 mPresenter.updateUserAvatar(result.uri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                ToastMessageHelper.showShortToast(result.error.toString())
+                SnackbarHelper.showError(result.error.localizedMessage, main_layout)
             }
         }
     }
 
-    override fun photoUploadSuccess() {
-        ToastMessageHelper.showShortToast(R.string.photo_change_succesfull)
+    override fun photoUploadSuccess(uri: Uri) {
+        SnackbarHelper.showSuccess(R.string.photo_change_succesfull, main_layout)
         cv_profile_avatar.setImageURI(mPhotoUri)
-        showProgress(false)
+        mUserDetails?.photo_url = uri.toString()
+        mPresenter.saveUserDetails(mUserDetails!!)
     }
 
     private fun setCurrentStatus(status: Long?) {
@@ -115,8 +115,6 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     private fun inflateUserData() {
         val user = mPresenter.getCurrentUser()
         tv_profile_email.text = user.email
-        tv_profile_display_name.text = user.displayName
-        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), user.photoUrl)
         mPresenter.getUserDetails(user.uid)
     }
 

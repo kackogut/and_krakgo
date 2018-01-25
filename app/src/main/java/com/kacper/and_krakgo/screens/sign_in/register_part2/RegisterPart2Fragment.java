@@ -19,6 +19,7 @@ import com.kacper.and_krakgo.R;
 import com.kacper.and_krakgo.helpers.DateHelper;
 import com.kacper.and_krakgo.helpers.PhotoHelper;
 import com.kacper.and_krakgo.helpers.ToastMessageHelper;
+import com.kacper.and_krakgo.model.UserDetails;
 import com.kacper.and_krakgo.screens.home.HomeMainActivity;
 import com.kacper.and_krakgo.rxbus.SignInEvents;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -129,13 +130,9 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
 
     @Override
     public void photoUploadFinished(Uri downloadUrl) {
-        mPresenter.updateUserProfile(mNameInputLayout.getEditText().getText().toString() + " "
-                + mSurnameInputLayout.getEditText().getText().toString(), downloadUrl);
-    }
-
-    @Override
-    public void userProfilUpdated() {
-        mPresenter.updateUserDetails(mDateTime.getTime());
+        UserDetails userDetails = new UserDetails(mNameInputLayout.getEditText().getText().toString() + " "
+                + mSurnameInputLayout.getEditText().getText().toString(), mDateTime.getTime(), downloadUrl.toString());
+        mPresenter.updateUserProfile(userDetails);
     }
 
     @Override

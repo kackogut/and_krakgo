@@ -4,6 +4,7 @@ import android.net.Uri
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,21 +23,13 @@ class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
         ProfileContract.Presenter{
     override fun updateUserAvatar(uri: Uri) {
         val reference = getStorageReference().child("avatars/" + getCurrentUser().uid)
-
         reference.delete()
         val uploadTask = reference.putFile(uri)
         uploadTask
-                .addOnCompleteListener { task -> updateUserPhoto(task.result.downloadUrl)}
+                .addOnCompleteListener { task -> mView?.photoUploadSuccess(task.result.downloadUrl!!)}
                 .addOnFailureListener { e -> mView?.showError(e) }
     }
-    private fun updateUserPhoto(uri:Uri?){
-        val profileChangeRequest = UserProfileChangeRequest.Builder()
-                .setPhotoUri(uri)
-                .build()
-        KrakGoApp.getCurrentUser().updateProfile(profileChangeRequest)
-                .addOnCompleteListener { mView?.photoUploadSuccess() }
-                .addOnFailureListener { e -> mView?.showError(e) }
-    }
+
 
     override fun saveUserDetails(userDetails: UserDetails) {
         getDatabaseReference()

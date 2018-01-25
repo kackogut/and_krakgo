@@ -17,7 +17,7 @@ object ProfileContract {
 
         fun onError(error: Exception)
 
-        fun photoUploadSuccess()
+        fun photoUploadSuccess(uri: Uri)
     }
 
     interface Presenter : MvpPresenter<View> {
