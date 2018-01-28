@@ -47,6 +47,7 @@ dependencies {
     compile 'com.github.aakira:expandable-layout:1.6.0@aar'
     apply plugin: 'kotlin-android-extensions'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+    implementation 'com.firebaseui:firebase-ui-database:3.2.1'
 
 }
 

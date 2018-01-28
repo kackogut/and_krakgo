@@ -14,6 +14,9 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.DatePicker
 import android.widget.ProgressBar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.R
@@ -115,7 +118,19 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     private fun inflateUserData() {
         val user = mPresenter.getCurrentUser()
         tv_profile_email.text = user.email
-        mPresenter.getUserDetails(user.uid)
+        mPresenter.getUserDetails(user.uid, object:ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+                showProgress(false)
+            }
+
+            override fun onDataChange(p0: DataSnapshot?) {
+                if(p0!!.exists()){
+                    val userDetails = p0.getValue(UserDetails::class.java)
+                    showUserDetails(userDetails)
+                }
+            }
+
+        })
     }
 
     private fun setListener() {

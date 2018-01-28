@@ -45,6 +45,7 @@ public class SignInActivity extends AppCompatActivity {
         mToolbar.setVisibility(View.INVISIBLE);
         mFragment = new LoginFragment();
         FragmentHelper.addFragment(getSupportFragmentManager(), mFragment, LoginFragment.TAG);
+        verifyView();
 
         SignInEvents.subscribe(new Consumer<Integer>() {
             @Override
@@ -100,7 +101,7 @@ public class SignInActivity extends AppCompatActivity {
     private void verifyView() {
         if (mFragment instanceof LoginFragment) {
             mBottomButton.setText(R.string.dont_have_account_sign_label);
-            mToolbar.setVisibility(View.INVISIBLE);
+            mToolbar.setVisibility(View.GONE);
         } else if (mFragment instanceof RegisterFragment) {
             mBottomButton.setText(R.string.next_label);
             mToolbar.setVisibility(View.VISIBLE);

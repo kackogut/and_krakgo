@@ -44,23 +44,4 @@ class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
                 })
     }
 
-    override fun getUserDetails(userId: String) {
-        getDatabaseReference()
-                .child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(userId)
-                .addListenerForSingleValueEvent(object : ValueEventListener{
-                    override fun onCancelled(p0: DatabaseError?) {
-
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot?) {
-                        if(p0!!.exists()){
-                            val userDetails = p0.getValue(UserDetails::class.java)
-                            mView!!.showUserDetails(userDetails)
-                        }
-                    }
-
-                })
-    }
-
 }

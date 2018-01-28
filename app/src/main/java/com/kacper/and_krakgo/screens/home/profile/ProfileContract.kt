@@ -21,8 +21,6 @@ object ProfileContract {
     }
 
     interface Presenter : MvpPresenter<View> {
-        fun getUserDetails(userId: String)
-
         fun saveUserDetails(userDetails: UserDetails)
 
         fun updateUserAvatar(uri:Uri)

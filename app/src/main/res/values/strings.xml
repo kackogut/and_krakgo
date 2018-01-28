@@ -59,4 +59,5 @@
     <string name="map_visibility_label">Widoczność na mapie</string>
     <string name="photo_change_succesfull">Zmiana zdjęcia zakończona powodzeniem zapisywanie zmian w profilu</string>
     <string name="write_message">Napisz wiadomość</string>
+    <string name="forum_message_send">Wiadomość wysłana</string>
 </resources>

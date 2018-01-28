@@ -52,4 +52,9 @@ public class GlideHelper {
                 })
                 .into(imageView);
     }
+    public static void load(Context context, ImageView image, String photoUri){
+        Glide.with(context)
+                .load(photoUri)
+                .into(image);
+    }
 }
