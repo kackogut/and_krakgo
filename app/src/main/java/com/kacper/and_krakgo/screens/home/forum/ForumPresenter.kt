@@ -1,5 +1,6 @@
 package com.kacper.and_krakgo.screens.home.forum
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -18,17 +19,17 @@ class ForumPresenter : MvpPresenterImpl<ForumContract.View>(),
     override fun getMessages() {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+                .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        Log.w(ForumPresenter::class.java.simpleName, "loadMessages:onCancelled", p0?.toException());
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
-                        var values: ArrayList<ForumMessage> = ArrayList()
+                        val values: ArrayList<ForumMessage> = ArrayList()
                         if (p0!!.exists()) {
                             p0.children.mapTo(values) {
                                 it.getValue(ForumMessage::class.java)!!
-                            }.reverse()
+                            }
 
                         }
                         mView?.onMessagesDownload(values)
@@ -38,10 +39,10 @@ class ForumPresenter : MvpPresenterImpl<ForumContract.View>(),
     }
 
     override fun sendMessage(message: String) {
-        val forumMessage = ForumMessage(message, getCurrentUser().uid)
+        val forumMessage = ForumMessage(message, getCurrentUser())
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
-                .child(getCurrentUser().uid.substring(0,6) + forumMessage.time)
+                .child( forumMessage.time.toString() + getCurrentUser().uid.substring(0,6))
                 .setValue(forumMessage)
                 .addOnCompleteListener({
                     mView?.messageSendComplete()

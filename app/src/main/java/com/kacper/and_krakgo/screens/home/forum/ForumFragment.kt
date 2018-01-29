@@ -1,19 +1,16 @@
 package com.kacper.and_krakgo.screens.home.forum
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.SnackbarHelper
 import com.kacper.and_krakgo.model.ForumMessage
 import com.kacper.and_krakgo.mvp.MvpFragment
-import com.kacper.and_krakgo.screens.home.profile.ProfileContract
-import kotlinx.android.synthetic.main.activity_home_main.*
+import com.kacper.and_krakgo.screens.home.adapters.MessagesAdapter
 import kotlinx.android.synthetic.main.fragment_forum.*
 import java.lang.Exception
 
@@ -24,14 +21,14 @@ import java.lang.Exception
 class ForumFragment : MvpFragment<ForumContract.View, ForumContract.Presenter>(),
         ForumContract.View{
     override fun onMessagesDownload(messages: ArrayList<ForumMessage>) {
-        rv_forum_messages.adapter = ForumAdapter(messages, mPresenter)
+        rv_forum_messages.adapter = MessagesAdapter(messages)
         showProgress(false)
     }
 
     override var mPresenter: ForumContract.Presenter = ForumPresenter()
     override fun messageSendComplete() {
-        SnackbarHelper.showSuccess(R.string.forum_message_send, forum_main_layout)
         showProgress(false)
+        rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_forum, container, false)
@@ -46,7 +43,8 @@ class ForumFragment : MvpFragment<ForumContract.View, ForumContract.Presenter>()
     }
 
     private fun setRecyclerView() {
-        rv_forum_messages.layoutManager = LinearLayoutManager(context)
+        var layoutManager = LinearLayoutManager(context)
+        rv_forum_messages.layoutManager = layoutManager
         rv_forum_messages.setHasFixedSize(true)
     }
 
@@ -54,6 +52,7 @@ class ForumFragment : MvpFragment<ForumContract.View, ForumContract.Presenter>()
         iv_forum_send_arrow.setOnClickListener({
             showProgress(true)
             mPresenter.sendMessage(et_forum_send_message.text.toString())
+            et_forum_send_message.setText("")
         })
     }
     private fun showProgress(show: Boolean){

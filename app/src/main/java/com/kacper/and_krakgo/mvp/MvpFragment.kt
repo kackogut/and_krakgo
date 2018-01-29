@@ -8,6 +8,7 @@ import java.lang.Exception
 /**
  * Created by kacper on 21/01/2018.
  */
+@Suppress("UNCHECKED_CAST")
 abstract class MvpFragment<in V : MvpView, T : MvpPresenter<V>> : Fragment(), MvpView {
 
     protected abstract var mPresenter: T

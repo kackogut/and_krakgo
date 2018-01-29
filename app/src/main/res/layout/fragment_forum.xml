@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/forum_separator"
             android:layout_alignParentLeft="true"
+            android:paddingBottom="8dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 

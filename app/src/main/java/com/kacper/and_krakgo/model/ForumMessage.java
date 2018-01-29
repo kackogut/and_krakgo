@@ -1,5 +1,8 @@
 package com.kacper.and_krakgo.model;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.kacper.and_krakgo.KrakGoApp;
+
 import java.util.Date;
 
 /**
@@ -10,13 +13,17 @@ public class ForumMessage {
     private String message_text;
     private String userID;
     private Long time;
+    private String userName;
+    private String avatarUrl;
 
     public ForumMessage() {
     }
 
-    public ForumMessage(String message_text, String userID) {
+    public ForumMessage(String message_text, FirebaseUser currentUser) {
         this.message_text = message_text;
-        this.userID = userID;
+        this.userID = currentUser.getUid();
+        this.userName = currentUser.getDisplayName();
+        this.avatarUrl = currentUser.getPhotoUrl().toString();
         this.time = new Date().getTime();
     }
 
@@ -42,5 +49,13 @@ public class ForumMessage {
 
     public void setTime(Long time) {
         this.time = time;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 }

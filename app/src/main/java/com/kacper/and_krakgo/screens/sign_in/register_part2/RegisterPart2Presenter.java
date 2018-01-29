@@ -57,7 +57,12 @@ public class RegisterPart2Presenter implements RegisterPart2Contract.Presenter {
 
     @Override
     public void updateUserProfile(UserDetails userDetails) {
-        FirebaseUser user = KrakGoApp.getCurrentUser();
+        final FirebaseUser user = KrakGoApp.getCurrentUser();
+        final UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName(userDetails.getDisplay_name())
+                .setPhotoUri(Uri.parse(userDetails.getPhoto_url()))
+                .build();
+
         DatabaseReference database = KrakGoApp.getFirebaseReference();
         database.child(FirebaseDatabaseHelper.USER_DETAILS)
                 .child(user.getUid())
@@ -65,7 +70,12 @@ public class RegisterPart2Presenter implements RegisterPart2Contract.Presenter {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        mView.userDetailsUpdated();
+                        user.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                mView.userDetailsUpdated();
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
