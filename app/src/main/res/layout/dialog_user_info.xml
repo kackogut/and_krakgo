@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dialog_background">
+
+    <include layout="@layout/item_user_basic_info"
+             android:id="@+id/layout_user_info"/>
+
+    <RelativeLayout
+        android:id="@+id/profile_expendable_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_dialog_map_status_circle"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="@dimen/margin_size_big"
+            android:layout_marginLeft="@dimen/margin_size_medium"
+            android:layout_marginTop="@dimen/margin_size_big"
+            android:src="@drawable/full_circle"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_map_status_label"
+            style="@style/TextLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            tools:text="Dostępny"/>
+
+    </RelativeLayout>
+    <View
+        style="@style/separator"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextLabelStyle"
+        android:textColor="@color/colorWhite"
+        tools:text="O mnie"
+        android:id="@+id/tv_dialog_about_me"/>
+    <FrameLayout
+        android:id="@+id/fl_send_message_button"
+        style="@style/RoundButton"
+        android:layout_width="@dimen/medium_button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:backgroundTint="@color/colorPrimaryDark">
+
+        <TextView
+            style="@style/ButtonTransparentText"
+            android:text="@string/send_message"
+            android:textColor="@color/colorBeerDark"/>
+    </FrameLayout>
+
+</LinearLayout>

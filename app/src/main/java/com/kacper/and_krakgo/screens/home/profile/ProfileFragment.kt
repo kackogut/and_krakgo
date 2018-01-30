@@ -22,11 +22,13 @@ import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.*
 import com.kacper.and_krakgo.model.UserDetails
+import com.kacper.and_krakgo.model.enums.MapVisibility
 import com.kacper.and_krakgo.mvp.MvpFragment
 import com.kacper.and_krakgo.screens.sign_in.SignInActivity
 import com.theartofdev.edmodo.cropper.CropImage
 
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.item_user_basic_info.*
 import java.lang.Exception
 import java.util.*
 
@@ -98,21 +100,10 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     }
 
     private fun setCurrentStatus(status: Long?) {
-        when (status!!.toInt()) {
-            0 -> {
-                tv_profile_map_status_label.text = getString(R.string.map_status_invisible)
-                iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!, R.color.mapStatusInvisible))
-            }
-            1 -> {
-                tv_profile_map_status_label.text = getString(R.string.map_status_visible)
-                iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!, R.color.mapStatusVisible))
-            }
-            2 -> {
-                tv_profile_map_status_label.text = getString(R.string.map_status_inviting)
-                iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!, R.color.mapStatusInviting))
-            }
+        tv_profile_map_status_label.text = getString(MapVisibility.values()[status!!.toInt()].stringResource)
+        iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,
+                MapVisibility.values()[status!!.toInt()].colourResource))
 
-        }
     }
 
     private fun inflateUserData() {

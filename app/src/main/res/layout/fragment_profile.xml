@@ -32,45 +32,8 @@
                 android:layout_marginRight="@dimen/margin_size_very_big"
                 android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/cv_profile_avatar"
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="22dp"
-                    android:src="@drawable/ic_user_logo_register"/>
-
-                <TextView
-                    android:id="@+id/tv_profile_display_name"
-                    style="@style/TextLabelBigBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_size_big"
-                    tools:text="Jan Kowalski"/>
-
-                <TextView
-                    android:id="@+id/tv_profile_email"
-                    style="@style/TextLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_size_big"
-                    tools:text="jan_kowalski@gmail.com"/>
-
-
-                <View style="@style/separator"/>
-
-                <TextView
-                    android:id="@+id/tv_profile_age"
-                    style="@style/TextLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_size_big"
-                    tools:text="Wiek: 23 lata"/>
-
-                <View style="@style/separator"/>
+                <include layout="@layout/item_user_basic_info"
+                    android:id="@+id/layout_user_info"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/ti_profile_dob_input"

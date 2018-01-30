@@ -1,7 +1,9 @@
 package com.kacper.and_krakgo.screens.home.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,16 +12,23 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.kacper.and_krakgo.KrakGoApp
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.DateHelper
+import com.kacper.and_krakgo.helpers.FirebaseDatabaseHelper
 import com.kacper.and_krakgo.helpers.GlideHelper
 import com.kacper.and_krakgo.model.ForumMessage
+import com.kacper.and_krakgo.model.UserDetails
+import com.kacper.and_krakgo.mvp.MvpPresenterImpl
+import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 
 /**
  * Created by kacper on 27/01/2018.
  */
-class MessagesAdapter(var messages: ArrayList<ForumMessage>)
+class MessagesAdapter(var messages: ArrayList<ForumMessage>, var listener: RecyclerViewClickListener)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_MESSAGE_SENT = 1
@@ -31,7 +40,7 @@ class MessagesAdapter(var messages: ArrayList<ForumMessage>)
         mContext = parent?.context
         return if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             ReceivedViewHolder(LayoutInflater.from(parent?.context)
-                    .inflate(R.layout.item_message_received, parent, false))
+                    .inflate(R.layout.item_message_received, parent, false), listener)
         } else {
             SentViewHolder(LayoutInflater.from(parent?.context)
                     .inflate(R.layout.item_message_send, parent, false))
@@ -76,15 +85,23 @@ class MessagesAdapter(var messages: ArrayList<ForumMessage>)
         }
     }
 
-    class ReceivedViewHolder(itemView: View) : SentViewHolder(itemView) {
+    class ReceivedViewHolder(itemView: View, var listener:RecyclerViewClickListener) : SentViewHolder(itemView), View.OnClickListener {
+        override fun onClick(view: View?) {
+           listener.onClick(view, adapterPosition)
+        }
+
         val mAvatar: ImageView = itemView.findViewById(R.id.civ_message_avatar)
         val mUserName: TextView = itemView.findViewById(R.id.tv_message_name)
+        var mMessage: ForumMessage? = null
 
         override fun bind(message: ForumMessage, isFirstMessage: Boolean) {
             super.bind(message, isFirstMessage)
+            mMessage = message
             val params = mMessageText.layoutParams as RelativeLayout.LayoutParams
             val density = KrakGoApp.getApplicationCtx().resources.displayMetrics.density
             var marginLeft = Math.round(48 * density)
+            mMessageText.setOnClickListener(this)
+            mAvatar.setOnClickListener(this)
             if (isFirstMessage) {
                 mAvatar.visibility = View.VISIBLE
                 mUserName.visibility = View.VISIBLE

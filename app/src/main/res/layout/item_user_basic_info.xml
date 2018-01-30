@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cv_profile_avatar"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/ic_user_logo_register"/>
+
+    <TextView
+        android:id="@+id/tv_profile_display_name"
+        style="@style/TextLabelBigBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_size_big"
+        tools:text="Jan Kowalski"/>
+
+    <TextView
+        android:id="@+id/tv_profile_email"
+        style="@style/TextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_size_big"
+        tools:text="jan_kowalski@gmail.com"/>
+
+
+    <View style="@style/separator"/>
+
+    <TextView
+        android:id="@+id/tv_profile_age"
+        style="@style/TextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_size_big"
+        tools:text="Wiek: 23 lata"/>
+
+    <View style="@style/separator"/>
+
+
+</LinearLayout>

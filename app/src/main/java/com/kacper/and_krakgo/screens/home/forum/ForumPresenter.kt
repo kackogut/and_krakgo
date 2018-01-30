@@ -21,7 +21,8 @@ class ForumPresenter : MvpPresenterImpl<ForumContract.View>(),
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        Log.w(ForumPresenter::class.java.simpleName, "loadMessages:onCancelled", p0?.toException());
+                        Log.w(ForumPresenter::class.java.simpleName,
+                                "loadMessages:onCancelled", p0?.toException());
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
