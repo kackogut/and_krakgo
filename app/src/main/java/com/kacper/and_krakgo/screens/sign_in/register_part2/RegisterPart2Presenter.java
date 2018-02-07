@@ -58,6 +58,7 @@ public class RegisterPart2Presenter implements RegisterPart2Contract.Presenter {
     @Override
     public void updateUserProfile(UserDetails userDetails) {
         final FirebaseUser user = KrakGoApp.getCurrentUser();
+        userDetails.setUserID(user.getUid());
         final UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                 .setDisplayName(userDetails.getDisplay_name())
                 .setPhotoUri(Uri.parse(userDetails.getPhoto_url()))

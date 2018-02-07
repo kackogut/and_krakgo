@@ -1,5 +1,6 @@
 package com.kacper.and_krakgo.screens.dialogs
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -21,6 +22,7 @@ import com.kacper.and_krakgo.helpers.FirebaseDatabaseHelper
 import com.kacper.and_krakgo.helpers.GlideHelper
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.model.enums.MapVisibility
+import com.kacper.and_krakgo.screens.main.chat.ChatActivity
 import kotlinx.android.synthetic.main.dialog_user_info.*
 import kotlinx.android.synthetic.main.item_user_basic_info.*
 import java.util.*
@@ -28,7 +30,8 @@ import java.util.*
 /**
  * Created by kacper on 29/01/2018.
  */
-class DialogUserInfo(context:Context, var mUserDetails:UserDetails?) : AppCompatDialog(context) {
+class DialogUserInfo(var mActivty:Activity, var mUserDetails:UserDetails)
+    : AppCompatDialog(mActivty) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,8 @@ class DialogUserInfo(context:Context, var mUserDetails:UserDetails?) : AppCompat
 
     private fun setListener() {
         fl_send_message_button.setOnClickListener({
-
+            mActivty.startActivity(ChatActivity.newIntent(mActivty, mUserDetails))
+            dismiss()
         })
     }
 
@@ -50,14 +54,14 @@ class DialogUserInfo(context:Context, var mUserDetails:UserDetails?) : AppCompat
                 DateHelper.getYearDifference(Date(mUserDetails!!.dob_time)),
                 DateHelper.getYearDifference(Date(mUserDetails!!.dob_time)))
         tv_profile_email.visibility = View.GONE
-        tv_profile_display_name.text = mUserDetails?.display_name
+        tv_profile_display_name.text = mUserDetails.display_name
         GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))
         tv_dialog_map_status_label.text = context.getString(
-                MapVisibility.values()[mUserDetails!!.map_visibility.toInt()].stringResource)
+                MapVisibility.values()[mUserDetails.map_visibility.toInt()].stringResource)
         iv_dialog_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,
-                MapVisibility.values()[mUserDetails!!.map_visibility.toInt()].colourResource))
-        if(mUserDetails!!.about_me != null)
-            tv_dialog_about_me.text = mUserDetails!!.about_me
+                MapVisibility.values()[mUserDetails.map_visibility.toInt()].colourResource))
+        if(mUserDetails.about_me != null)
+            tv_dialog_about_me.text = mUserDetails.about_me
         else
             tv_dialog_about_me.visibility = View.GONE
     }

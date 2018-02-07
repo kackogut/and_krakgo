@@ -13,7 +13,6 @@ public class FragmentHelper {
     public static void addFragment(FragmentManager fragmentManager, Fragment fragment, String fragmentTag){
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragment, fragmentTag)
-                .addToBackStack(fragmentTag)
                 .commit();
     }
     public static void changeFragments(FragmentManager fragmentManager, Fragment fragment, String fragmentTag){

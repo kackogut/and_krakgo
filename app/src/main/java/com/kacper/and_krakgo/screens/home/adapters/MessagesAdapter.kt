@@ -28,13 +28,15 @@ import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 /**
  * Created by kacper on 27/01/2018.
  */
-class MessagesAdapter(var messages: ArrayList<ForumMessage>, var listener: RecyclerViewClickListener)
+class MessagesAdapter()
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
 
     private var mContext: Context? = null
+    lateinit var listener: RecyclerViewClickListener
+    var messages: ArrayList<ForumMessage> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         mContext = parent?.context
@@ -49,6 +51,13 @@ class MessagesAdapter(var messages: ArrayList<ForumMessage>, var listener: Recyc
 
     override fun getItemCount(): Int {
         return messages.size
+    }
+    public fun addListener(listener: RecyclerViewClickListener){
+        this.listener = listener
+    }
+    public fun setData(messages: ArrayList<ForumMessage>){
+        this.messages = messages
+        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {

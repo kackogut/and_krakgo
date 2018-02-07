@@ -14,6 +14,6 @@ import com.kacper.and_krakgo.R
 
 class MessagesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+        return inflater.inflate(R.layout.fragment_friends, container, false)
     }
 }

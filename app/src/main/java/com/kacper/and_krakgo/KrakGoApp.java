@@ -51,8 +51,8 @@ public class KrakGoApp extends AppCompatActivity {
     }
 
     public static void logout(){
-        FirebaseAuth.getInstance().signOut();
         sUser = null;
+        FirebaseAuth.getInstance().signOut();
         SharedPreferencesHelper.saveToSharedPreferences(SharedPreferencesHelper.REMEMBER_USER, false);
     }
     public static DatabaseReference getFirebaseReference(){

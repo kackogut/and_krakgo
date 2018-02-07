@@ -8,14 +8,14 @@ import com.kacper.and_krakgo.helpers.DateHelper
 import com.kacper.and_krakgo.helpers.FirebaseDatabaseHelper
 import com.kacper.and_krakgo.model.ForumMessage
 import com.kacper.and_krakgo.mvp.MvpPresenterImpl
+import com.kacper.and_krakgo.screens.main.base_chat.BaseChatPresenter
 import java.util.*
 import kotlin.collections.ArrayList
 
 /**
  * Created by kacper on 25/01/2018.
  */
-class ForumPresenter : MvpPresenterImpl<ForumContract.View>(),
-        ForumContract.Presenter {
+class ForumPresenter : BaseChatPresenter() {
     override fun getMessages() {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
