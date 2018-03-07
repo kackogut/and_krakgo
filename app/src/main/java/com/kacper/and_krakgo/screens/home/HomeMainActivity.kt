@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.FragmentHelper
-import com.kacper.and_krakgo.screens.home.favourites.FavouritesFragment
 import com.kacper.and_krakgo.screens.home.map.MapFragment
 import com.kacper.and_krakgo.screens.home.messages.MessagesFragment
 import com.kacper.and_krakgo.screens.home.profile.ProfileFragment
@@ -19,13 +18,21 @@ import kotlinx.android.synthetic.main.activity_home_main.*
  */
 
 class HomeMainActivity : AppCompatActivity() {
-    private var mFragment: Fragment? = null
+    private var mFragment: HashMap<Int, Fragment> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_main)
+        initFragments()
         initBottomBar()
 
+    }
+
+    private fun initFragments() {
+        mFragment[R.id.tab_forum] = ForumFragment()
+        mFragment[R.id.tab_map] = MapFragment()
+        mFragment[R.id.tab_messages] = MessagesFragment()
+        mFragment[R.id.tab_profile] = ProfileFragment()
     }
 
     private fun initBottomBar() {
@@ -33,16 +40,9 @@ class HomeMainActivity : AppCompatActivity() {
         bottom_bar.enableShiftingMode(false)
 
         bottom_bar.setOnNavigationItemSelectedListener { tabId->
-            mFragment = when(tabId.itemId){
-                R.id.tab_chat -> MessagesFragment()
-                R.id.tab_favourites -> FavouritesFragment()
-                R.id.tab_recent -> ForumFragment()
-                R.id.tab_profile -> ProfileFragment()
-                R.id.tab_map -> MapFragment()
-                else -> ProfileFragment()
-            }
-            FragmentHelper.changeFragments(supportFragmentManager, mFragment)
+            FragmentHelper.changeFragments(supportFragmentManager, mFragment[tabId.itemId])
             true
         }
+        bottom_bar.currentItem = 1
     }
 }

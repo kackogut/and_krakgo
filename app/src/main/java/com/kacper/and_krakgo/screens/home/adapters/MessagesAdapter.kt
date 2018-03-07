@@ -28,7 +28,7 @@ import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 /**
  * Created by kacper on 27/01/2018.
  */
-class MessagesAdapter()
+class MessagesAdapter
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_MESSAGE_SENT = 1
@@ -115,7 +115,7 @@ class MessagesAdapter()
                 mAvatar.visibility = View.VISIBLE
                 mUserName.visibility = View.VISIBLE
                 marginLeft = Math.round(8 * density)
-                GlideHelper.load(KrakGoApp.getApplicationCtx(), mAvatar, message.avatarUrl)
+                GlideHelper.load( mAvatar, message.avatarUrl)
                 mUserName.text = message.userName
             } else {
                 mAvatar.visibility = View.GONE

@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
+import com.kacper.and_krakgo.KrakGoApp;
 import com.kacper.and_krakgo.R;
 
 /**
@@ -52,9 +53,13 @@ public class GlideHelper {
                 })
                 .into(imageView);
     }
-    public static void load(Context context, ImageView image, String photoUri){
-        Glide.with(context)
-                .load(photoUri)
-                .into(image);
+    public static void load( ImageView image, String photoUri){
+        load(KrakGoApp.getApplicationCtx(), image, photoUri);
     }
+    public static void load(Context context, ImageView imageView, String photoUrl){
+        Glide.with(context)
+                .load(photoUrl)
+                .into(imageView);
+    }
+
 }

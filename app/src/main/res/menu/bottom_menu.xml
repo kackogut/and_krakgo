@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/tab_recent"
+        android:id="@+id/tab_forum"
         android:enabled="true"
         android:icon="@drawable/ic_recent"
         android:title="@string/recent"
@@ -14,16 +14,10 @@
         android:title="@string/map"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/tab_chat"
+        android:id="@+id/tab_messages"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
         android:title="@string/messages"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/tab_favourites"
-        android:enabled="true"
-        android:icon="@drawable/ic_heart"
-        android:title="@string/favourites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/tab_profile"

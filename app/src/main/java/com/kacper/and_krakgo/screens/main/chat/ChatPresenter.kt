@@ -5,11 +5,13 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kacper.and_krakgo.helpers.FirebaseDatabaseHelper
+import com.kacper.and_krakgo.model.ConversationDetails
 import com.kacper.and_krakgo.model.ForumMessage
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpPresenterImpl
 import com.kacper.and_krakgo.screens.home.forum.ForumPresenter
 import com.kacper.and_krakgo.screens.main.base_chat.BaseChatContract
+import java.util.*
 
 /**
  * Created by kacper on 04/02/2018.
@@ -71,7 +73,7 @@ class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
 
                     override fun onDataChange(p0: DataSnapshot?) {
                         if (p0!!.exists()) {
-                            mConversationID = p0.getValue(String::class.java)!!
+                            mConversationID = p0.getValue(ConversationDetails::class.java)!!.conversationID
                         } else {
                             mConversationID = getDatabaseReference()
                                     .child(FirebaseDatabaseHelper.USER_CONVERSATIONS)
@@ -81,13 +83,23 @@ class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                                     .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
                                     .child(getCurrentUser().uid)
                                     .child(secondUserDetails.userID)
-                                    .setValue(mConversationID)
+                                    .setValue(ConversationDetails(
+                                            mConversationID,
+                                            secondUserDetails.photo_url,
+                                            secondUserDetails.display_name,
+                                            Date().time
+                                    ))
 
                             getDatabaseReference()
                                     .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
                                     .child(secondUserDetails.userID)
                                     .child(getCurrentUser().uid)
-                                    .setValue(mConversationID)
+                                    .setValue(ConversationDetails(
+                                            mConversationID,
+                                            getCurrentUser().photoUrl.toString(),
+                                            getCurrentUser().displayName,
+                                            Date().time
+                                    ))
                         }
                         getMessages()
                     }

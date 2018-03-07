@@ -51,8 +51,8 @@ class DialogUserInfo(var mActivty:Activity, var mUserDetails:UserDetails)
 
     private fun getUserInfo() {
         tv_profile_age.text = context.resources.getQuantityString(R.plurals.age_plural,
-                DateHelper.getYearDifference(Date(mUserDetails!!.dob_time)),
-                DateHelper.getYearDifference(Date(mUserDetails!!.dob_time)))
+                DateHelper.getYearDifference(Date(mUserDetails.dob_time)),
+                DateHelper.getYearDifference(Date(mUserDetails.dob_time)))
         tv_profile_email.visibility = View.GONE
         tv_profile_display_name.text = mUserDetails.display_name
         GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))

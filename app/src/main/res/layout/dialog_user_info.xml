@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,6 +44,7 @@
         style="@style/TextLabelStyle"
         android:textColor="@color/colorWhite"
         tools:text="O mnie"
+        android:layout_gravity="center"
         android:id="@+id/tv_dialog_about_me"/>
     <FrameLayout
         android:id="@+id/fl_send_message_button"

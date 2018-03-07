@@ -15,11 +15,11 @@ import io.reactivex.annotations.Nullable;
 
 public class UserDetails implements Parcelable{
     private String about_me;
-    private Long dob_time;
+    private Long dob_time = 0L;
     private String photo_url;
-    private Long map_visibility;
-    private Long longitude;
-    private Long latitude;
+    private Long map_visibility = 0L;
+    private Long longitude = 0L;
+    private Long latitude = 0L;
     private String userID;
     private String display_name;
 
@@ -60,11 +60,14 @@ public class UserDetails implements Parcelable{
     public UserDetails(String display_name, long dob_time, String photoUri){
         this.dob_time = dob_time;
         this.photo_url = photoUri;
-        this.map_visibility = 0L;
         this.display_name = display_name;
-        this.latitude = 0L;
-        this.longitude = 0L;
         this.about_me = "";
+    }
+
+    public UserDetails(String photo_url, String userID, String display_name) {
+        this.photo_url = photo_url;
+        this.userID = userID;
+        this.display_name = display_name;
     }
 
     public UserDetails(String about_me, Long dob_time, String photo_url, Long map_visibility, Long longitude, Long latitude, String userID, String display_name, List<String> conversations) {
