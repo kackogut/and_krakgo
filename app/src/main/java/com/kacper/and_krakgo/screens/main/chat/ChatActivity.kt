@@ -27,7 +27,7 @@ class ChatActivity : AppCompatActivity(){
         mUserDetails = intent.getParcelableExtra(USER_DETAILS_EXTRA)
                 ?: throw IllegalStateException("field $USER_DETAILS_EXTRA missing in Intent")
 
-        mFragment = ChatFragment.newFragment(applicationContext, mUserDetails)
+        mFragment = ChatFragment.newFragment(mUserDetails)
         FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment.tag)
 
         GlideHelper.load(baseContext, civ_chat_avatar, mUserDetails.photo_url)

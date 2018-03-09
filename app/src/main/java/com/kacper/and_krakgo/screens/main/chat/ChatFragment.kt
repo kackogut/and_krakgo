@@ -20,7 +20,7 @@ class ChatFragment : BaseChatFragment(){
     companion object {
         private val USER_DETAILS_EXTRA = "user_details"
 
-        fun newFragment(context: Context, userDetails: UserDetails): Fragment {
+        fun newFragment(userDetails: UserDetails): Fragment {
             val bundle = Bundle()
             bundle.putParcelable(USER_DETAILS_EXTRA, userDetails)
             val fragment = ChatFragment()

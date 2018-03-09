@@ -31,6 +31,7 @@ import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 class MessagesAdapter
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
 
@@ -38,7 +39,7 @@ class MessagesAdapter
     lateinit var listener: RecyclerViewClickListener
     var messages: ArrayList<ForumMessage> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         mContext = parent?.context
         return if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
             ReceivedViewHolder(LayoutInflater.from(parent?.context)
@@ -52,10 +53,12 @@ class MessagesAdapter
     override fun getItemCount(): Int {
         return messages.size
     }
-    public fun addListener(listener: RecyclerViewClickListener){
+
+    public fun addListener(listener: RecyclerViewClickListener) {
         this.listener = listener
     }
-    public fun setData(messages: ArrayList<ForumMessage>){
+
+    public fun setData(messages: ArrayList<ForumMessage>) {
         this.messages = messages
         notifyDataSetChanged()
     }
@@ -67,7 +70,7 @@ class MessagesAdapter
             VIEW_TYPE_MESSAGE_RECEIVED
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val isFirstMessage = !(position != 0
                 && messages[position].userID == messages[position - 1].userID)
@@ -94,9 +97,9 @@ class MessagesAdapter
         }
     }
 
-    class ReceivedViewHolder(itemView: View, var listener:RecyclerViewClickListener) : SentViewHolder(itemView), View.OnClickListener {
+    class ReceivedViewHolder(itemView: View, var listener: RecyclerViewClickListener) : SentViewHolder(itemView), View.OnClickListener {
         override fun onClick(view: View?) {
-           listener.onClick(view, adapterPosition)
+            listener.onClick(view, adapterPosition)
         }
 
         val mAvatar: ImageView = itemView.findViewById(R.id.civ_message_avatar)
@@ -115,7 +118,7 @@ class MessagesAdapter
                 mAvatar.visibility = View.VISIBLE
                 mUserName.visibility = View.VISIBLE
                 marginLeft = Math.round(8 * density)
-                GlideHelper.load( mAvatar, message.avatarUrl)
+                GlideHelper.load(mAvatar, message.avatarUrl)
                 mUserName.text = message.userName
             } else {
                 mAvatar.visibility = View.GONE

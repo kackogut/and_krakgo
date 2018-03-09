@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.kacper.and_krakgo.R
+import com.kacper.and_krakgo.helpers.SnackbarHelper
 import com.kacper.and_krakgo.model.ConversationDetails
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpFragment
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_conversations.*
 
 class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Presenter>(),
     MessagesContract.View, RecyclerViewClickListener {
+
     var mAdapter : UserMessagesAdapter? = null
     var mConversations : ArrayList<ConversationDetails> = ArrayList()
     override var mPresenter: MessagesContract.Presenter = MessagesPresenter()
@@ -43,7 +45,9 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
         showProgress(false)
     }
 
-
+    override fun showError(message:String) {
+         SnackbarHelper.showError(message, cl_conversations_main)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -58,10 +62,10 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
         mPresenter.getConversations()
     }
     fun showProgress(show: Boolean){
-        if(show)
-            pb_conversations.visibility = View.VISIBLE
-        else
-            pb_conversations.visibility = View.GONE
+        //if(show)
+            //pb_conversations.visibility = View.VISIBLE
+        //else
+          //  pb_conversations.visibility = View.GONE
         rv_users_messages.isEnabled = show
     }
 }

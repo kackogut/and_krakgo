@@ -47,9 +47,13 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
 
     protected fun setListeners() {
         iv_forum_send_arrow.setOnClickListener({
-            showProgress(true)
-            mPresenter.sendMessage(et_forum_send_message.text.toString())
-            et_forum_send_message.setText("")
+            if(et_forum_send_message.text.isNotEmpty()) {
+                showProgress(true)
+                mPresenter.sendMessage(et_forum_send_message.text.toString())
+                et_forum_send_message.setText("")
+            } else {
+                showError(getString(R.string.error_message_empty))
+            }
         })
     }
     protected fun showProgress(show: Boolean){
@@ -59,9 +63,9 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         rv_forum_messages.isEnabled = !show
         iv_forum_send_arrow.isEnabled = !show
     }
-    override fun showError(error: Exception) {
-        super.showError(error)
-        SnackbarHelper.showError(error.localizedMessage, forum_main_layout)
+
+    override fun showError(error:String){
+        SnackbarHelper.showError(error, forum_main_layout)
         showProgress(false)
     }
 }

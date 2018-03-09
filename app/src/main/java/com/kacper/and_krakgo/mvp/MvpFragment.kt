@@ -23,10 +23,15 @@ abstract class MvpFragment<in V : MvpView, T : MvpPresenter<V>> : Fragment(), Mv
         mPresenter.detachView()
     }
 
-    override fun showError(error: Exception) {
+    override fun showError(error: String) {
     }
 
     override fun showMessage(messageId: Int) {
     }
+
+    override fun showError(error: Exception) {
+        showError(error.localizedMessage)
+    }
+
 
 }

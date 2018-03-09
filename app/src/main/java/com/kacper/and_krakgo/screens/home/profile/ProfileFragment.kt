@@ -102,7 +102,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     private fun setCurrentStatus(status: Long?) {
         tv_profile_map_status_label.text = getString(MapVisibility.values()[status!!.toInt()].stringResource)
         iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,
-                MapVisibility.values()[status!!.toInt()].colourResource))
+                MapVisibility.values()[status.toInt()].colourResource))
 
     }
 

@@ -9,6 +9,8 @@ import java.lang.Exception
  */
 interface MvpView {
 
+    fun showError(error: String)
+
     fun showError(error: Exception)
 
     fun showMessage(messageId: Int)
