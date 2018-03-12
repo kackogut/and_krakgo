@@ -9,5 +9,5 @@ public class FirebaseDatabaseHelper {
     public static final String FORUM_MESSAGES = "forum-messages";
     public static final String ALL_CONVERSATIONS = "all_conversations";
     public static final String USER_CONVERSATIONS = "user_conversations";
-    public static final String PLACES = "places";
+    public static final String PLACES = "locations";
 }
