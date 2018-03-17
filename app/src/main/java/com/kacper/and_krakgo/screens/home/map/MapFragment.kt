@@ -31,6 +31,7 @@ import com.kacper.and_krakgo.helpers.SnackbarHelper
 import com.kacper.and_krakgo.model.Place
 import com.kacper.and_krakgo.mvp.MvpFragment
 import com.kacper.and_krakgo.screens.home.profile.ProfileContract
+import com.kacper.and_krakgo.screens.main.place_details.PlaceDetailsActivity
 import kotlinx.android.synthetic.main.fragment_map.*
 
 /**
@@ -129,6 +130,14 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         val padding = 100
         val cu = CameraUpdateFactory.newLatLngBounds(bounds, padding)
         mGoogleMap.moveCamera(cu)
+        mGoogleMap.setOnMarkerClickListener {
+            if(it.tag != null){
+                startActivity(PlaceDetailsActivity.newIntent(context!!, it.tag as Place))
+
+                true
+            } else
+                false
+        }
         showProgress(false)
     }
 

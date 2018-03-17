@@ -1,10 +1,13 @@
 package com.kacper.and_krakgo.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by kacper on 10/03/2018.
  */
 
-public class Place {
+public class Place implements Parcelable{
     private Double latitude;
     private Double longitude;
     private String display_name;
@@ -13,6 +16,47 @@ public class Place {
 
     public Place() {
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeDoubleArray(new double[]{
+                latitude,
+                longitude
+        });
+        parcel.writeStringArray(new String[]{
+                display_name,
+                photo_url,
+                reviewsID
+        });
+    }
+    public Place(Parcel in){
+        String[] strings = new String[3];
+        double[] doubles = new double[2];
+
+        in.readDoubleArray(doubles);
+        in.readStringArray(strings);
+
+        this.display_name = strings[0];
+        this.photo_url = strings[1];
+        this.reviewsID = strings[2];
+
+        this.latitude = doubles[0];
+        this.longitude = doubles[1];
+    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
+        }
+
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
 
     public Place(Double latitude, Double longitude, String display_name, String photo_url, String reviewsID) {
         this.latitude = latitude;

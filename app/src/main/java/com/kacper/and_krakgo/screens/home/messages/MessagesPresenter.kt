@@ -35,7 +35,7 @@ MessagesContract.Presenter{
                     }
 
                     override fun onCancelled(p0: DatabaseError?) {
-                        mView?.showError(p0!!.message)
+
                     }
 
                 })

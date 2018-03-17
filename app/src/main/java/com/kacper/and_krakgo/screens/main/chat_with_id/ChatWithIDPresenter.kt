@@ -1,4 +1,4 @@
-package com.kacper.and_krakgo.screens.main.chat
+package com.kacper.and_krakgo.screens.main.chat_with_id
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
@@ -9,21 +9,29 @@ import com.kacper.and_krakgo.model.ConversationDetails
 import com.kacper.and_krakgo.model.ForumMessage
 import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpPresenterImpl
-import com.kacper.and_krakgo.screens.home.forum.ForumPresenter
 import com.kacper.and_krakgo.screens.main.base_chat.BaseChatContract
 import java.util.*
 
 /**
  * Created by kacper on 04/02/2018.
  */
-class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
-        ChatContract.Presenter {
+open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
+        ChatWithIDContract.Presenter {
+
+    private lateinit var dataBase : String
+
+    override fun setID(conversationID: String) {
+        mConversationID = conversationID
+        dataBase = FirebaseDatabaseHelper.PLACES_REVIEWS
+        getMessages()
+    }
+
     lateinit var mConversationID: String
 
     override fun sendMessage(message: String) {
         val forumMessage = ForumMessage(message, getCurrentUser())
         getDatabaseReference()
-                .child(FirebaseDatabaseHelper.USER_CONVERSATIONS)
+                .child(dataBase)
                 .child(mConversationID)
                 .child( forumMessage.time.toString() + getCurrentUser().uid.substring(0,6))
                 .setValue(forumMessage)
@@ -38,11 +46,11 @@ class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
 
     override fun getMessages() {
         getDatabaseReference()
-                .child(FirebaseDatabaseHelper.USER_CONVERSATIONS)
+                .child(dataBase)
                 .child(mConversationID)
                 .addValueEventListener(object : ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
-                        Log.w(ChatPresenter::class.java.simpleName,
+                        Log.w(ChatWithIDPresenter::class.java.simpleName,
                                 "getMessages:onCancelled", p0?.toException());
                     }
 
@@ -61,13 +69,14 @@ class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
     }
 
     override fun getConversationID(secondUserDetails:UserDetails) {
+        dataBase = FirebaseDatabaseHelper.USER_CONVERSATIONS
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
                 .child(getCurrentUser().uid)
                 .child(secondUserDetails.userID)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        Log.w(ChatPresenter::class.java.simpleName,
+                        Log.w(ChatWithIDPresenter::class.java.simpleName,
                                 "getConversation:onCancelled", p0?.toException());
                     }
 
@@ -105,4 +114,6 @@ class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                     }
                 })
     }
+
+
 }

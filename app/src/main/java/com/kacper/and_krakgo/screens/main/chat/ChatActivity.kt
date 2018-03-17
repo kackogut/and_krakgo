@@ -10,7 +10,6 @@ import com.kacper.and_krakgo.helpers.FragmentHelper
 import com.kacper.and_krakgo.helpers.GlideHelper
 import com.kacper.and_krakgo.model.UserDetails
 import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.item_message_received.*
 
 /**
  * Created by kacper on 30/01/2018.
@@ -27,11 +26,13 @@ class ChatActivity : AppCompatActivity(){
         mUserDetails = intent.getParcelableExtra(USER_DETAILS_EXTRA)
                 ?: throw IllegalStateException("field $USER_DETAILS_EXTRA missing in Intent")
 
-        mFragment = ChatFragment.newFragment(mUserDetails)
+        mFragment = ChatWithIDFragment.newFragment(mUserDetails)
         FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment.tag)
 
         GlideHelper.load(baseContext, civ_chat_avatar, mUserDetails.photo_url)
         tv_chat_username.text = mUserDetails.display_name
+
+        (mFragment as ChatWithIDFragment).getChatMessages()
     }
 
     companion object {

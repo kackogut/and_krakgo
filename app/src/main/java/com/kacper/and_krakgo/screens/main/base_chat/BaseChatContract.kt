@@ -17,5 +17,6 @@ object BaseChatContract {
         fun sendMessage(message: String)
         fun getMessages()
         fun getConversationID(secondUserDetails: UserDetails)
+        fun setID(conversationID:String)
     }
 }

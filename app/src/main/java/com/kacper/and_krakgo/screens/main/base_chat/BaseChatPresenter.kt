@@ -8,6 +8,10 @@ import com.kacper.and_krakgo.mvp.MvpPresenterImpl
  */
 open class BaseChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
         BaseChatContract.Presenter {
+    override fun setID(conversationID: String) {
+
+    }
+
     override fun getConversationID(userDetails: UserDetails) {
 
     }
