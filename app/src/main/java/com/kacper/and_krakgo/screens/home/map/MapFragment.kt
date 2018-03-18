@@ -3,6 +3,7 @@ package com.kacper.and_krakgo.screens.home.map
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -20,16 +21,16 @@ import com.google.android.gms.location.LocationListener
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.kacper.and_krakgo.Manifest
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.SnackbarHelper
 import com.kacper.and_krakgo.model.Place
+import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpFragment
+import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 import com.kacper.and_krakgo.screens.home.profile.ProfileContract
 import com.kacper.and_krakgo.screens.main.place_details.PlaceDetailsActivity
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -41,6 +42,7 @@ import kotlinx.android.synthetic.main.fragment_map.*
 class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         MapContract.View, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
+
 
     override var mPresenter: MapContract.Presenter = MapPresenter()
     private lateinit var mLastLocation: Location
@@ -111,18 +113,40 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         mGoogleMap.clear()
         mGoogleMap.isMyLocationEnabled = true
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
+        mPresenter.getUsers()
         mPresenter.getPlaces()
+        mPresenter.setUserLocation(mLastLocation)
     }
 
     override fun onConnectionSuspended(p0: Int) {
 
     }
 
+    override fun setUsers(users: ArrayList<UserDetails>) {
+        mGoogleMap.clear()
+        mPresenter.getPlaces()
+        users.forEach({
+            if(it.map_visibility != 0L) {
+                val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
+                        it.latitude, it.longitude
+                )))
+                if(it.map_visibility == 1L)
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
+                else
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_inviting))
+
+                marker.tag = it
+            }
+        })
+    }
+
     override fun setPlaces(places: ArrayList<Place>) {
         val builder = LatLngBounds.Builder()
         places.forEach({
             val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
-                    it.latitude.toDouble(), it.longitude.toDouble())).title(it.display_name))
+                    it.latitude, it.longitude))
+                    .title(it.display_name))
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beer))
             marker.tag = it
             builder.include(marker.position)
         })
@@ -132,8 +156,10 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         mGoogleMap.moveCamera(cu)
         mGoogleMap.setOnMarkerClickListener {
             if(it.tag != null){
-                startActivity(PlaceDetailsActivity.newIntent(context!!, it.tag as Place))
-
+                if(it.tag is Place)
+                    startActivity(PlaceDetailsActivity.newIntent(context!!, it.tag as Place))
+                else if(it.tag is UserDetails)
+                    DialogUserInfo(activity!!, it.tag as UserDetails).show()
                 true
             } else
                 false

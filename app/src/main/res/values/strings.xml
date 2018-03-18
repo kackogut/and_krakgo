@@ -64,4 +64,5 @@
     <string name="error_message_empty">Wiadomość nie może być pusta</string>
     <string name="error_location_not_granted">Aplikacja musi mieć dostęp do lokalizacji</string>
     <string name="opinions_label">Opinie na żywo</string>
+    <string name="tab_forum">Forum</string>
 </resources>

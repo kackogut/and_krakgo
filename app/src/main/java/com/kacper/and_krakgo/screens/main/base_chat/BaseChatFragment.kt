@@ -5,11 +5,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.kacper.and_krakgo.R
 import com.kacper.and_krakgo.helpers.SnackbarHelper
 import com.kacper.and_krakgo.model.ForumMessage
+import com.kacper.and_krakgo.model.UserDetails
 import com.kacper.and_krakgo.mvp.MvpFragment
+import com.kacper.and_krakgo.screens.dialogs.DialogUserInfo
 import com.kacper.and_krakgo.screens.home.adapters.MessagesAdapter
+import com.kacper.and_krakgo.screens.home.adapters.RecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_chat.*
 import java.lang.Exception
 
@@ -17,7 +23,7 @@ import java.lang.Exception
  * Created by kacper on 04/02/2018.
  */
 open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContract.Presenter>(),
-        BaseChatContract.View {
+        BaseChatContract.View, RecyclerViewClickListener{
     override var mPresenter: BaseChatContract.Presenter = BaseChatPresenter()
     protected var mMessages: ArrayList<ForumMessage>? = null
     protected var mAdapter: MessagesAdapter? =null
@@ -31,6 +37,7 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         mAdapter?.setData(messages)
         showProgress(false)
         rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
+        mAdapter?.addListener(this)
     }
     override fun messageSendComplete() {
         showProgress(false)
@@ -67,5 +74,17 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
     override fun showError(error:String){
         SnackbarHelper.showError(error, forum_main_layout)
         showProgress(false)
+    }
+    override fun onClick(view: View?, position: Int) {
+        mPresenter.getUserDetails(mMessages!![position].userID, object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot?) {
+                DialogUserInfo(activity!!, p0!!.getValue(UserDetails::class.java)!!).show()
+            }
+
+        })
     }
 }

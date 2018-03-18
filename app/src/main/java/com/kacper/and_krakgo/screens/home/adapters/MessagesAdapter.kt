@@ -40,12 +40,12 @@ class MessagesAdapter
     var messages: ArrayList<ForumMessage> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        mContext = parent?.context
+        mContext = parent.context
         return if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
-            ReceivedViewHolder(LayoutInflater.from(parent?.context)
+            ReceivedViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_message_received, parent, false), listener)
         } else {
-            SentViewHolder(LayoutInflater.from(parent?.context)
+            SentViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_message_send, parent, false))
         }
     }
@@ -75,7 +75,7 @@ class MessagesAdapter
         val isFirstMessage = !(position != 0
                 && messages[position].userID == messages[position - 1].userID)
 
-        when (holder?.itemViewType) {
+        when (holder.itemViewType) {
             VIEW_TYPE_MESSAGE_SENT -> (holder as SentViewHolder)
                     .bind(messages[position], isFirstMessage)
             VIEW_TYPE_MESSAGE_RECEIVED -> (holder as ReceivedViewHolder)

@@ -2,6 +2,7 @@ package com.kacper.and_krakgo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -22,23 +23,32 @@ public class KrakGoApp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash_screen);
         sInstance = this;
         sFirebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        Intent intent = null;
-        if(SharedPreferencesHelper.getBoolean(SharedPreferencesHelper.REMEMBER_USER)) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if(user != null) {
-                intent = new Intent(this, HomeMainActivity.class);
-                sUser = user;
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = null;
+                if(SharedPreferencesHelper.getBoolean(SharedPreferencesHelper.REMEMBER_USER)) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user != null) {
+                        intent = new Intent(getApplicationContext(), HomeMainActivity.class);
+                        sUser = user;
+                    }
+                    else
+                        ToastMessageHelper.showShortToast(R.string.auto_login_error);
+                }
+                if(intent == null){
+                    intent = new Intent(getApplicationContext(), SignInActivity.class);
+                }
+                startActivity(intent);
+                finish();
             }
-            else
-                ToastMessageHelper.showShortToast(R.string.auto_login_error);
-        }
-        if(intent == null){
-            intent = new Intent(this, SignInActivity.class);
-        }
-        startActivity(intent);
-        finish();
+        }, 5000);
+
     }
     public static Context getApplicationCtx(){
         return sInstance.getApplicationContext();

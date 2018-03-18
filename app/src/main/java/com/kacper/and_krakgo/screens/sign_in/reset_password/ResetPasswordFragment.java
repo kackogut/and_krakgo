@@ -41,7 +41,7 @@ public class ResetPasswordFragment extends Fragment implements ResetPasswordCont
         SignInEvents.subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer o) throws Exception {
-                if (isVisible() && o == SignInEvents.ACTION_BOTTOM_BUTTON_PRESSED) {
+                if (isVisible() && o == SignInEvents.ACTION_BOTTOM_BUTTON_PASSWORD) {
                     isLoading = true;
                     showLoading();
                     resetPassword();

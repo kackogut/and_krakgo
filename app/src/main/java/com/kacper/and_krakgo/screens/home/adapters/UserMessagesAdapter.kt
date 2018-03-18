@@ -20,7 +20,7 @@ class UserMessagesAdapter
     lateinit var listener: RecyclerViewClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
-        return ConversationViewHolder(LayoutInflater.from(parent?.context)
+        return ConversationViewHolder(LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_user_message, parent, false), listener)
     }
 
@@ -38,7 +38,7 @@ class UserMessagesAdapter
     }
 
     override fun onBindViewHolder(holder: ConversationViewHolder, position: Int) {
-        holder?.bind(mConversations[position])
+        holder.bind(mConversations[position])
     }
 
     class ConversationViewHolder(itemView: View, private var listener: RecyclerViewClickListener) :
@@ -49,7 +49,7 @@ class UserMessagesAdapter
 
         val mConversationAvatar: CircleImageView = itemView.findViewById(R.id.civ_users_conversations_avatar)
         val mConversationName: TextView = itemView.findViewById(R.id.tv_users_display_name)
-        open fun bind(conversation: ConversationDetails) {
+        fun bind(conversation: ConversationDetails) {
             GlideHelper.load(mConversationAvatar, conversation.user_avatar)
             mConversationName.text = conversation.user_name
             mConversationAvatar.setOnClickListener(this)

@@ -16,6 +16,7 @@ import com.kacper.and_krakgo.helpers.ToastMessageHelper;
 import com.kacper.and_krakgo.rxbus.SignInEvents;
 import com.kacper.and_krakgo.screens.sign_in.register.RegisterFragment;
 import com.kacper.and_krakgo.screens.sign_in.login.LoginFragment;
+import com.kacper.and_krakgo.screens.sign_in.register_part2.RegisterPart2Fragment;
 import com.kacper.and_krakgo.screens.sign_in.reset_password.ResetPasswordFragment;
 
 import butterknife.BindView;
@@ -61,11 +62,16 @@ public class SignInActivity extends AppCompatActivity {
 
     @OnClick(R.id.sign_button)
     void onBottomButtonClick() {
+        mFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (mFragment instanceof LoginFragment) {
             mFragment = new RegisterFragment();
             FragmentHelper.changeFragments(getSupportFragmentManager(), mFragment, RegisterFragment.TAG);
-        } else  {
-            SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_PRESSED);
+        } else if(mFragment instanceof RegisterFragment) {
+            SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_1);
+        } else if(mFragment instanceof RegisterPart2Fragment){
+            SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_2);
+        } else if(mFragment instanceof ResetPasswordFragment){
+            SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_PASSWORD);
         }
         verifyView();
     }

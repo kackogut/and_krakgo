@@ -42,11 +42,11 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
     override fun onConversationDownload(conversations: ArrayList<ConversationDetails>) {
         mConversations = conversations
         mAdapter?.setData(conversations)
-        showProgress(false)
+        //showProgress(false)
     }
 
-    override fun showError(message:String) {
-         SnackbarHelper.showError(message, cl_conversations_main)
+    override fun showError(error:String) {
+         SnackbarHelper.showError(error, cl_conversations_main)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

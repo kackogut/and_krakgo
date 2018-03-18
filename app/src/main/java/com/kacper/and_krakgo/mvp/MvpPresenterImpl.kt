@@ -37,10 +37,10 @@ open class MvpPresenterImpl<V : MvpView> : MvpPresenter<V> {
         return KrakGoApp.getFirebaseReference()
     }
 
-    override fun getUserDetails(userId: String, listener: ValueEventListener) {
+    override fun getUserDetails(userID: String, listener: ValueEventListener) {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(userId)
+                .child(userID)
                 .addListenerForSingleValueEvent(listener)
     }
 }

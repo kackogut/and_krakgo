@@ -55,7 +55,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
         SignInEvents.subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                if (isVisible() && integer == SignInEvents.ACTION_BOTTOM_BUTTON_PRESSED)
+                if (isVisible() && integer == SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_1)
                     goToNextPage();
             }
         });

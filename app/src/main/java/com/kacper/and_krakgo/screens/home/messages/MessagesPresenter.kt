@@ -19,7 +19,6 @@ MessagesContract.Presenter{
                 .child(getCurrentUser().uid)
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot?) {
-                        val childrens: ArrayList<DataSnapshot> = ArrayList()
                         val values : ArrayList<ConversationDetails> = ArrayList()
                         if (p0!!.exists()) {
                             for(c in p0.children){

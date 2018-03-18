@@ -12,7 +12,7 @@ open class BaseChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
 
     }
 
-    override fun getConversationID(userDetails: UserDetails) {
+    override fun getConversationID(secondUserDetails: UserDetails) {
 
     }
 

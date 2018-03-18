@@ -26,29 +26,17 @@ import java.lang.Exception
  * Created by kacper on 05/11/2017.
  */
 
-class ForumFragment : BaseChatFragment(), RecyclerViewClickListener{
+class ForumFragment : BaseChatFragment(){
 
     override var mPresenter: BaseChatContract.Presenter = ForumPresenter()
 
-    override fun onClick(view: View?, position: Int) {
-       mPresenter.getUserDetails(mMessages!![position].userID, object:ValueEventListener{
-           override fun onCancelled(p0: DatabaseError?) {
 
-           }
-
-           override fun onDataChange(p0: DataSnapshot?) {
-               DialogUserInfo(activity!!, p0!!.getValue(UserDetails::class.java)!!).show()
-           }
-
-       })
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         showProgress(true)
         setListeners()
         setRecyclerView()
-        mAdapter?.addListener(this)
         mPresenter.getMessages()
     }
 }

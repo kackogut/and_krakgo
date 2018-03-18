@@ -12,7 +12,9 @@ import io.reactivex.subjects.PublishSubject;
 
 public class SignInEvents {
     public static final int ACTION_FORGOT_PASSSWORD_CLICKED = 3;
-    public static final int ACTION_BOTTOM_BUTTON_PRESSED = 4;
+    public static final int ACTION_BOTTOM_BUTTON_REGISTER_1 = 4;
+    public static final int ACTION_BOTTOM_BUTTON_REGISTER_2 = 5;
+    public static final int ACTION_BOTTOM_BUTTON_PASSWORD = 6;
 
     private static PublishSubject<Integer> sInstance;
 

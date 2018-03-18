@@ -18,8 +18,8 @@ public class UserDetails implements Parcelable{
     private Long dob_time = 0L;
     private String photo_url;
     private Long map_visibility = 0L;
-    private Long longitude = 0L;
-    private Long latitude = 0L;
+    private Double longitude = 0.0;
+    private Double latitude = 0.0;
     private String userID;
     private String display_name;
 
@@ -33,18 +33,22 @@ public class UserDetails implements Parcelable{
                 userID,
                 display_name
         });
-        parcel.writeLongArray(new long[]{
-                dob_time,
-                map_visibility,
+        parcel.writeDoubleArray(new double[]{
                 longitude,
                 latitude
+        });
+        parcel.writeLongArray(new long[]{
+                dob_time,
+                map_visibility
         });
     }
     public UserDetails(Parcel in){
         String[] strings = new String[4];
-        long[] longs = new long[4];
+        double[] doubles = new double[2];
+        long[] longs = new long[2];
 
         in.readStringArray(strings);
+        in.readDoubleArray(doubles);
         in.readLongArray(longs);
 
         this.about_me = strings[0];
@@ -54,8 +58,9 @@ public class UserDetails implements Parcelable{
 
         this.dob_time = longs[0];
         this.map_visibility = longs[1];
-        this.longitude = longs[2];
-        this.latitude = longs[3];
+
+        this.longitude = doubles[0];
+        this.latitude = doubles[1];
     }
     public UserDetails(String display_name, long dob_time, String photoUri){
         this.dob_time = dob_time;
@@ -70,7 +75,9 @@ public class UserDetails implements Parcelable{
         this.display_name = display_name;
     }
 
-    public UserDetails(String about_me, Long dob_time, String photo_url, Long map_visibility, Long longitude, Long latitude, String userID, String display_name, List<String> conversations) {
+    public UserDetails(String about_me, long dob_time, String photo_url,
+                       long map_visibility, double longitude, double latitude,
+                       String userID, String display_name, List<String> conversations) {
         this.about_me = about_me;
         this.dob_time = dob_time;
         this.photo_url = photo_url;
@@ -96,19 +103,19 @@ public class UserDetails implements Parcelable{
     }
 
     @NonNull
-    public Long getDob_time() {
+    public long getDob_time() {
         return dob_time;
     }
 
-    public Long getMap_visibility() {
+    public long getMap_visibility() {
         return map_visibility;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
@@ -128,11 +135,11 @@ public class UserDetails implements Parcelable{
         this.map_visibility = map_visibility;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 

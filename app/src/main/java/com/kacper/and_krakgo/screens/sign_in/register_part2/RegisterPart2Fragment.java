@@ -72,7 +72,7 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         SignInEvents.subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer action) throws Exception {
-                if (isVisible() && action == SignInEvents.ACTION_BOTTOM_BUTTON_PRESSED)
+                if (isVisible() && action == SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_2)
                     goToNextPage();
             }
         });
