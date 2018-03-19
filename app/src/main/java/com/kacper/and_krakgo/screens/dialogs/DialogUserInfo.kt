@@ -55,7 +55,7 @@ class DialogUserInfo(var mActivty:Activity, var mUserDetails:UserDetails)
                 DateHelper.getYearDifference(Date(mUserDetails.dob_time)))
         tv_profile_email.visibility = View.GONE
         tv_profile_display_name.text = mUserDetails.display_name
-        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))
+        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails.photo_url))
         tv_dialog_map_status_label.text = context.getString(
                 MapVisibility.values()[mUserDetails.map_visibility.toInt()].stringResource)
         iv_dialog_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,

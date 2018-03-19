@@ -3,6 +3,7 @@ package com.kacper.and_krakgo.screens.home.map
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
@@ -10,6 +11,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,6 +91,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
 
         } else {
             getMarkers()
+            setLocationAndScroll()
         }
 
     }
@@ -98,6 +101,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
             PERMISSION_READ_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     getMarkers()
+                    setLocationAndScroll()
                 } else {
                     SnackbarHelper.showError(R.string.error_location_not_granted, fragment_map_main_layout)
                 }
@@ -112,6 +116,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     private fun getMarkers() {
         mGoogleMap.clear()
         mGoogleMap.isMyLocationEnabled = true
+        mGoogleMap.mapType
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
         mPresenter.getUsers()
         mPresenter.getPlaces()
@@ -119,6 +124,15 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnectionSuspended(p0: Int) {
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setLocationAndScroll(){
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
+        val cu = CameraUpdateFactory.newLatLngZoom(LatLng(
+                mLastLocation.latitude, mLastLocation.longitude), 16f)
+        mGoogleMap.animateCamera(cu)
 
     }
 
@@ -141,19 +155,17 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun setPlaces(places: ArrayList<Place>) {
-        val builder = LatLngBounds.Builder()
+
         places.forEach({
             val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
                     it.latitude, it.longitude))
                     .title(it.display_name))
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beer))
+            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beer_with_padding))
             marker.tag = it
-            builder.include(marker.position)
+
         })
-        val bounds = builder.build()
-        val padding = 100
-        val cu = CameraUpdateFactory.newLatLngBounds(bounds, padding)
-        mGoogleMap.moveCamera(cu)
+
+
         mGoogleMap.setOnMarkerClickListener {
             if(it.tag != null){
                 if(it.tag is Place)
@@ -165,6 +177,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                 false
         }
         showProgress(false)
+
     }
 
     private fun connectToMap() {
@@ -178,6 +191,15 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
 
         map_view.getMapAsync({
             mGoogleMap = it
+            try{
+                val success = it.setMapStyle(
+                        MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style))
+                if(!success)
+                    Log.e(this.tag, "Style parsing failed")
+            } catch (e: Resources.NotFoundException){
+                Log.e(this.tag, "Can't find style")
+            }
+
         })
         mGoogleApiClient = GoogleApiClient.Builder(context!!)
                 .addConnectionCallbacks(this)
@@ -187,11 +209,13 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     private fun showProgress(show: Boolean) {
-        if (show) {
-            pb_map_fragment?.visibility = View.VISIBLE
-        } else {
-            pb_map_fragment?.visibility = View.GONE
+        if(isVisible) {
+            if (show) {
+                pb_map_fragment?.visibility = View.VISIBLE
+            } else {
+                pb_map_fragment?.visibility = View.GONE
+            }
+            map_view.isEnabled = !show
         }
-        map_view.isEnabled = !show
     }
 }

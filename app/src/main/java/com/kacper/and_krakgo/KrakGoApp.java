@@ -51,7 +51,10 @@ public class KrakGoApp extends AppCompatActivity {
 
     }
     public static Context getApplicationCtx(){
-        return sInstance.getApplicationContext();
+        if(sInstance != null)
+            return sInstance.getApplicationContext();
+
+            return null;
     }
 
     public static FirebaseUser getCurrentUser(){

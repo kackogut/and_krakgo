@@ -34,11 +34,11 @@
     <string name="password_dont_match">Hasła się nie zgadzają</string>
     <string name="you_have_to_be_above_18">Musisz mieć powyżej 18 lat aby założyć konto</string>
     <string name="you_have_to_accept_terms">Musisz zakceptować regulamin</string>
-    <string name="error_gallery_request">You must allow application to access gallery before continuing</string>
+    <string name="error_gallery_request">Musisz zezwolić na dostęp do galeri i zdjęć przed kontynuowaniem</string>
     <string name="error_no_avatar">Aby kontynuować musisz wybrać swoje zdjęcie</string>
     <string name="account_created">Utworzono konto</string>
     <string name="avatar_label">Awatar</string>
-    <string name="reset_password_label">Podaj swoj adres email, na który zostanie wysłane nowe hasło</string>
+    <string name="reset_password_label">"Podaj swoj adres email, na który zostanie wysłany link do zmiany hasła "</string>
     <string name="reset_password_button">Restartuj hasło</string>
     <string name="password_change_success">Email z nowym hasłem został wysłany</string>
     <string name="press_back_again_to_exit">Naciśnij jeszcze raz wstecz aby wyjść</string>
@@ -48,7 +48,7 @@
     <string name="save_label">Zapisz</string>
     <string name="map_status_visible">Widoczny</string>
     <string name="map_status_invisible">Niewidoczny</string>
-    <string name="map_status_inviting">Zapraszam na piwko</string>
+    <string name="map_status_inviting">Chcę się spotkac</string>
     <string name="error_dob_not_picked">Aby korzystać z aplikacji musisz podać datę urodzenia</string>
     <string name="user_details_saved">Dane użytkownika zapisane pomyślnie</string>
     <string name="recent">Ostatnie</string>
