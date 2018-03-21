@@ -137,6 +137,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
             progress_bar_save.visibility = View.VISIBLE
             showProgress(true)
             mUserDetails?.about_me = ti_profile_dob_input?.editText?.text.toString()
+            mUserDetails?.setLast_login_time()
             mPresenter.saveUserDetails(mUserDetails!!)
         })
         profile_expendable_main.setOnClickListener({

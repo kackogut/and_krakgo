@@ -140,6 +140,7 @@ public class RegisterPart2Fragment extends Fragment implements RegisterPart2Cont
         ToastMessageHelper.showShortToast(R.string.account_created);
         Intent intent = new Intent(getContext(), HomeMainActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

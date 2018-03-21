@@ -50,6 +50,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     private lateinit var mLastLocation: Location
     private lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mGoogleMap: GoogleMap
+    private  var isUserInLocation = false
 
     private val PERMISSION_READ_LOCATION = 101
 
@@ -90,8 +91,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                     PERMISSION_READ_LOCATION);
 
         } else {
-            getMarkers()
             setLocationAndScroll()
+            getMarkers()
         }
 
     }
@@ -100,8 +101,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         when (requestCode) {
             PERMISSION_READ_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    getMarkers()
                     setLocationAndScroll()
+                    getMarkers()
                 } else {
                     SnackbarHelper.showError(R.string.error_location_not_granted, fragment_map_main_layout)
                 }
@@ -124,15 +125,19 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnectionSuspended(p0: Int) {
-
+        Log.d(this.tag, "onConnectionSuspended")
     }
 
     @SuppressLint("MissingPermission")
     private fun setLocationAndScroll(){
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
-        val cu = CameraUpdateFactory.newLatLngZoom(LatLng(
-                mLastLocation.latitude, mLastLocation.longitude), 16f)
-        mGoogleMap.animateCamera(cu)
+        if(mLastLocation.latitude in 50.0..50.12 && mLastLocation.longitude in 19.8..20.1) {
+            isUserInLocation = true
+            val cu = CameraUpdateFactory.newLatLngZoom(LatLng(
+                    mLastLocation.latitude, mLastLocation.longitude), 16f)
+            mGoogleMap.moveCamera(cu)
+        } else
+            isUserInLocation = false
 
     }
 
@@ -140,7 +145,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         mGoogleMap.clear()
         mPresenter.getPlaces()
         users.forEach({
-            if(it.map_visibility != 0L) {
+            if(it.map_visibility != 0L && it.latitude in 50.0..50.12 && it.longitude in 19.8..20.1) {
                 val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
                         it.latitude, it.longitude
                 )))
@@ -155,15 +160,20 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun setPlaces(places: ArrayList<Place>) {
-
+        val builder = LatLngBounds.Builder()
         places.forEach({
             val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
                     it.latitude, it.longitude))
                     .title(it.display_name))
             marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_beer_with_padding))
             marker.tag = it
-
+            builder.include(marker.position)
         })
+        val bounds = builder.build()
+        val padding = 100
+        val cu = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+        if(!isUserInLocation)
+            mGoogleMap.moveCamera(cu)
 
 
         mGoogleMap.setOnMarkerClickListener {

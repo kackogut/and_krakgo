@@ -3,11 +3,10 @@ package com.kacper.and_krakgo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 
 /**
  * Created by kacper on 20/01/2018.
@@ -22,6 +21,7 @@ public class UserDetails implements Parcelable{
     private Double latitude = 0.0;
     private String userID;
     private String display_name;
+    private Long last_login_time;
 
     public UserDetails(){
     }
@@ -39,13 +39,14 @@ public class UserDetails implements Parcelable{
         });
         parcel.writeLongArray(new long[]{
                 dob_time,
-                map_visibility
+                map_visibility,
+                last_login_time
         });
     }
     public UserDetails(Parcel in){
         String[] strings = new String[4];
         double[] doubles = new double[2];
-        long[] longs = new long[2];
+        long[] longs = new long[3];
 
         in.readStringArray(strings);
         in.readDoubleArray(doubles);
@@ -58,6 +59,7 @@ public class UserDetails implements Parcelable{
 
         this.dob_time = longs[0];
         this.map_visibility = longs[1];
+        this.last_login_time = longs[2];
 
         this.longitude = doubles[0];
         this.latitude = doubles[1];
@@ -67,12 +69,14 @@ public class UserDetails implements Parcelable{
         this.photo_url = photoUri;
         this.display_name = display_name;
         this.about_me = "";
+        this.last_login_time = Calendar.getInstance().getTimeInMillis();
     }
 
     public UserDetails(String photo_url, String userID, String display_name) {
         this.photo_url = photo_url;
         this.userID = userID;
         this.display_name = display_name;
+        this.last_login_time = Calendar.getInstance().getTimeInMillis();
     }
 
     public UserDetails(String about_me, long dob_time, String photo_url,
@@ -168,5 +172,14 @@ public class UserDetails implements Parcelable{
         return 0;
     }
 
+    public Long getLast_login_time() {
+        return last_login_time;
+    }
 
+    public void setLast_login_time(Long last_login_time) {
+        this.last_login_time = last_login_time;
+    }
+    public void setLast_login_time() {
+        this.last_login_time = Calendar.getInstance().getTimeInMillis();
+    }
 }

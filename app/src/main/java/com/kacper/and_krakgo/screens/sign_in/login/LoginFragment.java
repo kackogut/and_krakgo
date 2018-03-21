@@ -80,6 +80,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
         ToastMessageHelper.showShortToast(getString(R.string.login_succesfull));
         Intent intent = new Intent(getContext(), HomeMainActivity.class);
         startActivity(intent);
+        getActivity().finish();
     }
 
     @Override

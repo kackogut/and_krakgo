@@ -1,5 +1,7 @@
 package com.kacper.and_krakgo.screens.sign_in.register;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +23,7 @@ import com.kacper.and_krakgo.views.CustomTextWatcher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -152,6 +155,12 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
             textInputLayout.setEnabled(true);
             textInputLayout.setError(error);
         }
+    }
+    @OnClick(R.id.terms_textview)
+    void onTermsClicked(){
+        Intent browserIntent = new Intent
+                (Intent.ACTION_VIEW, Uri.parse("http://www.kacperkogut.com/pubgo/terms"));
+        startActivity(browserIntent);
     }
 
 }

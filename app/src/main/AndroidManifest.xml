@@ -46,7 +46,7 @@
             android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".screens.main.chat.ChatActivity"/>
         <activity android:name=".screens.main.place_details.PlaceDetailsActivity"/>
-        <activity android:name=".screens.main.chat.ChatActivity"/>
+
 
 
     </application>
