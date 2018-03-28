@@ -145,7 +145,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         mGoogleMap.clear()
         mPresenter.getPlaces()
         users.forEach({
-            if(it.map_visibility != 0L && it.latitude in 50.0..50.12 && it.longitude in 19.8..20.1) {
+            if(it.map_visibility != 0L ) {
                 val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
                         it.latitude, it.longitude
                 )))
