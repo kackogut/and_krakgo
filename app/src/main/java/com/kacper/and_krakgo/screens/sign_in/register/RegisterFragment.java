@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.kacper.and_krakgo.InputTypes;
+import com.kacper.and_krakgo.model.enums.InputTypes;
 import com.kacper.and_krakgo.R;
 import com.kacper.and_krakgo.helpers.FragmentHelper;
 import com.kacper.and_krakgo.helpers.ToastMessageHelper;

@@ -3,7 +3,7 @@ package com.kacper.and_krakgo.helpers;
 import android.content.Context;
 import android.util.Patterns;
 
-import com.kacper.and_krakgo.InputTypes;
+import com.kacper.and_krakgo.model.enums.InputTypes;
 import com.kacper.and_krakgo.R;
 
 import java.util.regex.Pattern;

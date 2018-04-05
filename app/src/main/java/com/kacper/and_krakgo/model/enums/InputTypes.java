@@ -1,4 +1,4 @@
-package com.kacper.and_krakgo;
+package com.kacper.and_krakgo.model.enums;
 
 /**
  * Created by kacper on 22/10/2017.
