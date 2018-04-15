@@ -72,9 +72,7 @@ class MapPresenter : MvpPresenterImpl<MapContract.View>(),
                             }
                             mView?.setPlaces(values)
                         }
-
                     })
-
     }
 
 }

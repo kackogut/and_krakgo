@@ -38,7 +38,6 @@ import java.util.*
 
 class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presenter>(),
         DatePickerDialog.OnDateSetListener, ProfileContract.View {
-
     override var mPresenter: ProfileContract.Presenter = ProfilePresenter()
     private var mUserDetails: UserDetails? = null
     private var mPhotoUri : Uri? = null
@@ -97,6 +96,10 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         cv_profile_avatar.setImageURI(mPhotoUri)
         mUserDetails?.photo_url = uri.toString()
         mPresenter.saveUserDetails(mUserDetails!!)
+    }
+
+    override fun showError(error: String) {
+        SnackbarHelper.showError(error, main_layout)
     }
 
     private fun setCurrentStatus(status: Long?) {
