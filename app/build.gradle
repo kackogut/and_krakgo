@@ -6,7 +6,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.kacper.and_krakgo"
+        applicationId "com.kacper.krakgo"
         minSdkVersion 19
         multiDexEnabled true
         targetSdkVersion 27
