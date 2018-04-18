@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:maxWidth="300dp"
+        android:maxWidth="250dp"
         android:padding="8dp"
         android:textColor="@color/colorBackground"
         android:layout_marginStart="8dp" />
@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
+        android:lines="2"
         android:textColor="@color/colorWhite"
         android:layout_toStartOf="@id/tv_message_body"
         android:layout_marginStart="4dp"

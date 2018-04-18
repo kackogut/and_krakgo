@@ -16,7 +16,7 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_gravity="center"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/ic_user_logo_register"/>
 
         <TextView
@@ -25,14 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_size_big"
+            android:layout_margin="@dimen/margin_size_medium"
             tools:text="Bar bar"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextLabel"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/opinions_label"/>
         <View
             style="@style/separator"/>
