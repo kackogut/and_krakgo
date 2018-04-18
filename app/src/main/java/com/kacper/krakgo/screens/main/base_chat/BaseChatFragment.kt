@@ -64,11 +64,13 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         })
     }
     protected fun showProgress(show: Boolean){
-        if(show) pb_forum.visibility = View.VISIBLE
-        else pb_forum.visibility = View.GONE
+        if(pb_forum != null) {
+            if (show) pb_forum.visibility = View.VISIBLE
+            else pb_forum.visibility = View.GONE
 
-        rv_forum_messages.isEnabled = !show
-        iv_forum_send_arrow.isEnabled = !show
+            rv_forum_messages.isEnabled = !show
+            iv_forum_send_arrow.isEnabled = !show
+        }
     }
 
     override fun showError(error:String){

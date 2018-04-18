@@ -245,7 +245,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     private fun showProgress(show: Boolean) {
-        if (isVisible) {
+        if (isVisible && map_view != null) {
             if (show) {
                 pb_map_fragment?.visibility = View.VISIBLE
             } else {
