@@ -51,15 +51,15 @@ class DialogUserInfo(var mActivty:Activity, var mUserDetails:UserDetails)
 
     private fun getUserInfo() {
         tv_profile_age.text = context.resources.getQuantityString(R.plurals.age_plural,
-                DateHelper.getYearDifference(Date(mUserDetails.dob_time)),
-                DateHelper.getYearDifference(Date(mUserDetails.dob_time)))
+                DateHelper.getYearDifference(Date(mUserDetails.dob_time!!)),
+                DateHelper.getYearDifference(Date(mUserDetails.dob_time!!)))
         tv_profile_email.visibility = View.GONE
         tv_profile_display_name.text = mUserDetails.display_name
         GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails.photo_url))
         tv_dialog_map_status_label.text = context.getString(
-                MapVisibility.values()[mUserDetails.map_visibility.toInt()].stringResource)
+                MapVisibility.values()[mUserDetails.map_visibility!!.toInt()].stringResource)
         iv_dialog_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,
-                MapVisibility.values()[mUserDetails.map_visibility.toInt()].colourResource))
+                MapVisibility.values()[mUserDetails.map_visibility!!.toInt()].colourResource))
         if(mUserDetails.about_me != null)
             tv_dialog_about_me.text = mUserDetails.about_me
         else

@@ -94,8 +94,8 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                                     .child(secondUserDetails.userID)
                                     .setValue(ConversationDetails(
                                             mConversationID,
-                                            secondUserDetails.photo_url,
-                                            secondUserDetails.display_name,
+                                            secondUserDetails.photo_url!!,
+                                            secondUserDetails.display_name!!,
                                             Date().time
                                     ))
 
@@ -106,7 +106,7 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                                     .setValue(ConversationDetails(
                                             mConversationID,
                                             getCurrentUser().photoUrl.toString(),
-                                            getCurrentUser().displayName,
+                                            getCurrentUser().displayName!!,
                                             Date().time
                                     ))
                         }

@@ -70,8 +70,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         setCurrentStatus(userDetails?.map_visibility)
         ti_profile_dob_input.editText?.setText(userDetails?.about_me ?: "")
         tv_profile_age.text = resources.getQuantityString(R.plurals.age_plural,
-                DateHelper.getYearDifference(Date(userDetails!!.dob_time)),
-                DateHelper.getYearDifference(Date(userDetails.dob_time)))
+                DateHelper.getYearDifference(Date(userDetails!!.dob_time!!)),
+                DateHelper.getYearDifference(Date(userDetails.dob_time!!)))
         tv_profile_display_name.text = mUserDetails?.display_name
         GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))
         showProgress(false)

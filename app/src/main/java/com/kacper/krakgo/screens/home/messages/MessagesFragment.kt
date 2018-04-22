@@ -33,7 +33,7 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
     override fun onClick(view: View?, position: Int) {
         activity?.startActivity(ChatActivity.newIntent(context!!, UserDetails(
                 mConversations[position].user_avatar,
-                mConversations[position].user_id,
+                mConversations[position].user_id!!,
                 mConversations[position].user_name
         )))
     }

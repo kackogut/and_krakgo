@@ -164,7 +164,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         users.forEach({
             if (it.map_visibility != 0L) {
                 val marker = mGoogleMap.addMarker(MarkerOptions().position(LatLng(
-                        it.latitude, it.longitude
+                        it.latitude!!, it.longitude!!
                 )))
                 if (it.map_visibility == 1L)
                     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
