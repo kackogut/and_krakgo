@@ -91,7 +91,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     @Override
     public void onSignUpCompleted() {
-        FragmentHelper.removeAndChangeFragment(getFragmentManager(), new RegisterPart2Fragment());
+        FragmentHelper.INSTANCE.removeAndChangeFragment(getFragmentManager(), new RegisterPart2Fragment());
     }
 
     @Override
@@ -148,7 +148,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
 
     public void showOrHideError(String message, InputTypes type) {
         TextInputLayout textInputLayout = getInputLayoutByType(type);
-        String error = ValidationHelper.validateText(getContext(), message, type);
+        String error = ValidationHelper.INSTANCE.validateText(getContext(), message, type);
         if (error == null) {
             textInputLayout.setErrorEnabled(false);
         } else {

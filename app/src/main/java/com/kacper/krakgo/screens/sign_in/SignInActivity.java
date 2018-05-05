@@ -45,7 +45,7 @@ public class SignInActivity extends AppCompatActivity {
 
         mToolbar.setVisibility(View.INVISIBLE);
         mFragment = new LoginFragment();
-        FragmentHelper.addFragment(getSupportFragmentManager(), mFragment, LoginFragment.TAG);
+        FragmentHelper.INSTANCE.addFragment(getSupportFragmentManager(), mFragment, LoginFragment.TAG);
         verifyView();
 
         SignInEvents.subscribe(new Consumer<Integer>() {
@@ -53,7 +53,7 @@ public class SignInActivity extends AppCompatActivity {
             public void accept(Integer integer) throws Exception {
                 if (integer == SignInEvents.ACTION_FORGOT_PASSSWORD_CLICKED) {
                     mFragment = new ResetPasswordFragment();
-                    FragmentHelper.changeFragments(getSupportFragmentManager(), mFragment, ResetPasswordFragment.TAG);
+                    FragmentHelper.INSTANCE.changeFragments(getSupportFragmentManager(), mFragment, ResetPasswordFragment.Companion.getTAG());
                     verifyView();
                 }
             }
@@ -65,7 +65,7 @@ public class SignInActivity extends AppCompatActivity {
         mFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (mFragment instanceof LoginFragment) {
             mFragment = new RegisterFragment();
-            FragmentHelper.changeFragments(getSupportFragmentManager(), mFragment, RegisterFragment.TAG);
+            FragmentHelper.INSTANCE.changeFragments(getSupportFragmentManager(), mFragment, RegisterFragment.TAG);
         } else if(mFragment instanceof RegisterFragment) {
             SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_1);
         } else if(mFragment instanceof RegisterPart2Fragment){
@@ -99,7 +99,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         }else {
             super.onBackPressed();
-            mFragment = FragmentHelper.getVisibleFragment(getSupportFragmentManager());
+            mFragment = FragmentHelper.INSTANCE.getVisibleFragment(getSupportFragmentManager());
             verifyView();
         }
     }

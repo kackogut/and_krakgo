@@ -127,7 +127,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
 
     public void showOrHideError(String message, InputTypes type) {
         TextInputLayout textInputLayout = getInputLayoutByType(type);
-        String error = ValidationHelper.validateText(getContext(), message, type);
+        String error = ValidationHelper.INSTANCE.validateText(getContext(), message, type);
         if (error == null) {
             textInputLayout.setErrorEnabled(false);
         } else {
