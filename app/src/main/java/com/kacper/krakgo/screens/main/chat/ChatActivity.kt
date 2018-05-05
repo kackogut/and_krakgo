@@ -29,7 +29,7 @@ class ChatActivity : AppCompatActivity(){
         mFragment = ChatWithIDFragment.newFragment(mUserDetails)
         FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment.tag)
 
-        GlideHelper.load(baseContext, civ_chat_avatar, mUserDetails.photo_url)
+        GlideHelper.load(civ_chat_avatar, mUserDetails.photo_url)
         tv_chat_username.text = mUserDetails.display_name
 
         (mFragment as ChatWithIDFragment).getChatMessages()

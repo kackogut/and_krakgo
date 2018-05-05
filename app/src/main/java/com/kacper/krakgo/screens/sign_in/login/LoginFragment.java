@@ -64,7 +64,8 @@ public class LoginFragment extends Fragment implements LoginContract.View {
             mPresenter.loginWithEmail(mEmailInputLayout.getEditText().getText().toString(),
                     mPasswordInputLayout.getEditText().getText().toString());
         } else
-            ToastMessageHelper.showShortToast(getString(R.string.error_fields_empty_or_invalid));
+            ToastMessageHelper.INSTANCE.showShortToast( getContext(),
+                    getString(R.string.error_fields_empty_or_invalid));
     }
 
     @OnClick(R.id.forgot_password_text_view)
@@ -75,9 +76,9 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void onLoginSuccesfull() {
         showProgress(false);
-        SharedPreferencesHelper.saveToSharedPreferences(SharedPreferencesHelper.REMEMBER_USER,
-                mRememberMeCheckBox.isChecked());
-        ToastMessageHelper.showShortToast(getString(R.string.login_succesfull));
+        SharedPreferencesHelper.INSTANCE.saveToSharedPreferences( getContext(),
+                SharedPreferencesHelper.INSTANCE.getREMEMBER_USER(), mRememberMeCheckBox.isChecked());
+        ToastMessageHelper.INSTANCE.showShortToast(getContext(),R.string.login_succesfull);
         Intent intent = new Intent(getContext(), HomeMainActivity.class);
         startActivity(intent);
         getActivity().finish();
@@ -86,7 +87,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void showError(Exception error) {
         showProgress(false);
-        ToastMessageHelper.showShortToast(error.getMessage());
+        ToastMessageHelper.INSTANCE.showShortToast(getContext(), error.getMessage());
     }
 
     private void showProgress(boolean showProgress) {

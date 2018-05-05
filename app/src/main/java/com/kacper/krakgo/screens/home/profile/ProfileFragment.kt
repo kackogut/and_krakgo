@@ -55,14 +55,14 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     override fun userSaveComplete() {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
-        SnackbarHelper.showSuccess(R.string.user_details_saved, main_layout)
+        SnackbarHelper.showSuccess(context!!, R.string.user_details_saved, main_layout)
     }
 
     override fun onError(error: Exception) {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
         progress_bar_logout.visibility = View.GONE
-        SnackbarHelper.showError(error.localizedMessage, main_layout)
+        SnackbarHelper.showError(context!!, error.localizedMessage, main_layout)
     }
 
     override fun showUserDetails(userDetails: UserDetails?) {
@@ -86,20 +86,20 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
                 mPhotoUri = result.uri
                 mPresenter.updateUserAvatar(result.uri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                SnackbarHelper.showError(result.error.localizedMessage, main_layout)
+                SnackbarHelper.showError(context!!, result.error.localizedMessage, main_layout)
             }
         }
     }
 
     override fun photoUploadSuccess(uri: Uri) {
-        SnackbarHelper.showSuccess(R.string.photo_change_succesfull, main_layout)
+        SnackbarHelper.showSuccess(context!!, R.string.photo_change_succesfull, main_layout)
         cv_profile_avatar.setImageURI(mPhotoUri)
         mUserDetails?.photo_url = uri.toString()
         mPresenter.saveUserDetails(mUserDetails!!)
     }
 
     override fun showError(error: String) {
-        SnackbarHelper.showError(error, main_layout)
+        SnackbarHelper.showError(context!!, error, main_layout)
     }
 
     private fun setCurrentStatus(status: Long?) {
@@ -131,7 +131,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         fl_logout_button.setOnClickListener({
             progress_bar_logout.visibility = View.VISIBLE
             showProgress(true)
-            KrakGoApp.logout()
+            KrakGoApp.logout(context!!)
             val intent = Intent(context, SignInActivity::class.java)
             startActivity(intent)
             activity?.finish()

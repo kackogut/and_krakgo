@@ -57,7 +57,7 @@ class HomeMainActivity : AppCompatActivity() {
             finish()
         } else {
             wasBackPressed = true
-            SnackbarHelper.showSuccess(R.string.press_back_again_to_exit, bottom_bar)
+            SnackbarHelper.showSuccess(baseContext, R.string.press_back_again_to_exit, bottom_bar)
             val h = Handler()
             h.postDelayed({ wasBackPressed = false }, 2000)
         }

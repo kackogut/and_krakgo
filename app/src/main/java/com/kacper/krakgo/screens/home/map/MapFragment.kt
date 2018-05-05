@@ -89,7 +89,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        SnackbarHelper.showError(p0.errorMessage, fragment_map_main_layout)
+        SnackbarHelper.showError(context!!, p0.errorMessage, fragment_map_main_layout)
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -108,7 +108,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
     
     override fun showError(error: String) {
-        SnackbarHelper.showError(error,fragment_map_main_layout) 
+        SnackbarHelper.showError(context!!,error,fragment_map_main_layout)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -119,7 +119,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                     setMap()
                     sendRequestLocation()
                 } else {
-                    SnackbarHelper.showError(R.string.error_location_not_granted, fragment_map_main_layout)
+                    SnackbarHelper.showError(context!!, R.string.error_location_not_granted, fragment_map_main_layout)
                 }
             }
             else -> {

@@ -74,7 +74,7 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
     }
 
     override fun showError(error:String){
-        SnackbarHelper.showError(error, forum_main_layout)
+        SnackbarHelper.showError(context!!, error, forum_main_layout)
         showProgress(false)
     }
     override fun onClick(view: View?, position: Int) {

@@ -53,11 +53,9 @@ public class GlideHelper {
                 })
                 .into(imageView);
     }
-    public static void load( ImageView image, String photoUri){
-        load(KrakGoApp.getApplicationCtx(), image, photoUri);
-    }
-    public static void load(Context context, ImageView imageView, String photoUrl){
-        Glide.with(context)
+
+    public static void load(ImageView imageView, String photoUrl){
+        Glide.with(imageView.getContext())
                 .load(photoUrl)
                 .into(imageView);
     }

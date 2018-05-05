@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             } else {
                 wasBackPressed = true;
-                ToastMessageHelper.showShortToast(R.string.press_back_again_to_exit);
+                ToastMessageHelper.INSTANCE.showShortToast(getBaseContext(), R.string.press_back_again_to_exit);
                 Handler h = new Handler();
                 h.postDelayed(new Runnable() {
                     @Override

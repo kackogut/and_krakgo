@@ -46,7 +46,7 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
     }
 
     override fun showError(error:String) {
-         SnackbarHelper.showError(error, cl_conversations_main)
+         SnackbarHelper.showError(context!!, error, cl_conversations_main)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -1,6 +1,7 @@
 package com.kacper.krakgo.screens.home.adapters
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -24,6 +26,7 @@ import com.kacper.krakgo.model.ForumMessage
 import com.kacper.krakgo.model.UserDetails
 import com.kacper.krakgo.mvp.MvpPresenterImpl
 import com.kacper.krakgo.screens.dialogs.DialogUserInfo
+import kotlin.coroutines.experimental.coroutineContext
 
 /**
  * Created by kacper on 27/01/2018.
@@ -64,7 +67,8 @@ class MessagesAdapter
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (messages[position].userID.equals(KrakGoApp.getCurrentUser().uid))
+        return if (messages[position].userID.equals(
+                        FirebaseAuth.getInstance().currentUser?.uid))
             VIEW_TYPE_MESSAGE_SENT
         else
             VIEW_TYPE_MESSAGE_RECEIVED
@@ -90,7 +94,7 @@ class MessagesAdapter
         open fun bind(message: ForumMessage, isFirstMessage: Boolean) {
             mMessageText.text = message.message_text
             if (isFirstMessage) {
-                mMessageDate.text = DateHelper.getFomattedMessageDate(message.time)
+                mMessageDate.text = DateHelper.getFomattedMessageDate(mMessageDate.context, message.time)
                 mMessageDate.visibility = View.VISIBLE
 
             } else mMessageDate.visibility = View.GONE
@@ -110,7 +114,7 @@ class MessagesAdapter
             super.bind(message, isFirstMessage)
             mMessage = message
             val params = mMessageText.layoutParams as RelativeLayout.LayoutParams
-            val density = KrakGoApp.getApplicationCtx().resources.displayMetrics.density
+            val density = Resources.getSystem().displayMetrics.density
             var marginLeft = Math.round(48 * density)
             mMessageText.setOnClickListener(this)
             mAvatar.setOnClickListener(this)

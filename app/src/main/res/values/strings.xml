@@ -64,4 +64,5 @@
     <string name="error_location_not_granted">Application have to be able to track location</string>
     <string name="opinions_label">Live opinions</string>
     <string name="tab_forum">Forum</string>
+    <string name="error_placeholder">Error</string>
 </resources>

@@ -52,7 +52,7 @@ public class ResetPasswordFragment extends Fragment implements ResetPasswordCont
 
     private void resetPassword() {
         if (mResetEmail.getEditText() != null && mResetEmail.isErrorEnabled()) {
-            ToastMessageHelper.showShortToast(R.string.error_email_field);
+            ToastMessageHelper.INSTANCE.showShortToast(getContext(), R.string.error_email_field);
         } else {
             mPresenter.sendResetPassword(mResetEmail.getEditText().getText().toString());
         }
@@ -85,14 +85,14 @@ public class ResetPasswordFragment extends Fragment implements ResetPasswordCont
 
     @Override
     public void showError(String message) {
-        ToastMessageHelper.showShortToast( message);
+        ToastMessageHelper.INSTANCE.showShortToast(getContext(), message);
         isLoading = false;
         showLoading();
     }
 
     @Override
     public void onResetSuccesful() {
-        ToastMessageHelper.showShortToast( R.string.password_change_success);
+        ToastMessageHelper.INSTANCE.showShortToast(getContext(), R.string.password_change_success);
         getActivity().onBackPressed();
     }
 

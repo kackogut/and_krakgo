@@ -67,9 +67,9 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     private void goToNextPage() {
         if (!(mEmailInput.getEditText().length() > 0 && mPasswordInput.getEditText().length() > 0 && mRetypePasswordInput.getEditText().length() > 0) ||
                 mEmailInput.isErrorEnabled() || mPasswordInput.isErrorEnabled() || mRetypePasswordInput.isErrorEnabled()) {
-            ToastMessageHelper.showShortToast(R.string.error_fields_empty_or_invalid);
+            ToastMessageHelper.INSTANCE.showShortToast(getContext(),R.string.error_fields_empty_or_invalid);
         } else if (!mtermsAcceptedCheckbox.isChecked()) {
-            ToastMessageHelper.showShortToast(R.string.you_have_to_accept_terms);
+            ToastMessageHelper.INSTANCE.showShortToast(getContext(), R.string.you_have_to_accept_terms);
         } else if (isBottomButtonEnabled) {
             isBottomButtonEnabled = false;
             showProgress();
@@ -97,7 +97,7 @@ public class RegisterFragment extends Fragment implements RegisterContract.View 
     @Override
     public void showError(Exception error) {
         if (error != null) {
-            ToastMessageHelper.showShortToast(error.toString());
+            ToastMessageHelper.INSTANCE.showShortToast(getContext(), error.toString());
         }
         isBottomButtonEnabled = true;
         showProgress();
