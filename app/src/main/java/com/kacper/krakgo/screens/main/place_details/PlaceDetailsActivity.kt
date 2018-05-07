@@ -32,7 +32,7 @@ class PlaceDetailsActivity : AppCompatActivity() {
         tv_place_details_name.text = mPlaceDetails.display_name
 
         mFragment = PlaceDetailsFragment.newFragment(mPlaceDetails)
-        FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment.tag!!)
+        FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment::class.java.simpleName)
 
     }
 
