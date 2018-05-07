@@ -13,6 +13,7 @@ import com.kacper.krakgo.model.UserDetails
  * Created by kacper on 21/01/2018.
  */
 open class MvpPresenterImpl<V : MvpView> : MvpPresenter<V> {
+
     override fun getStorageReference(): StorageReference {
         return FirebaseStorage.getInstance().reference
     }
@@ -27,8 +28,8 @@ open class MvpPresenterImpl<V : MvpView> : MvpPresenter<V> {
         mView = null
     }
 
-    override fun getCurrentUser(): FirebaseUser {
-        return FirebaseAuth.getInstance().currentUser!!
+    override fun getCurrentUser(): FirebaseUser? {
+        return FirebaseAuth.getInstance().currentUser
     }
 
     override fun getDatabaseReference(): DatabaseReference {
@@ -40,5 +41,9 @@ open class MvpPresenterImpl<V : MvpView> : MvpPresenter<V> {
                 .child(FirebaseDatabaseHelper.USER_DETAILS)
                 .child(userID)
                 .addListenerForSingleValueEvent(listener)
+    }
+
+    override fun getAuthReference(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
 }

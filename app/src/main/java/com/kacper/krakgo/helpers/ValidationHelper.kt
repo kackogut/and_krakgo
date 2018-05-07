@@ -13,14 +13,14 @@ import java.util.regex.Pattern
  */
 
 object ValidationHelper {
-    private val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$"
+    private const val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$"
     private val EMAIL_PATTERN = Patterns.EMAIL_ADDRESS
 
     fun validateText(context: Context, text: String, inputType: InputTypes): String? {
-        if (text.length > inputType.getmMaximumLength())
-            return context.getString(R.string.error_max_characters_placeholder, inputType.getmMaximumLength())
-        else if (text.length < inputType.getmMinimumLength())
-            return context.getString(R.string.error_minimum_character_placeholder, inputType.getmMinimumLength())
+        if (text.length > inputType.getMaximumLength())
+            return context.getString(R.string.error_max_characters_placeholder, inputType.getMaximumLength())
+        else if (text.length < inputType.getMinimumLength())
+            return context.getString(R.string.error_minimum_character_placeholder, inputType.getMinimumLength())
         else if (!getPatternByType(inputType).matcher(text).matches())
             return context.getString(getMessageByType(inputType))
         return null
@@ -35,10 +35,11 @@ object ValidationHelper {
     }
 
     private fun getMessageByType(type: InputTypes): Int {
-        when (type) {
-            InputTypes.PASSWORD, InputTypes.RETYPEPASSWORD -> return R.string.password_field_error
-            InputTypes.EMAIL -> return R.string.error_email_field
-            else -> return R.string.error_default
+        return when (type) {
+            InputTypes.PASSWORD,
+            InputTypes.RETYPEPASSWORD -> R.string.password_field_error
+            InputTypes.EMAIL -> R.string.error_email_field
+            else -> R.string.error_default
         }
     }
 }

@@ -4,15 +4,10 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
 
 import com.kacper.krakgo.R
 import com.kacper.krakgo.helpers.DateHelper
@@ -26,10 +21,8 @@ import com.theartofdev.edmodo.cropper.CropImage
 import java.util.Calendar
 import java.util.Date
 
-import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import de.hdodenhof.circleimageview.CircleImageView
 
 import android.app.Activity.RESULT_OK
 import com.kacper.krakgo.mvp.MvpFragment
@@ -54,7 +47,6 @@ class RegisterPart2Fragment
         val rootView =
                 inflater.inflate(R.layout.fragment_register_2, container, false)
         ButterKnife.bind(this, rootView)
-        setListeners()
         return rootView
     }
 
@@ -66,11 +58,17 @@ class RegisterPart2Fragment
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setListeners()
+    }
+
     override fun onDateSet(datePicker: DatePicker, year: Int, month: Int, day: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
         tv_dob_label.visibility = View.VISIBLE
         et_register_dob_input.setText(DateHelper.formatDate(context!!, calendar.time))
+        mDateTime = calendar.time
     }
 
     private fun goToNextPage() {
@@ -87,17 +85,15 @@ class RegisterPart2Fragment
         }
     }
 
-    private fun setListeners() {}
-
-    @OnClick(R.id.avatar_image)
-    internal fun onUploadAvatarClick() {
-        PhotoHelper.startCircleCropPhoto(this)
+    private fun setListeners() {
+        avatar_image.setOnClickListener({
+            PhotoHelper.startCircleCropPhoto(this)
+        })
+        et_register_dob_input.setOnClickListener({
+            DateHelper.getDOBDialog(context!!, this).show()
+        })
     }
 
-    @OnClick(R.id.et_register_dob_input)
-    internal fun onChangeDateClicked() {
-        DateHelper.getDOBDialog(context!!, this).show()
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -114,7 +110,7 @@ class RegisterPart2Fragment
 
     override fun photoUploadFinished(downloadUrl: Uri) {
         val userDetails = UserDetails(register_name_input.editText?.text.toString() + " "
-                + register_surname_input.editText!!.text.toString(), mDateTime!!.time, downloadUrl.toString())
+                + register_surname_input.editText?.text.toString(), mDateTime!!.time, downloadUrl.toString())
         mPresenter.updateUserProfile(userDetails)
     }
 
@@ -125,7 +121,7 @@ class RegisterPart2Fragment
         activity!!.finish()
     }
     override fun showError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private fun showProgress() {
@@ -138,10 +134,5 @@ class RegisterPart2Fragment
         else
             progress_bar.visibility = View.VISIBLE
     }
-
-    companion object {
-        val TAG = RegisterPart2Fragment::class.java.simpleName
-    }
-
 
 }

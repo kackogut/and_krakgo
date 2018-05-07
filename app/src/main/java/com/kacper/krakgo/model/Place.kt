@@ -14,7 +14,9 @@ class Place : Parcelable {
     lateinit var photo_url: String
     lateinit var reviewsID: String
 
-    constructor() {}
+    constructor() {
+        //Constructor needed for firebase data parse
+    }
 
     override fun describeContents(): Int {
         return 0

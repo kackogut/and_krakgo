@@ -73,7 +73,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
                 DateHelper.getYearDifference(Date(userDetails!!.dob_time!!)),
                 DateHelper.getYearDifference(Date(userDetails.dob_time!!)))
         tv_profile_display_name.text = mUserDetails?.display_name
-        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context), Uri.parse(mUserDetails?.photo_url))
+        GlideHelper.loadWithProgress(context!!, cv_profile_avatar, ProgressBar(context),
+                Uri.parse(mUserDetails?.photo_url))
         showProgress(false)
     }
 
@@ -111,8 +112,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
 
     private fun inflateUserData() {
         val user = mPresenter.getCurrentUser()
-        tv_profile_email.text = user.email
-        mPresenter.getUserDetails(user.uid, object:ValueEventListener{
+        tv_profile_email.text = user?.email
+        mPresenter.getUserDetails(user!!.uid, object:ValueEventListener{
             override fun onCancelled(p0: DatabaseError?) {
                 showProgress(false)
             }
@@ -140,7 +141,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
             progress_bar_save.visibility = View.VISIBLE
             showProgress(true)
             mUserDetails?.about_me = ti_profile_dob_input?.editText?.text.toString()
-            mUserDetails?.setLast_login_time()
+            mUserDetails?.setLastLoginTime()
             mPresenter.saveUserDetails(mUserDetails!!)
         })
         profile_expendable_main.setOnClickListener({

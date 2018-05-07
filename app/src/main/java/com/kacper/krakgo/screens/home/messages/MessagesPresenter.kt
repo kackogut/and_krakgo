@@ -16,7 +16,7 @@ MessagesContract.Presenter{
     override fun getConversations() {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot?) {
                         val values : ArrayList<ConversationDetails> = ArrayList()

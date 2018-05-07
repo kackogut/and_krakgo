@@ -30,7 +30,7 @@ import java.util.*
 /**
  * Created by kacper on 29/01/2018.
  */
-class DialogUserInfo(var mActivty:Activity, var mUserDetails:UserDetails)
+class DialogUserInfo(private var mActivty:Activity, private var mUserDetails:UserDetails)
     : AppCompatDialog(mActivty) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

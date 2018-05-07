@@ -4,4 +4,8 @@ package com.kacper.krakgo.model
  * Created by kacper on 04/02/2018.
  */
 
-class ChatMessage(val user_id: String?, val time: Long?, val message: String?)
+class ChatMessage(val user_id: String?, val time: Long?, val message: String?){
+    constructor() : this("",-1,"") {
+        //Constructor needed for firebase data parse
+    }
+}

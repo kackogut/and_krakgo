@@ -20,13 +20,13 @@ class MapPresenter : MvpPresenterImpl<MapContract.View>(),
     override fun setUserLocation(location: Location) {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .child("latitude")
                 .setValue(location.latitude)
 
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .child("longitude")
                 .setValue(location.longitude)
     }

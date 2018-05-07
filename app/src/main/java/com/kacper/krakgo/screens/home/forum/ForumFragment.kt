@@ -30,8 +30,6 @@ class ForumFragment : BaseChatFragment(){
 
     override var mPresenter: BaseChatContract.Presenter = ForumPresenter()
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         showProgress(true)

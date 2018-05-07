@@ -12,17 +12,19 @@ import io.reactivex.annotations.NonNull
  */
 
 class UserDetails : Parcelable {
-    var about_me: String? = null
+    var about_me: String? = ""
     var dob_time: Long? = 0L
-    var photo_url: String? = null
+    var photo_url: String? = ""
     var map_visibility: Long? = 0L
     var longitude: Double? = 0.0
     var latitude: Double? = 0.0
-    var userID: String? = null
-    var display_name: String? = null
-    var last_login_time: Long? = null
+    var userID: String? = ""
+    var display_name: String? = ""
+    var last_login_time: Long? = 0L
 
-    constructor() {}
+    constructor() {
+        //Constructor needed for firebase data parse
+    }
 
     override fun writeToParcel(parcel: Parcel, i: Int) {
         parcel.writeStringArray(arrayOf<String>(about_me!!, photo_url!!, userID!!, display_name!!))
@@ -69,7 +71,7 @@ class UserDetails : Parcelable {
 
     constructor(about_me: String, dob_time: Long, photo_url: String,
                 map_visibility: Long, longitude: Double, latitude: Double,
-                userID: String, display_name: String, conversations: List<String>) {
+                userID: String, display_name: String) {
         this.about_me = about_me
         this.dob_time = dob_time
         this.photo_url = photo_url
@@ -85,7 +87,7 @@ class UserDetails : Parcelable {
         return 0
     }
 
-    fun setLast_login_time() {
+    fun setLastLoginTime() {
         this.last_login_time = Calendar.getInstance().timeInMillis
     }
 

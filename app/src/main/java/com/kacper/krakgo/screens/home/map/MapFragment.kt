@@ -48,7 +48,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
 
     private val PERMISSION_READ_LOCATION = 101
 
-    val locationRequest = LocationRequest().apply {
+    private val locationRequest = LocationRequest().apply {
         interval = 10000
         fastestInterval = 5000
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -61,6 +61,10 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
+                if(mPresenter.getCurrentUser() == null){
+                    fusedLocationClient.removeLocationUpdates(this)
+                    return
+                }
                 for (location in locationResult.locations) {
                     mLastLocation = location
                     mPresenter.setUserLocation(mLastLocation)

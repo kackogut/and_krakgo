@@ -10,7 +10,7 @@ import com.kacper.krakgo.KrakGoApp
  */
 
 object ToastMessageHelper {
-    private fun showToast(context: Context, textToShow: String, isLong: Boolean) {
+    private fun showToast(context: Context?, textToShow: String, isLong: Boolean) {
         if (isLong) {
             Toast.makeText(context, textToShow, Toast.LENGTH_LONG).show()
         } else {
@@ -18,11 +18,11 @@ object ToastMessageHelper {
         }
     }
 
-    fun showShortToast(context: Context, textToShow: String) {
+    fun showShortToast(context: Context?, textToShow: String) {
         showToast(context, textToShow, false)
     }
 
-    fun showShortToast(context: Context, resourceId: Int) {
-        showShortToast(context, context.getString(resourceId))
+    fun showShortToast(context: Context?, resourceId: Int) {
+        if(context!= null) showShortToast(context, context.getString(resourceId))
     }
 }

@@ -42,7 +42,7 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
     override fun onConversationDownload(conversations: ArrayList<ConversationDetails>) {
         mConversations = conversations
         mAdapter?.setData(conversations)
-        //showProgress(false)
+        showProgress(false)
     }
 
     override fun showError(error:String) {
@@ -61,11 +61,14 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
         rv_users_messages.adapter = mAdapter
         mPresenter.getConversations()
     }
+
     fun showProgress(show: Boolean){
-        //if(show)
-            //pb_conversations.visibility = View.VISIBLE
-        //else
-          //  pb_conversations.visibility = View.GONE
-        rv_users_messages.isEnabled = show
+        if(isVisible && pb_conversations != null) {
+            if (show)
+                pb_conversations.visibility = View.VISIBLE
+            else
+                pb_conversations.visibility = View.GONE
+            rv_users_messages.isEnabled = show
+        }
     }
 }

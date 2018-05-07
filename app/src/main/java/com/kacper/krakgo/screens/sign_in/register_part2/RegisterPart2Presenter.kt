@@ -23,7 +23,7 @@ class RegisterPart2Presenter : MvpPresenterImpl<RegisterPart2Contract.View>(),
 
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
-        val reference = storageRef.child("avatars/" + getCurrentUser().uid)
+        val reference = storageRef.child("avatars/" + getCurrentUser()?.uid)
 
         val uploadTask = reference.putFile(mPhotoUri)
         uploadTask
@@ -32,17 +32,17 @@ class RegisterPart2Presenter : MvpPresenterImpl<RegisterPart2Contract.View>(),
     }
 
     override fun updateUserProfile(userDetails: UserDetails) {
-        userDetails.userID = getCurrentUser().uid
+        userDetails.userID = getCurrentUser()?.uid
         val profileChangeRequest = UserProfileChangeRequest.Builder()
                 .setDisplayName(userDetails.display_name)
                 .setPhotoUri(Uri.parse(userDetails.photo_url))
                 .build()
 
         getDatabaseReference().child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .setValue(userDetails)
-                .addOnCompleteListener { getCurrentUser().updateProfile(profileChangeRequest)
-                        .addOnCompleteListener({ mView?.userDetailsUpdated() }) }
+                .addOnCompleteListener { getCurrentUser()?.updateProfile(profileChangeRequest)
+                        ?.addOnCompleteListener({ mView?.userDetailsUpdated() }) }
                 .addOnFailureListener { e -> mView?.showError(e) }
     }
 

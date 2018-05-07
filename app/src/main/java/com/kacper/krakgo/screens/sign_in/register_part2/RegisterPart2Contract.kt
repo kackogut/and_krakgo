@@ -14,6 +14,5 @@ object RegisterPart2Contract {
     interface View : MvpView{
         fun photoUploadFinished(downloadUrl: Uri)
         fun userDetailsUpdated()
-        override fun showError(e: Exception)
     }
 }

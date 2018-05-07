@@ -40,10 +40,10 @@ class ForumPresenter : BaseChatPresenter() {
     }
 
     override fun sendMessage(message: String) {
-        val forumMessage = ForumMessage(message, getCurrentUser())
+        val forumMessage = ForumMessage(message, getCurrentUser()!!)
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
-                .child( forumMessage.time.toString() + getCurrentUser().uid.substring(0,6))
+                .child( forumMessage.time.toString() + getCurrentUser()!!.uid.substring(0,6))
                 .setValue(forumMessage)
                 .addOnCompleteListener({
                     mView?.messageSendComplete()

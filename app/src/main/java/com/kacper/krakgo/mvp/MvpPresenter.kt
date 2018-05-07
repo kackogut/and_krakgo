@@ -1,5 +1,6 @@
 package com.kacper.krakgo.mvp
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
@@ -16,11 +17,13 @@ interface MvpPresenter<in V : MvpView> {
 
     fun detachView()
 
-    fun getCurrentUser() : FirebaseUser
+    fun getCurrentUser() : FirebaseUser?
 
     fun getDatabaseReference() : DatabaseReference
 
     fun getStorageReference() : StorageReference
 
     fun getUserDetails(userID: String, listener: ValueEventListener)
+
+    fun getAuthReference() : FirebaseAuth
 }

@@ -29,11 +29,11 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
     lateinit var mConversationID: String
 
     override fun sendMessage(message: String) {
-        val forumMessage = ForumMessage(message, getCurrentUser())
+        val forumMessage = ForumMessage(message, getCurrentUser()!!)
         getDatabaseReference()
                 .child(dataBase)
                 .child(mConversationID)
-                .child( forumMessage.time.toString() + getCurrentUser().uid.substring(0,6))
+                .child( forumMessage.time.toString() + getCurrentUser()!!.uid.substring(0,6))
                 .setValue(forumMessage)
                 .addOnCompleteListener({
                     mView?.messageSendComplete()
@@ -72,7 +72,7 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
         dataBase = FirebaseDatabaseHelper.USER_CONVERSATIONS
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .child(secondUserDetails.userID)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
@@ -90,7 +90,7 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                             
                             getDatabaseReference()
                                     .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
-                                    .child(getCurrentUser().uid)
+                                    .child(getCurrentUser()?.uid)
                                     .child(secondUserDetails.userID)
                                     .setValue(ConversationDetails(
                                             mConversationID,
@@ -102,11 +102,11 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                             getDatabaseReference()
                                     .child(FirebaseDatabaseHelper.ALL_CONVERSATIONS)
                                     .child(secondUserDetails.userID)
-                                    .child(getCurrentUser().uid)
+                                    .child(getCurrentUser()?.uid)
                                     .setValue(ConversationDetails(
                                             mConversationID,
-                                            getCurrentUser().photoUrl.toString(),
-                                            getCurrentUser().displayName!!,
+                                            getCurrentUser()?.photoUrl.toString(),
+                                            getCurrentUser()?.displayName!!,
                                             Date().time
                                     ))
                         }

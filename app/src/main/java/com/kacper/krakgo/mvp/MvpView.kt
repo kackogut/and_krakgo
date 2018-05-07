@@ -11,7 +11,9 @@ interface MvpView {
 
     fun showError(error: String)
 
-    fun showError(error: Exception)
+    fun showError(error: Exception?)
 
     fun showMessage(messageId: Int)
+
+    fun showMessage(message:String)
 }

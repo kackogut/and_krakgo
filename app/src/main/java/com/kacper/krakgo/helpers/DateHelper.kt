@@ -1,5 +1,6 @@
 package com.kacper.krakgo.helpers
 
+import android.annotation.TargetApi
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Build
@@ -31,7 +32,7 @@ object DateHelper {
     }
 
     fun formatDate(context: Context, dateToFormat: Date): String {
-        val sdf = SimpleDateFormat("dd - MMMM - yyyy", DateHelper.getLoacale(context))
+        val sdf = SimpleDateFormat("dd - MMMM - yyyy", DateHelper.getLocale(context))
         return sdf.format(dateToFormat)
     }
 
@@ -53,28 +54,25 @@ object DateHelper {
 
         dateToCompare.time = Date(dateToFormatt)
 
-        if (currentDate.get(YEAR) == dateToCompare.get(YEAR)) {
-            if (currentDate.get(DAY_OF_MONTH) == dateToCompare.get(DAY_OF_MONTH)) {
-                sdf = SimpleDateFormat("kk:mm", DateHelper.getLoacale(context))
-            } else if (currentDate.get(WEEK_OF_MONTH) == dateToCompare.get(WEEK_OF_MONTH)) {
-                sdf = SimpleDateFormat("EEE kk:mm", DateHelper.getLoacale(context))
-            } else {
-                sdf = SimpleDateFormat("dd MMM kk:mm", DateHelper.getLoacale(context))
+        sdf = if (currentDate.get(YEAR) == dateToCompare.get(YEAR)) {
+            when {
+                currentDate.get(DAY_OF_MONTH) == dateToCompare.get(DAY_OF_MONTH)
+                -> SimpleDateFormat("kk:mm", DateHelper.getLocale(context))
+                currentDate.get(WEEK_OF_MONTH) == dateToCompare.get(WEEK_OF_MONTH)
+                -> SimpleDateFormat("EEE kk:mm", DateHelper.getLocale(context))
+                else -> SimpleDateFormat("dd MMM kk:mm", DateHelper.getLocale(context))
             }
         } else {
-            sdf = SimpleDateFormat("dd MMM YYYY", DateHelper.getLoacale(context))
+            SimpleDateFormat("dd MMM YYYY", DateHelper.getLocale(context))
         }
         return sdf.format(Date(dateToFormatt))
     }
 
-    private fun getLoacale(context: Context): Locale {
+    private fun getLocale(context: Context): Locale{
         if (sLocale == null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                sLocale = context.resources.configuration.locales.get(0)
-            } else {
-                sLocale = context.resources.configuration.locale
-            }
+            sLocale = context.resources.configuration.locales.get(0)
         }
         return sLocale!!
     }
+
 }

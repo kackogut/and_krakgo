@@ -17,7 +17,9 @@ class ForumMessage {
     lateinit var userName: String
     lateinit var avatarUrl: String
 
-    constructor() {}
+    constructor() {
+        //Constructor needed for firebase data parse
+    }
 
     constructor(message_text: String, currentUser: FirebaseUser) {
         this.message_text = message_text

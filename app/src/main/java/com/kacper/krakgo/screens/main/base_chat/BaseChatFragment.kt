@@ -24,9 +24,11 @@ import java.lang.Exception
  */
 open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContract.Presenter>(),
         BaseChatContract.View, RecyclerViewClickListener{
+
+
     override var mPresenter: BaseChatContract.Presenter = BaseChatPresenter()
-    protected var mMessages: ArrayList<ForumMessage>? = null
-    protected var mAdapter: MessagesAdapter? =null
+    private var mMessages: ArrayList<ForumMessage>? = null
+    private var mAdapter: MessagesAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_chat, container, false)
@@ -77,6 +79,12 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         SnackbarHelper.showError(context!!, error, forum_main_layout)
         showProgress(false)
     }
+
+    override fun showMessage(message: String) {
+        SnackbarHelper.showSuccess(context!!, message, forum_main_layout)
+        showProgress(false)
+    }
+
     override fun onClick(view: View?, position: Int) {
         mPresenter.getUserDetails(mMessages!![position].userID, object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {

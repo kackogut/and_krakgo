@@ -45,7 +45,8 @@ class HomeMainActivity : AppCompatActivity() {
         bottom_bar.enableShiftingMode(false)
 
         bottom_bar.setOnNavigationItemSelectedListener { tabId ->
-            FragmentHelper.changeFragments(supportFragmentManager, mFragment[tabId.itemId])
+            FragmentHelper.changeFragments(supportFragmentManager,
+                    mFragment[tabId.itemId]!!)
             true
         }
         bottom_bar.currentItem = 1

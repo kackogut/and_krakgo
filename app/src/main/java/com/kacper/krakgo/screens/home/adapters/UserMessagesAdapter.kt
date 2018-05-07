@@ -16,7 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 class UserMessagesAdapter
     : RecyclerView.Adapter<UserMessagesAdapter.ConversationViewHolder>() {
 
-    var mConversations: ArrayList<ConversationDetails> = ArrayList()
+    private var mConversations: ArrayList<ConversationDetails> = ArrayList()
     lateinit var listener: RecyclerViewClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
@@ -28,11 +28,11 @@ class UserMessagesAdapter
         return mConversations.size
     }
 
-    public fun addListener(listener: RecyclerViewClickListener) {
+    fun addListener(listener: RecyclerViewClickListener) {
         this.listener = listener
     }
 
-    public fun setData(data: ArrayList<ConversationDetails>) {
+    fun setData(data: ArrayList<ConversationDetails>) {
         this.mConversations = data
         notifyDataSetChanged()
     }
@@ -47,8 +47,8 @@ class UserMessagesAdapter
             listener.onClick(view, adapterPosition)
         }
 
-        val mConversationAvatar: CircleImageView = itemView.findViewById(R.id.civ_users_conversations_avatar)
-        val mConversationName: TextView = itemView.findViewById(R.id.tv_users_display_name)
+        private val mConversationAvatar: CircleImageView = itemView.findViewById(R.id.civ_users_conversations_avatar)
+        private val mConversationName: TextView = itemView.findViewById(R.id.tv_users_display_name)
         fun bind(conversation: ConversationDetails) {
             GlideHelper.load(mConversationAvatar, conversation.user_avatar)
             mConversationName.text = conversation.user_name

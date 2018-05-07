@@ -22,7 +22,7 @@ import com.kacper.krakgo.mvp.MvpPresenterImpl
 class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
         ProfileContract.Presenter{
     override fun updateUserAvatar(uri: Uri) {
-        val reference = getStorageReference().child("avatars/" + getCurrentUser().uid)
+        val reference = getStorageReference().child("avatars/" + getCurrentUser()?.uid)
         reference.delete()
         val uploadTask = reference.putFile(uri)
         uploadTask
@@ -34,7 +34,7 @@ class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
     override fun saveUserDetails(userDetails: UserDetails) {
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.USER_DETAILS)
-                .child(getCurrentUser().uid)
+                .child(getCurrentUser()?.uid)
                 .setValue(userDetails)
                 .addOnCompleteListener({
                     mView?.userSaveComplete()

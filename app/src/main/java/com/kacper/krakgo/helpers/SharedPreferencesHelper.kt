@@ -22,7 +22,7 @@ object SharedPreferencesHelper {
         editor.apply()
     }
 
-    fun getBoolean(context: Context, key: String, defaultValue: Boolean): Boolean {
+    private fun getBoolean(context: Context, key: String, defaultValue: Boolean): Boolean {
         val sharedPref = context.getSharedPreferences(PREFERENCES_NAME, 0)
         return sharedPref.getBoolean(key, defaultValue)
     }
