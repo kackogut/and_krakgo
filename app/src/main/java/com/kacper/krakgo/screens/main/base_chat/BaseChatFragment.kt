@@ -38,7 +38,7 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         mMessages = messages
         mAdapter?.setData(messages)
         showProgress(false)
-        rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
+        rv_forum_messages?.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
         mAdapter?.addListener(this)
     }
     override fun messageSendComplete() {
