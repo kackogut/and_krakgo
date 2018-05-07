@@ -47,7 +47,8 @@ class UserMessagesAdapter
             listener.onClick(view, adapterPosition)
         }
 
-        private val mConversationAvatar: CircleImageView = itemView.findViewById(R.id.civ_users_conversations_avatar)
+        private val mConversationAvatar: CircleImageView =
+                itemView.findViewById(R.id.civ_users_conversations_avatar)
         private val mConversationName: TextView = itemView.findViewById(R.id.tv_users_display_name)
         fun bind(conversation: ConversationDetails) {
             GlideHelper.load(mConversationAvatar, conversation.user_avatar)

@@ -33,7 +33,8 @@ class RegisterFragment : MvpFragment<RegisterContract.View, RegisterContract.Pre
     override var mPresenter: RegisterContract.Presenter = RegisterPresenter()
     private var isBottomButtonEnabled = true
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_register_1, container, false)
         ButterKnife.bind(this, rootView)
 
@@ -54,7 +55,8 @@ class RegisterFragment : MvpFragment<RegisterContract.View, RegisterContract.Pre
     }
 
     private fun goToNextPage() {
-        if (!(register_email_input.editText!!.length() > 0 && register_password_input.editText!!.length() > 0
+        if (!(register_email_input.editText!!.length() > 0
+                        && register_password_input.editText!!.length() > 0
                         && register_retype_password_input.editText!!.length() > 0) ||
                 register_email_input.isErrorEnabled || register_password_input.isErrorEnabled
                 || register_retype_password_input.isErrorEnabled) {

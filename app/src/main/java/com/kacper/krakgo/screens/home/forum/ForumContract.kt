@@ -1,8 +1,5 @@
 package com.kacper.krakgo.screens.home.forum
 
-import com.kacper.krakgo.model.ForumMessage
-import com.kacper.krakgo.mvp.MvpPresenter
-import com.kacper.krakgo.mvp.MvpView
 import com.kacper.krakgo.screens.main.base_chat.BaseChatContract
 
 /**

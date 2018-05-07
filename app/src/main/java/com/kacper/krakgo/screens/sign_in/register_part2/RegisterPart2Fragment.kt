@@ -73,11 +73,15 @@ class RegisterPart2Fragment
 
     private fun goToNextPage() {
         if (mPhotoUri == null) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_no_avatar)
+            ToastMessageHelper.showShortToast(context!!,
+                    R.string.error_no_avatar)
         } else if (register_name_input.isErrorEnabled || register_surname_input.isErrorEnabled) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_fields_empty_or_invalid)
-        } else if (et_register_dob_input.length() <= 0 && et_register_dob_input.text.toString() != getString(R.string.dob_label)) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_dob_not_picked)
+            ToastMessageHelper.showShortToast(context!!,
+                    R.string.error_fields_empty_or_invalid)
+        } else if (et_register_dob_input.length() <= 0
+                && et_register_dob_input.text.toString() != getString(R.string.dob_label)) {
+            ToastMessageHelper.showShortToast(context!!,
+                    R.string.error_dob_not_picked)
         } else {
             isBottomButtonEnabled = false
             showProgress()

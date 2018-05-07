@@ -4,12 +4,9 @@ import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.kacper.krakgo.helpers.DateHelper
 import com.kacper.krakgo.helpers.FirebaseDatabaseHelper
-import com.kacper.krakgo.model.ForumMessage
-import com.kacper.krakgo.mvp.MvpPresenterImpl
+import com.kacper.krakgo.model.Message
 import com.kacper.krakgo.screens.main.base_chat.BaseChatPresenter
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -26,10 +23,10 @@ class ForumPresenter : BaseChatPresenter() {
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
-                        val values: ArrayList<ForumMessage> = ArrayList()
+                        val values: ArrayList<Message> = ArrayList()
                         if (p0!!.exists()) {
                             p0.children.mapTo(values) {
-                                it.getValue(ForumMessage::class.java)!!
+                                it.getValue(Message::class.java)!!
                             }
 
                         }
@@ -40,7 +37,7 @@ class ForumPresenter : BaseChatPresenter() {
     }
 
     override fun sendMessage(message: String) {
-        val forumMessage = ForumMessage(message, getCurrentUser()!!)
+        val forumMessage = Message(message, getCurrentUser()!!)
         getDatabaseReference()
                 .child(FirebaseDatabaseHelper.FORUM_MESSAGES)
                 .child( forumMessage.time.toString() + getCurrentUser()!!.uid.substring(0,6))

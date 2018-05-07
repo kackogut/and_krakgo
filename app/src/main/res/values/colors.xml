@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#365780</color>
     <color name="colorPrimaryDark">#365780</color>
-    <color name="colorAccent">#DFB9A2</color>
-    
+
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlack">#000000</color>
     <color name="colorBeer">#F9AB3A</color>
     <color name="colorBeerDark">#F27B22</color>
-    <color name="colorHeart">#FF3C3C</color>
-    <color name="colorHeartDark">#E52423</color>
 
     <color name="colorBackground">#1e1e2b</color>
-    <color name="colorGreyUnselected">#365780</color>
 
     <color name="mapStatusVisible">#0ead08</color>
     <color name="mapStatusInvisible">#ea070e</color>
     <color name="mapStatusInviting">#0262fc</color>
 
-    <color name="tealTransparent">#00796BCC</color>
 </resources>
 

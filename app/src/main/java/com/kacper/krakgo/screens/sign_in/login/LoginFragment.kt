@@ -36,7 +36,8 @@ class LoginFragment : MvpFragment<LoginContract.View, LoginContract.Presenter>()
 
     override var mPresenter: LoginContract.Presenter = LoginPresenter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -85,8 +86,10 @@ class LoginFragment : MvpFragment<LoginContract.View, LoginContract.Presenter>()
         })
 
         login_button.setOnClickListener({
-            if (login_email_input_layout.editText!!.length() > 0 &&  login_password_input_layout.editText!!.length() > 0
-                    && (!login_email_input_layout.isErrorEnabled || !login_password_input_layout.isErrorEnabled)) {
+            if (login_email_input_layout.editText!!.length() > 0
+                    &&  login_password_input_layout.editText!!.length() > 0
+                    && (!login_email_input_layout.isErrorEnabled
+                            || !login_password_input_layout.isErrorEnabled)) {
                 showProgress(true)
                 mPresenter.loginWithEmail(login_email_input_layout.editText!!.text.toString(),
                         login_password_input_layout.editText!!.text.toString())

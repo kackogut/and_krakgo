@@ -97,7 +97,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnected(p0: Bundle?) {
-        if (ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(context!!,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(activity!!,
@@ -115,7 +116,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         SnackbarHelper.showError(context!!,error,fragment_map_main_layout)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_READ_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -123,7 +125,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                     setMap()
                     sendRequestLocation()
                 } else {
-                    SnackbarHelper.showError(context!!, R.string.error_location_not_granted, fragment_map_main_layout)
+                    SnackbarHelper.showError(context!!,
+                            R.string.error_location_not_granted, fragment_map_main_layout)
                 }
             }
             else -> {
