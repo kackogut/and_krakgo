@@ -11,8 +11,8 @@ import com.kacper.krakgo.KrakGoApp
  */
 
 object SharedPreferencesHelper {
-    private val PREFERENCES_NAME = "KrakGoShared"
-    val REMEMBER_USER = "remember_user"
+    private const val PREFERENCES_NAME = "KrakGoShared"
+    const val REMEMBER_USER = "remember_user"
 
     fun saveToSharedPreferences(context: Context, key: String, value: Boolean) {
 
@@ -22,7 +22,8 @@ object SharedPreferencesHelper {
         editor.apply()
     }
 
-    private fun getBoolean(context: Context, key: String, defaultValue: Boolean): Boolean {
+    private fun getBoolean(context: Context,
+                           key: String, defaultValue: Boolean): Boolean {
         val sharedPref = context.getSharedPreferences(PREFERENCES_NAME, 0)
         return sharedPref.getBoolean(key, defaultValue)
     }

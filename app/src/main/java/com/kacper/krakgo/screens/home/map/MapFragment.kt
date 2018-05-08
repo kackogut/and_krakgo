@@ -54,7 +54,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
 
@@ -120,7 +121,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                                             grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_READ_LOCATION -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if ((grantResults.isNotEmpty()
+                                && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     setLocationAndScroll()
                     setMap()
                     sendRequestLocation()
@@ -174,9 +176,11 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                         it.latitude!!, it.longitude!!
                 )))
                 if (it.map_visibility == 1L)
-                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
+                    marker.setIcon(
+                            BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
                 else
-                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_inviting))
+                    marker.setIcon(
+                            BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_inviting))
 
                 marker.tag = it
             }

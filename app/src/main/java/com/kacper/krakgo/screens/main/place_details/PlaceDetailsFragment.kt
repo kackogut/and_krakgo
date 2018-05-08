@@ -24,7 +24,7 @@ class PlaceDetailsFragment : ChatWithIDFragment(){
     }
 
     companion object {
-        val PLACE_DETAILS_EXTRA = "place_extra"
+        const val PLACE_DETAILS_EXTRA = "place_extra"
         fun newFragment(placeDetails: Place): Fragment {
             val bundle = Bundle()
             bundle.putParcelable(PLACE_DETAILS_EXTRA, placeDetails)

@@ -19,7 +19,8 @@ import com.theartofdev.edmodo.cropper.CropImageView
 object PhotoHelper {
     fun getImageFromGallery(context: Context, photoUri: Uri): Bitmap {
         val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context.contentResolver.query(photoUri, filePathColumn, null, null, null)
+        val cursor = context.contentResolver.query(photoUri,
+                filePathColumn, null, null, null)
         cursor!!.moveToFirst()
         val columnIndex = cursor.getColumnIndex(filePathColumn[0])
         val picturePath = cursor.getString(columnIndex)

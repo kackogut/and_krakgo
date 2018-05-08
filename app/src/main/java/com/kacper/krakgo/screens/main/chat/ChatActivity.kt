@@ -27,7 +27,8 @@ class ChatActivity : AppCompatActivity(){
                 ?: throw IllegalStateException("field $USER_DETAILS_EXTRA missing in Intent")
 
         mFragment = ChatWithIDFragment.newFragment(mUserDetails)
-        FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment::class.java.simpleName)
+        FragmentHelper.addFragment(supportFragmentManager, mFragment,
+                mFragment::class.java.simpleName)
 
         GlideHelper.load(civ_chat_avatar, mUserDetails.photo_url!!)
         tv_chat_username.text = mUserDetails.display_name
@@ -36,7 +37,7 @@ class ChatActivity : AppCompatActivity(){
     }
 
     companion object {
-        private val USER_DETAILS_EXTRA = "user_details"
+        private const val USER_DETAILS_EXTRA = "user_details"
 
         fun newIntent(context: Context, userDetails: UserDetails): Intent {
             val intent = Intent(context, ChatActivity::class.java)

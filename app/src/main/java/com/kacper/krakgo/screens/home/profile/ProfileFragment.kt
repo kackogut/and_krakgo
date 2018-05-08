@@ -155,7 +155,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         cv_profile_avatar.setOnClickListener({PhotoHelper.startCircleCropPhoto(this)})
     }
 
-    fun toogleExpandableLayout(){
+    private fun toogleExpandableLayout(){
         val rotateAnimation: RotateAnimation = if (profile_expendable_layout.isExpanded)
             RotateAnimation(180.0f, 0.0f, Animation.RELATIVE_TO_SELF,
                     0.5f, Animation.RELATIVE_TO_SELF, 0.5f)

@@ -37,7 +37,7 @@ class MapPresenter : MvpPresenterImpl<MapContract.View>(),
                 .addValueEventListener(object : ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
                         Log.w(MapFragment::class.java.simpleName,
-                                "loadUsers:onCancelled", p0?.toException());
+                                "loadUsers:onCancelled", p0?.toException())
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
@@ -59,7 +59,7 @@ class MapPresenter : MvpPresenterImpl<MapContract.View>(),
                     .addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError?) {
                             Log.w(MapFragment::class.java.simpleName,
-                                    "loadPlaces:onCancelled", p0?.toException());
+                                    "loadPlaces:onCancelled", p0?.toException())
                         }
 
                         override fun onDataChange(p0: DataSnapshot?) {

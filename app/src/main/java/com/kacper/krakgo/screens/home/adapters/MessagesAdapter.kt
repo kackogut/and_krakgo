@@ -44,11 +44,11 @@ class MessagesAdapter
         return messages.size
     }
 
-    public fun addListener(listener: RecyclerViewClickListener) {
+    fun addListener(listener: RecyclerViewClickListener) {
         this.listener = listener
     }
 
-    public fun setData(messages: ArrayList<Message>) {
+    fun setData(messages: ArrayList<Message>) {
         this.messages = messages
         notifyDataSetChanged()
     }
@@ -76,7 +76,7 @@ class MessagesAdapter
 
     open class SentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mMessageText: TextView = itemView.findViewById(R.id.tv_message_body)
-        val mMessageDate: TextView = itemView.findViewById(R.id.tv_message_time)
+        private val mMessageDate: TextView = itemView.findViewById(R.id.tv_message_time)
 
         open fun bind(message: Message, isFirstMessage: Boolean) {
             mMessageText.text = message.message_text
