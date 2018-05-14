@@ -16,21 +16,21 @@ object ValidationHelper {
     private const val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$"
     private val EMAIL_PATTERN = Patterns.EMAIL_ADDRESS
 
-    fun validateText(context: Context, text: String, inputType: InputTypes): String? {
+    fun validateText(context: Context?, text: String, inputType: InputTypes): String? {
         if (text.length > inputType.getMaximumLength())
-            return context.getString(R.string.error_max_characters_placeholder, inputType.getMaximumLength())
+            return context?.getString(R.string.error_max_characters_placeholder, inputType.getMaximumLength())
         else if (text.length < inputType.getMinimumLength())
-            return context.getString(R.string.error_minimum_character_placeholder, inputType.getMinimumLength())
+            return context?.getString(R.string.error_minimum_character_placeholder, inputType.getMinimumLength())
         else if (!getPatternByType(inputType).matcher(text).matches())
-            return context.getString(getMessageByType(inputType))
+            return context?.getString(getMessageByType(inputType))
         return null
     }
 
     private fun getPatternByType(type: InputTypes): Pattern {
-        when (type) {
-            InputTypes.PASSWORD, InputTypes.RETYPEPASSWORD -> return Pattern.compile(PASSWORD_PATTERN)
-            InputTypes.EMAIL -> return EMAIL_PATTERN
-            else -> return EMAIL_PATTERN
+        return when (type) {
+            InputTypes.PASSWORD, InputTypes.RETYPEPASSWORD -> Pattern.compile(PASSWORD_PATTERN)
+            InputTypes.EMAIL -> EMAIL_PATTERN
+            else -> EMAIL_PATTERN
         }
     }
 

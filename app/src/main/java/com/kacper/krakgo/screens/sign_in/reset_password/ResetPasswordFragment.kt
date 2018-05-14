@@ -46,9 +46,9 @@ class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View, ResetPassw
 
     private fun resetPassword() {
         if (reset_email_input.editText != null && reset_email_input.isErrorEnabled) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_email_field)
+            ToastMessageHelper.showShortToast(context, R.string.error_email_field)
         } else {
-            mPresenter.sendResetPassword(reset_email_input.editText!!.text.toString())
+            mPresenter.sendResetPassword(reset_email_input.editText?.text.toString())
         }
     }
 
@@ -59,29 +59,29 @@ class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View, ResetPassw
     }
 
     private fun setListeners() {
-        reset_email_input.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        reset_email_input.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 super.onTextChanged(charSequence, i, i1, i2)
-                val error = ValidationHelper.validateText(context!!, charSequence.toString(), InputTypes.EMAIL)
+                val error = ValidationHelper.validateText(context, charSequence.toString(), InputTypes.EMAIL)
                 if (error == null) {
-                    reset_email_input.isErrorEnabled = false
+                    reset_email_input?.isErrorEnabled = false
                 } else {
-                    reset_email_input.isEnabled = true
-                    reset_email_input.error = error
+                    reset_email_input?.isEnabled = true
+                    reset_email_input?.error = error
                 }
             }
         })
     }
 
     override fun showError(error: String) {
-        ToastMessageHelper.showShortToast(context!!, error)
+        ToastMessageHelper.showShortToast(context, error)
         isLoading = false
         showLoading()
     }
 
     override fun onResetSuccessful() {
-        ToastMessageHelper.showShortToast(context!!, R.string.password_change_success)
-        activity!!.onBackPressed()
+        ToastMessageHelper.showShortToast(context, R.string.password_change_success)
+        activity?.onBackPressed()
     }
 
     private fun showLoading() {
@@ -94,7 +94,7 @@ class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View, ResetPassw
     }
 
     companion object {
-        val TAG = "ResetPasswordFragment"
+        const val TAG = "ResetPasswordFragment"
     }
 
 

@@ -36,6 +36,10 @@ class LoginFragment : MvpFragment<LoginContract.View, LoginContract.Presenter>()
 
     override var mPresenter: LoginContract.Presenter = LoginPresenter()
 
+    companion object {
+        const val TAG = "LoginFragment"
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -47,51 +51,51 @@ class LoginFragment : MvpFragment<LoginContract.View, LoginContract.Presenter>()
 
     override fun onLoginSuccesfull() {
         showProgress(false)
-        SharedPreferencesHelper.saveToSharedPreferences(context!!,
+        SharedPreferencesHelper.saveToSharedPreferences(context,
                 SharedPreferencesHelper.REMEMBER_USER, cb_remember_me.isChecked)
-        ToastMessageHelper.showShortToast(context!!, R.string.login_succesfull)
+        ToastMessageHelper.showShortToast(context, R.string.login_succesfull)
         val intent = Intent(context, HomeMainActivity::class.java)
         startActivity(intent)
-        activity!!.finish()
+        activity?.finish()
     }
 
     override fun showError(error: String) {
         showProgress(false)
-        ToastMessageHelper.showShortToast(context!!, error)
+        ToastMessageHelper.showShortToast(context, error)
     }
 
     private fun showProgress(showProgress: Boolean) {
         if (showProgress) {
-            progress_bar_login.visibility = View.VISIBLE
-            login_button.isEnabled = false
+            progress_bar_login?.visibility = View.VISIBLE
+            login_button?.isEnabled = false
         } else {
-            progress_bar_login.visibility = View.GONE
-            login_button.isEnabled = true
+            progress_bar_login?.visibility = View.GONE
+            login_button?.isEnabled = true
         }
     }
 
     private fun setListeners() {
-        login_email_input_layout?.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        login_email_input_layout?.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun afterTextChanged(editable: Editable) {
                 super.afterTextChanged(editable)
                 showOrHideError(editable.toString(), InputTypes.EMAIL)
             }
         })
-        login_password_input_layout?.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        login_password_input_layout?.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 super.onTextChanged(charSequence, i, i1, i2)
                 showOrHideError(charSequence.toString(), InputTypes.PASSWORD)
             }
         })
 
-        login_button.setOnClickListener({
+        login_button?.setOnClickListener({
             if (login_email_input_layout.editText!!.length() > 0 &&  login_password_input_layout.editText!!.length() > 0
                     && (!login_email_input_layout.isErrorEnabled || !login_password_input_layout.isErrorEnabled)) {
                 showProgress(true)
-                mPresenter.loginWithEmail(login_email_input_layout.editText!!.text.toString(),
-                        login_password_input_layout.editText!!.text.toString())
+                mPresenter.loginWithEmail(login_email_input_layout.editText?.text.toString(),
+                        login_password_input_layout.editText?.text.toString())
             } else
-                ToastMessageHelper.showShortToast(context!!,
+                ToastMessageHelper.showShortToast(context,
                         getString(R.string.error_fields_empty_or_invalid))
         })
 
@@ -110,17 +114,12 @@ class LoginFragment : MvpFragment<LoginContract.View, LoginContract.Presenter>()
 
     fun showOrHideError(message: String, type: InputTypes) {
         val textInputLayout = getInputLayoutByType(type)
-        val error = ValidationHelper.validateText(context!!, message, type)
+        val error = ValidationHelper.validateText(context, message, type)
         if (error == null) {
-            textInputLayout!!.isErrorEnabled = false
+            textInputLayout?.isErrorEnabled = false
         } else {
-            textInputLayout!!.isEnabled = true
-            textInputLayout.error = error
+            textInputLayout?.isEnabled = true
+            textInputLayout?.error = error
         }
-    }
-
-    companion object {
-
-        val TAG = "LoginFragment"
     }
 }

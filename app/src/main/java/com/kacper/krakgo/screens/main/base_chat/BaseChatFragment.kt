@@ -22,8 +22,8 @@ import java.lang.Exception
 /**
  * Created by kacper on 04/02/2018.
  */
-open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContract.Presenter>(),
-        BaseChatContract.View, RecyclerViewClickListener{
+open class BaseChatFragment : MvpFragment<BaseChatContract.View, BaseChatContract.Presenter>(),
+        BaseChatContract.View, RecyclerViewClickListener {
 
 
     override var mPresenter: BaseChatContract.Presenter = BaseChatPresenter()
@@ -41,10 +41,12 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
         rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
         mAdapter?.addListener(this)
     }
+
     override fun messageSendComplete() {
         showProgress(false)
         rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
     }
+
     protected fun setRecyclerView() {
         val layoutManager = LinearLayoutManager(context)
         rv_forum_messages.layoutManager = layoutManager
@@ -56,7 +58,7 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
 
     protected fun setListeners() {
         iv_forum_send_arrow.setOnClickListener({
-            if(et_forum_send_message.text.isNotEmpty()) {
+            if (et_forum_send_message.text.isNotEmpty()) {
                 showProgress(true)
                 mPresenter.sendMessage(et_forum_send_message.text.toString())
                 et_forum_send_message.setText("")
@@ -65,28 +67,29 @@ open class BaseChatFragment :  MvpFragment<BaseChatContract.View, BaseChatContra
             }
         })
     }
-    protected fun showProgress(show: Boolean){
-        if(pb_forum != null) {
-            if (show) pb_forum.visibility = View.VISIBLE
-            else pb_forum.visibility = View.GONE
 
-            rv_forum_messages.isEnabled = !show
-            iv_forum_send_arrow.isEnabled = !show
-        }
+    protected fun showProgress(show: Boolean) {
+
+        if (show) pb_forum?.visibility = View.VISIBLE
+        else pb_forum?.visibility = View.GONE
+
+        rv_forum_messages?.isEnabled = !show
+        iv_forum_send_arrow?.isEnabled = !show
+
     }
 
-    override fun showError(error:String){
-        SnackbarHelper.showError(context!!, error, forum_main_layout)
+    override fun showError(error: String) {
+        SnackbarHelper.showError(context, error, forum_main_layout)
         showProgress(false)
     }
 
     override fun showMessage(message: String) {
-        SnackbarHelper.showSuccess(context!!, message, forum_main_layout)
+        SnackbarHelper.showSuccess(context, message, forum_main_layout)
         showProgress(false)
     }
 
     override fun onClick(view: View?, position: Int) {
-        mPresenter.getUserDetails(mMessages!![position].userID, object: ValueEventListener {
+        mPresenter.getUserDetails(mMessages!![position].userID, object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {
 
             }

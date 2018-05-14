@@ -13,22 +13,24 @@ import com.kacper.krakgo.R
  */
 
 object SnackbarHelper {
-    fun showError(context: Context, text: String?, parentLayout: View) {
+    fun showError(context: Context?, text: String?, parentLayout: View) {
+        if(context != null)
         showSnackbar(context, text?:context.getString(R.string.error_placeholder),
                 parentLayout, R.color.mapStatusInvisible)
     }
 
-    fun showSuccess(context: Context, text: String?, parentLayout: View) {
+    fun showSuccess(context: Context?, text: String?, parentLayout: View) {
+        if(context != null)
         showSnackbar(context, text?:context.getString(R.string.error_placeholder),
                 parentLayout, R.color.mapStatusVisible)
     }
 
-    fun showSuccess(context: Context, textResource: Int, parentLayout: View) {
-        showSuccess(context, context.getString(textResource), parentLayout)
+    fun showSuccess(context: Context?, textResource: Int, parentLayout: View) {
+        showSuccess(context, context?.getString(textResource), parentLayout)
     }
 
-    fun showError(context: Context, textResource: Int, parentLayout: View) {
-        showError(context, context.getString(textResource), parentLayout)
+    fun showError(context: Context?, textResource: Int, parentLayout: View) {
+        showError(context, context?.getString(textResource), parentLayout)
     }
 
     private fun showSnackbar(context: Context, text: String, parentLayout: View, color: Int) {

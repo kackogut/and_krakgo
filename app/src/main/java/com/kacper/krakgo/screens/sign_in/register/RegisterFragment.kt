@@ -58,26 +58,26 @@ class RegisterFragment : MvpFragment<RegisterContract.View, RegisterContract.Pre
                         && register_retype_password_input.editText!!.length() > 0) ||
                 register_email_input.isErrorEnabled || register_password_input.isErrorEnabled
                 || register_retype_password_input.isErrorEnabled) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_fields_empty_or_invalid)
+            ToastMessageHelper.showShortToast(context, R.string.error_fields_empty_or_invalid)
         } else if (!terms_accepted_checkbox.isChecked) {
-            ToastMessageHelper.showShortToast(context!!, R.string.you_have_to_accept_terms)
+            ToastMessageHelper.showShortToast(context, R.string.you_have_to_accept_terms)
         } else if (isBottomButtonEnabled) {
             isBottomButtonEnabled = false
             showProgress()
-            mPresenter.signInWithEmail(register_email_input.editText!!.text.toString(),
-                    register_password_input.editText!!.text.toString())
+            mPresenter.signInWithEmail(register_email_input.editText?.text.toString(),
+                    register_password_input.editText?.text.toString())
         }
     }
 
     private fun showProgress() {
-        register_email_input.isEnabled = isBottomButtonEnabled
-        register_password_input.isEnabled = isBottomButtonEnabled
-        register_retype_password_input.isEnabled = isBottomButtonEnabled
-        terms_accepted_checkbox.isEnabled = isBottomButtonEnabled
+        register_email_input?.isEnabled = isBottomButtonEnabled
+        register_password_input?.isEnabled = isBottomButtonEnabled
+        register_retype_password_input?.isEnabled = isBottomButtonEnabled
+        terms_accepted_checkbox?.isEnabled = isBottomButtonEnabled
         if (isBottomButtonEnabled)
-            progress_bar.visibility = View.GONE
+            progress_bar?.visibility = View.GONE
         else
-            progress_bar.visibility = View.VISIBLE
+            progress_bar?.visibility = View.VISIBLE
     }
 
     override fun onSignUpCompleted() {
@@ -95,19 +95,19 @@ class RegisterFragment : MvpFragment<RegisterContract.View, RegisterContract.Pre
     }
 
     private fun setListeners() {
-        register_email_input.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        register_email_input.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 super.onTextChanged(charSequence, i, i1, i2)
                 showOrHideError(charSequence.toString(), InputTypes.EMAIL)
             }
         })
-        register_password_input.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        register_password_input.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 super.onTextChanged(charSequence, i, i1, i2)
                 showOrHideError(charSequence.toString(), InputTypes.PASSWORD)
             }
         })
-        register_retype_password_input.editText!!.addTextChangedListener(object : CustomTextWatcher() {
+        register_retype_password_input.editText?.addTextChangedListener(object : CustomTextWatcher() {
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 super.onTextChanged(charSequence, i, i1, i2)
                 showOrHideError(charSequence.toString(), InputTypes.RETYPEPASSWORD)
@@ -141,10 +141,10 @@ class RegisterFragment : MvpFragment<RegisterContract.View, RegisterContract.Pre
         val textInputLayout = getInputLayoutByType(type)
         val error = ValidationHelper.validateText(context!!, message, type)
         if (error == null) {
-            textInputLayout!!.isErrorEnabled = false
+            textInputLayout?.isErrorEnabled = false
         } else {
-            textInputLayout!!.isEnabled = true
-            textInputLayout.error = error
+            textInputLayout?.isEnabled = true
+            textInputLayout?.error = error
         }
     }
 

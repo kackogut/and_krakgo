@@ -26,13 +26,15 @@ class ChatActivity : AppCompatActivity(){
         mUserDetails = intent.getParcelableExtra(USER_DETAILS_EXTRA)
                 ?: throw IllegalStateException("field $USER_DETAILS_EXTRA missing in Intent")
 
-        mFragment = ChatWithIDFragment.newFragment(mUserDetails)
-        FragmentHelper.addFragment(supportFragmentManager, mFragment, mFragment::class.java.simpleName)
+        mFragment = ChatFragment.newFragment(mUserDetails)
+        FragmentHelper.addFragment(supportFragmentManager, mFragment,
+                mFragment::class.java.simpleName)
+
 
         GlideHelper.load(civ_chat_avatar, mUserDetails.photo_url!!)
         tv_chat_username.text = mUserDetails.display_name
 
-        (mFragment as ChatWithIDFragment).getChatMessages()
+        (mFragment as ChatFragment).getChatMessages()
     }
 
     companion object {

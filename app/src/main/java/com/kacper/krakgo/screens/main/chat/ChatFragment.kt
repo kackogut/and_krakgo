@@ -5,23 +5,22 @@ import android.support.v4.app.Fragment
 import com.kacper.krakgo.model.UserDetails
 import com.kacper.krakgo.screens.main.base_chat.BaseChatContract
 import com.kacper.krakgo.screens.main.base_chat.BaseChatFragment
-import com.kacper.krakgo.screens.main.chat_with_id.ChatWithIDPresenter
 
 /**
  * Created by kacper on 30/01/2018.
  */
-open class ChatWithIDFragment : BaseChatFragment(){
+open class ChatFragment : BaseChatFragment(){
 
-    override var mPresenter: BaseChatContract.Presenter = ChatWithIDPresenter()
+    override var mPresenter: BaseChatContract.Presenter = ChatPresenter()
     lateinit var mUserDetails: UserDetails
 
     companion object {
-        private val USER_DETAILS_EXTRA = "user_details"
+        private const val USER_DETAILS_EXTRA = "user_details"
 
         fun newFragment(userDetails: UserDetails): Fragment {
             val bundle = Bundle()
             bundle.putParcelable(USER_DETAILS_EXTRA, userDetails)
-            val fragment = ChatWithIDFragment()
+            val fragment = ChatFragment()
             fragment.arguments = bundle
             return fragment
         }
@@ -34,7 +33,8 @@ open class ChatWithIDFragment : BaseChatFragment(){
         setListeners()
         setRecyclerView()
     }
-    public fun getChatMessages(){
+
+    fun getChatMessages(){
         mUserDetails = arguments!!.getParcelable(USER_DETAILS_EXTRA)
         mPresenter.getConversationID(mUserDetails)
     }

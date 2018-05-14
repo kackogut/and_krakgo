@@ -21,10 +21,10 @@ import kotlinx.android.synthetic.main.fragment_conversations.*
  */
 
 class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Presenter>(),
-    MessagesContract.View, RecyclerViewClickListener {
+        MessagesContract.View, RecyclerViewClickListener {
 
-    var mAdapter : UserMessagesAdapter? = null
-    var mConversations : ArrayList<ConversationDetails> = ArrayList()
+    var mAdapter: UserMessagesAdapter? = null
+    var mConversations: ArrayList<ConversationDetails> = ArrayList()
     override var mPresenter: MessagesContract.Presenter = MessagesPresenter()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_conversations, container, false)
@@ -45,8 +45,8 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
         showProgress(false)
     }
 
-    override fun showError(error:String) {
-         SnackbarHelper.showError(context!!, error, cl_conversations_main)
+    override fun showError(error: String) {
+        SnackbarHelper.showError(context, error, cl_conversations_main)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -62,13 +62,11 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
         mPresenter.getConversations()
     }
 
-    fun showProgress(show: Boolean){
-        if(isVisible && pb_conversations != null) {
-            if (show)
-                pb_conversations.visibility = View.VISIBLE
-            else
-                pb_conversations.visibility = View.GONE
-            rv_users_messages.isEnabled = show
-        }
+    fun showProgress(show: Boolean) {
+        if (show)
+            pb_conversations?.visibility = View.VISIBLE
+        else
+            pb_conversations?.visibility = View.GONE
+        rv_users_messages?.isEnabled = show
     }
 }

@@ -61,7 +61,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
-                if(mPresenter.getCurrentUser() == null){
+                if (mPresenter.getCurrentUser() == null) {
                     fusedLocationClient.removeLocationUpdates(this)
                     return
                 }
@@ -93,7 +93,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
-        SnackbarHelper.showError(context!!, p0.errorMessage, fragment_map_main_layout)
+        SnackbarHelper.showError(context, p0.errorMessage, fragment_map_main_layout)
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -110,9 +110,9 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
             sendRequestLocation()
         }
     }
-    
+
     override fun showError(error: String) {
-        SnackbarHelper.showError(context!!,error,fragment_map_main_layout)
+        SnackbarHelper.showError(context, error, fragment_map_main_layout)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -123,7 +123,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                     setMap()
                     sendRequestLocation()
                 } else {
-                    SnackbarHelper.showError(context!!, R.string.error_location_not_granted, fragment_map_main_layout)
+                    SnackbarHelper.showError(context, R.string.error_location_not_granted, fragment_map_main_layout)
                 }
             }
             else -> {
@@ -163,7 +163,7 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
 
     override fun setUsers(users: ArrayList<UserDetails>) {
         mGoogleMap.clear()
-        if(::mPlaces.isInitialized && !mPlaces.isEmpty())
+        if (::mPlaces.isInitialized && !mPlaces.isEmpty())
             setPlaces(mPlaces)
         users.forEach({
             if (it.map_visibility != 0L) {
@@ -215,10 +215,10 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     @SuppressLint("MissingPermission")
-    private fun sendRequestLocation(){
+    private fun sendRequestLocation() {
         fusedLocationClient.requestLocationUpdates(locationRequest,
                 locationCallback,
-                null )
+                null)
     }
 
     private fun connectToMap() {
@@ -249,13 +249,11 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     private fun showProgress(show: Boolean) {
-        if (isVisible && map_view != null) {
-            if (show) {
-                pb_map_fragment?.visibility = View.VISIBLE
-            } else {
-                pb_map_fragment?.visibility = View.GONE
-            }
-            map_view.isEnabled = !show
+        if (show) {
+            pb_map_fragment?.visibility = View.VISIBLE
+        } else {
+            pb_map_fragment?.visibility = View.GONE
         }
+        map_view?.isEnabled = !show
     }
 }

@@ -73,11 +73,11 @@ class RegisterPart2Fragment
 
     private fun goToNextPage() {
         if (mPhotoUri == null) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_no_avatar)
+            ToastMessageHelper.showShortToast(context, R.string.error_no_avatar)
         } else if (register_name_input.isErrorEnabled || register_surname_input.isErrorEnabled) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_fields_empty_or_invalid)
+            ToastMessageHelper.showShortToast(context, R.string.error_fields_empty_or_invalid)
         } else if (et_register_dob_input.length() <= 0 && et_register_dob_input.text.toString() != getString(R.string.dob_label)) {
-            ToastMessageHelper.showShortToast(context!!, R.string.error_dob_not_picked)
+            ToastMessageHelper.showShortToast(context, R.string.error_dob_not_picked)
         } else {
             isBottomButtonEnabled = false
             showProgress()
@@ -90,7 +90,7 @@ class RegisterPart2Fragment
             PhotoHelper.startCircleCropPhoto(this)
         })
         et_register_dob_input.setOnClickListener({
-            DateHelper.getDOBDialog(context!!, this).show()
+            DateHelper.getDOBDialog(context, this).show()
         })
     }
 
@@ -103,7 +103,7 @@ class RegisterPart2Fragment
                 mPhotoUri = result.uri
                 avatar_image.setImageURI(mPhotoUri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                ToastMessageHelper.showShortToast(context!!, result.error.toString())
+                ToastMessageHelper.showShortToast(context, result.error.toString())
             }
         }
     }
@@ -115,7 +115,7 @@ class RegisterPart2Fragment
     }
 
     override fun userDetailsUpdated() {
-        ToastMessageHelper.showShortToast(context!!, R.string.account_created)
+        ToastMessageHelper.showShortToast(context, R.string.account_created)
         val intent = Intent(context, HomeMainActivity::class.java)
         startActivity(intent)
         activity!!.finish()
@@ -125,14 +125,14 @@ class RegisterPart2Fragment
     }
 
     private fun showProgress() {
-        register_name_input.isEnabled = isBottomButtonEnabled
-        register_surname_input.isEnabled = isBottomButtonEnabled
-        avatar_image.isEnabled = isBottomButtonEnabled
-        et_register_dob_input.isEnabled = isBottomButtonEnabled
+        register_name_input?.isEnabled = isBottomButtonEnabled
+        register_surname_input?.isEnabled = isBottomButtonEnabled
+        avatar_image?.isEnabled = isBottomButtonEnabled
+        et_register_dob_input?.isEnabled = isBottomButtonEnabled
         if (isBottomButtonEnabled)
-            progress_bar.visibility = View.GONE
+            progress_bar?.visibility = View.GONE
         else
-            progress_bar.visibility = View.VISIBLE
+            progress_bar?.visibility = View.VISIBLE
     }
 
 }

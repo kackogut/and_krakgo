@@ -1,4 +1,4 @@
-package com.kacper.krakgo.screens.main.chat_with_id
+package com.kacper.krakgo.screens.main.chat
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
@@ -15,8 +15,8 @@ import java.util.*
 /**
  * Created by kacper on 04/02/2018.
  */
-open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
-        ChatWithIDContract.Presenter {
+open class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
+        ChatContract.Presenter {
 
     private lateinit var dataBase : String
 
@@ -50,7 +50,7 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                 .child(mConversationID)
                 .addValueEventListener(object : ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
-                        Log.w(ChatWithIDPresenter::class.java.simpleName,
+                        Log.w(ChatPresenter::class.java.simpleName,
                                 "getMessages:onCancelled", p0?.toException());
                     }
 
@@ -60,7 +60,6 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                             p0.children.mapTo(values) {
                                 it.getValue(ForumMessage::class.java)!!
                             }
-
                         }
                         mView?.onMessagesDownload(values)
                     }
@@ -76,7 +75,7 @@ open class ChatWithIDPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                 .child(secondUserDetails.userID)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        Log.w(ChatWithIDPresenter::class.java.simpleName,
+                        Log.w(ChatPresenter::class.java.simpleName,
                                 "getConversation:onCancelled", p0?.toException());
                     }
 

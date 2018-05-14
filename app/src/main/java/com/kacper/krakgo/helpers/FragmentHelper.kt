@@ -17,10 +17,12 @@ object FragmentHelper {
     }
 
     @JvmOverloads
-    fun changeFragments(fragmentManager: FragmentManager, fragment: Fragment, fragmentTag: String = fragment.javaClass.simpleName) {
+    fun changeFragments(fragmentManager: FragmentManager, fragment: Fragment,
+                        fragmentTag: String = fragment.javaClass.simpleName) {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment, fragmentTag)
-                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                        R.anim.enter_from_right, R.anim.exit_to_left)
                 .addToBackStack(fragmentTag)
                 .commit()
 
@@ -29,7 +31,8 @@ object FragmentHelper {
     fun removeAndChangeFragment(fragmentManager: FragmentManager, fragment: Fragment) {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
-                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left)
+                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                        R.anim.enter_from_right, R.anim.exit_to_left)
                 .commit()
     }
 

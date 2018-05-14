@@ -22,7 +22,7 @@ import java.util.Calendar.MONTH
 object DateHelper {
     private var sLocale: Locale? = null
 
-    fun getDOBDialog(context: Context, listener: DatePickerDialog.OnDateSetListener): DatePickerDialog {
+    fun getDOBDialog(context: Context?, listener: DatePickerDialog.OnDateSetListener): DatePickerDialog {
         val calendar = getInstance()
         calendar.set(YEAR, calendar.get(YEAR) - 18)
         val dialog = DatePickerDialog(context, listener, calendar.get(YEAR),

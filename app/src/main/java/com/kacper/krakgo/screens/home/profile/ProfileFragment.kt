@@ -55,14 +55,14 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     override fun userSaveComplete() {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
-        SnackbarHelper.showSuccess(context!!, R.string.user_details_saved, main_layout)
+        SnackbarHelper.showSuccess(context, R.string.user_details_saved, main_layout)
     }
 
     override fun onError(error: Exception) {
         showProgress(false)
         progress_bar_save.visibility = View.GONE
         progress_bar_logout.visibility = View.GONE
-        SnackbarHelper.showError(context!!, error.localizedMessage, main_layout)
+        SnackbarHelper.showError(context, error.localizedMessage, main_layout)
     }
 
     override fun showUserDetails(userDetails: UserDetails?) {
@@ -73,7 +73,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
                 DateHelper.getYearDifference(Date(userDetails!!.dob_time!!)),
                 DateHelper.getYearDifference(Date(userDetails.dob_time!!)))
         tv_profile_display_name.text = mUserDetails?.display_name
-        GlideHelper.loadWithProgress(context!!, cv_profile_avatar, ProgressBar(context),
+        GlideHelper.loadWithProgress(context, cv_profile_avatar, ProgressBar(context),
                 Uri.parse(mUserDetails?.photo_url))
         showProgress(false)
     }
@@ -87,20 +87,20 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
                 mPhotoUri = result.uri
                 mPresenter.updateUserAvatar(result.uri)
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                SnackbarHelper.showError(context!!, result.error.localizedMessage, main_layout)
+                SnackbarHelper.showError(context, result.error.localizedMessage, main_layout)
             }
         }
     }
 
     override fun photoUploadSuccess(uri: Uri) {
-        SnackbarHelper.showSuccess(context!!, R.string.photo_change_succesfull, main_layout)
+        SnackbarHelper.showSuccess(context, R.string.photo_change_succesfull, main_layout)
         cv_profile_avatar.setImageURI(mPhotoUri)
         mUserDetails?.photo_url = uri.toString()
         mPresenter.saveUserDetails(mUserDetails!!)
     }
 
     override fun showError(error: String) {
-        SnackbarHelper.showError(context!!, error, main_layout)
+        SnackbarHelper.showError(context, error, main_layout)
     }
 
     private fun setCurrentStatus(status: Long?) {
@@ -153,7 +153,7 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
         cv_profile_avatar.setOnClickListener({PhotoHelper.startCircleCropPhoto(this)})
     }
 
-    fun toogleExpandableLayout(){
+    private fun toogleExpandableLayout(){
         val rotateAnimation: RotateAnimation = if (profile_expendable_layout.isExpanded)
             RotateAnimation(180.0f, 0.0f, Animation.RELATIVE_TO_SELF,
                     0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
@@ -171,25 +171,24 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
 
     }
-
-    fun showProgress(show: Boolean) {
-        ll_map_status_inviting.isEnabled = !show
-        ll_map_status_visible.isEnabled = !show
-        ll_map_status_invisible.isEnabled = !show
-        profile_expendable_layout.isEnabled = !show
-        fl_save_button.isEnabled = !show
-        fl_logout_button.isEnabled = !show
-        cv_profile_avatar.isEnabled = !show
-        profile_expendable_main.isEnabled = !show
-        if(show)
-            pb_profile.visibility = View.VISIBLE
-        else
-            pb_profile.visibility = View.GONE
-    }
-    fun changeMapVisibility(value: Long){
+    private fun changeMapVisibility(value: Long){
         mUserDetails?.map_visibility = value
         setCurrentStatus(value)
         toogleExpandableLayout()
+    }
+    fun showProgress(show: Boolean) {
+        ll_map_status_inviting?.isEnabled = !show
+        ll_map_status_visible?.isEnabled = !show
+        ll_map_status_invisible?.isEnabled = !show
+        profile_expendable_layout?.isEnabled = !show
+        fl_save_button?.isEnabled = !show
+        fl_logout_button?.isEnabled = !show
+        cv_profile_avatar?.isEnabled = !show
+        profile_expendable_main?.isEnabled = !show
+        if(show)
+            pb_profile?.visibility = View.VISIBLE
+        else
+            pb_profile?.visibility = View.GONE
     }
 }
 

@@ -25,30 +25,40 @@ import com.kacper.krakgo.R
  */
 
 object GlideHelper {
-    fun loadWithProgress(context: Context, imageView: ImageView, progressBar: ProgressBar, photoUri: Uri) {
+
+    private val myOptions = RequestOptions()
+            .placeholder(R.drawable.ic_user_logo_register)
+            .signature(MediaStoreSignature("",
+                    System.currentTimeMillis(), 0))
+
+    fun loadWithProgress(context: Context?, imageView: ImageView, progressBar: ProgressBar, photoUri: Uri) {
         progressBar.visibility = View.VISIBLE
         imageView.isEnabled = false
-        val myOptions = RequestOptions()
-                .placeholder(R.drawable.ic_user_logo_register)
-                .signature(MediaStoreSignature("", System.currentTimeMillis(), 0))
 
-        Glide.with(context)
-                .load(photoUri)
-                .apply(myOptions)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
-                        progressBar.visibility = View.GONE
-                        imageView.isEnabled = true
-                        return false
-                    }
 
-                    override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>, dataSource: DataSource, isFirstResource: Boolean): Boolean {
-                        progressBar.visibility = View.GONE
-                        imageView.isEnabled = true
-                        return false
-                    }
-                })
-                .into(imageView)
+        if(context!= null) {
+            Glide.with(context)
+                    .load(photoUri)
+                    .apply(myOptions)
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(e: GlideException?,
+                                                  model: Any, target: Target<Drawable>,
+                                                  isFirstResource: Boolean): Boolean {
+                            progressBar.visibility = View.GONE
+                            imageView.isEnabled = true
+                            return false
+                        }
+
+                        override fun onResourceReady(resource: Drawable, model: Any,
+                                                     target: Target<Drawable>, dataSource: DataSource,
+                                                     isFirstResource: Boolean): Boolean {
+                            progressBar.visibility = View.GONE
+                            imageView.isEnabled = true
+                            return false
+                        }
+                    })
+                    .into(imageView)
+        }
     }
 
     fun load(imageView: ImageView, photoUrl: String) {
