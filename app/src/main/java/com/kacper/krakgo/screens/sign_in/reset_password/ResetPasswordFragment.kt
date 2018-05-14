@@ -21,7 +21,8 @@ import kotlinx.android.synthetic.main.fragment_reset_password.*
  * Created by kacper on 05/11/2017.
  */
 
-class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View, ResetPasswordContract.Presenter>(),
+class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View,
+        ResetPasswordContract.Presenter>(),
         ResetPasswordContract.View {
 
     override var mPresenter: ResetPasswordContract.Presenter = ResetPasswordPresenter()
@@ -52,7 +53,8 @@ class ResetPasswordFragment : MvpFragment<ResetPasswordContract.View, ResetPassw
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_reset_password, container, false)
         ButterKnife.bind(this, rootView)
         return rootView

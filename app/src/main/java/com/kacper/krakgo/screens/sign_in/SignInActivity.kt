@@ -40,7 +40,8 @@ class SignInActivity : AppCompatActivity() {
         SignInEvents.subscribe { integer ->
             if (integer == SignInEvents.ACTION_FORGOT_PASSSWORD_CLICKED) {
                 mFragment = ResetPasswordFragment()
-                FragmentHelper.changeFragments(supportFragmentManager, mFragment!!, ResetPasswordFragment.TAG)
+                FragmentHelper.changeFragments(supportFragmentManager, mFragment!!,
+                        ResetPasswordFragment.TAG)
                 verifyView()
             }
         }
@@ -89,9 +90,12 @@ class SignInActivity : AppCompatActivity() {
                     FragmentHelper.changeFragments(supportFragmentManager, mFragment!!,
                             RegisterFragment::class.java.simpleName)
                 }
-                is RegisterFragment -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_1)
-                is RegisterPart2Fragment -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_2)
-                is ResetPasswordFragment -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_PASSWORD)
+                is RegisterFragment
+                    -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_1)
+                is RegisterPart2Fragment
+                    -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_REGISTER_2)
+                is ResetPasswordFragment
+                    -> SignInEvents.publish(SignInEvents.ACTION_BOTTOM_BUTTON_PASSWORD)
             }
             verifyView()
         })

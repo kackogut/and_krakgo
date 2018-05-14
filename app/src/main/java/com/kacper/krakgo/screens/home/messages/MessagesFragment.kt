@@ -26,7 +26,8 @@ class MessagesFragment : MvpFragment<MessagesContract.View, MessagesContract.Pre
     var mAdapter: UserMessagesAdapter? = null
     var mConversations: ArrayList<ConversationDetails> = ArrayList()
     override var mPresenter: MessagesContract.Presenter = MessagesPresenter()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_conversations, container, false)
     }
 

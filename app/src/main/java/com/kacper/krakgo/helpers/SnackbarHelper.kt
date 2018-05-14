@@ -33,7 +33,8 @@ object SnackbarHelper {
         showError(context, context?.getString(textResource), parentLayout)
     }
 
-    private fun showSnackbar(context: Context, text: String, parentLayout: View, color: Int) {
+    private fun showSnackbar(context: Context, text: String,
+                             parentLayout: View, color: Int) {
         val snackbar = Snackbar.make(parentLayout, text, Snackbar.LENGTH_LONG)
         snackbar.view.setBackgroundColor(ContextCompat.getColor(
                 context, color))

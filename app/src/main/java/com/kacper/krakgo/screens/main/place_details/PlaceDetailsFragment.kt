@@ -18,12 +18,13 @@ class PlaceDetailsFragment : ChatFragment(){
     override var mPresenter: BaseChatContract.Presenter = ChatPresenter()
     lateinit var mPlaceDetails: Place
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
     companion object {
-        val PLACE_DETAILS_EXTRA = "place_extra"
+        const val PLACE_DETAILS_EXTRA = "place_extra"
         fun newFragment(placeDetails: Place): Fragment {
             val bundle = Bundle()
             bundle.putParcelable(PLACE_DETAILS_EXTRA, placeDetails)

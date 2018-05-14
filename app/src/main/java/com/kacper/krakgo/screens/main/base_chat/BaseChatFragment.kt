@@ -10,14 +10,13 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kacper.krakgo.R
 import com.kacper.krakgo.helpers.SnackbarHelper
-import com.kacper.krakgo.model.ForumMessage
+import com.kacper.krakgo.model.Message
 import com.kacper.krakgo.model.UserDetails
 import com.kacper.krakgo.mvp.MvpFragment
 import com.kacper.krakgo.screens.dialogs.DialogUserInfo
 import com.kacper.krakgo.screens.home.adapters.MessagesAdapter
 import com.kacper.krakgo.screens.home.adapters.RecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_chat.*
-import java.lang.Exception
 
 /**
  * Created by kacper on 04/02/2018.
@@ -27,18 +26,19 @@ open class BaseChatFragment : MvpFragment<BaseChatContract.View, BaseChatContrac
 
 
     override var mPresenter: BaseChatContract.Presenter = BaseChatPresenter()
-    private var mMessages: ArrayList<ForumMessage>? = null
+    private var mMessages: ArrayList<Message>? = null
     private var mAdapter: MessagesAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
-    override fun onMessagesDownload(messages: ArrayList<ForumMessage>) {
+    override fun onMessagesDownload(messages: ArrayList<Message>) {
         mMessages = messages
         mAdapter?.setData(messages)
         showProgress(false)
-        rv_forum_messages.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
+        rv_forum_messages?.smoothScrollToPosition(rv_forum_messages.adapter.itemCount)
         mAdapter?.addListener(this)
     }
 

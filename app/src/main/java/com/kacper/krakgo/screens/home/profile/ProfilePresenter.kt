@@ -26,7 +26,8 @@ class ProfilePresenter : MvpPresenterImpl<ProfileContract.View>(),
         reference.delete()
         val uploadTask = reference.putFile(uri)
         uploadTask
-                .addOnCompleteListener { task -> mView?.photoUploadSuccess(task.result.downloadUrl!!)}
+                .addOnCompleteListener { task -> mView?.photoUploadSuccess(
+                        task.result.downloadUrl!!)}
                 .addOnFailureListener { e -> mView?.showError(e) }
     }
 

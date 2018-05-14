@@ -1,6 +1,6 @@
 package com.kacper.krakgo.screens.main.base_chat
 
-import com.kacper.krakgo.model.ForumMessage
+import com.kacper.krakgo.model.Message
 import com.kacper.krakgo.model.UserDetails
 import com.kacper.krakgo.mvp.MvpPresenter
 import com.kacper.krakgo.mvp.MvpView
@@ -11,7 +11,7 @@ import com.kacper.krakgo.mvp.MvpView
 object BaseChatContract {
     interface View : MvpView {
         fun messageSendComplete()
-        fun onMessagesDownload(messages: ArrayList<ForumMessage>)
+        fun onMessagesDownload(messages: ArrayList<Message>)
     }
     interface Presenter : MvpPresenter<View> {
         fun sendMessage(message: String)

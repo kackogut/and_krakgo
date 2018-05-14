@@ -54,7 +54,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_map, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
 
@@ -97,7 +98,8 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
     }
 
     override fun onConnected(p0: Bundle?) {
-        if (ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(context!!,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(activity!!,
@@ -115,15 +117,19 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
         SnackbarHelper.showError(context, error, fragment_map_main_layout)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_READ_LOCATION -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if ((grantResults.isNotEmpty()
+                                && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     setLocationAndScroll()
                     setMap()
                     sendRequestLocation()
                 } else {
-                    SnackbarHelper.showError(context, R.string.error_location_not_granted, fragment_map_main_layout)
+
+                    SnackbarHelper.showError(context,
+                            R.string.error_location_not_granted, fragment_map_main_layout)
                 }
             }
             else -> {
@@ -171,9 +177,11 @@ class MapFragment : MvpFragment<MapContract.View, MapContract.Presenter>(),
                         it.latitude!!, it.longitude!!
                 )))
                 if (it.map_visibility == 1L)
-                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
+                    marker.setIcon(
+                            BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_visible))
                 else
-                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_inviting))
+                    marker.setIcon(
+                            BitmapDescriptorFactory.fromResource(R.drawable.ic_user_map_inviting))
 
                 marker.tag = it
             }

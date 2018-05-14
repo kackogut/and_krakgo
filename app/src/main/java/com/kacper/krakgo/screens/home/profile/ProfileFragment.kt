@@ -42,7 +42,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     private var mUserDetails: UserDetails? = null
     private var mPhotoUri : Uri? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -104,7 +105,8 @@ class ProfileFragment : MvpFragment<ProfileContract.View, ProfileContract.Presen
     }
 
     private fun setCurrentStatus(status: Long?) {
-        tv_profile_map_status_label.text = getString(MapVisibility.values()[status!!.toInt()].stringResource)
+        tv_profile_map_status_label.text =
+                getString(MapVisibility.values()[status!!.toInt()].stringResource)
         iv_profile_map_status_circle.setColorFilter(ContextCompat.getColor(context!!,
                 MapVisibility.values()[status.toInt()].colourResource))
 

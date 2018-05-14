@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.kacper.krakgo.helpers.FirebaseDatabaseHelper
 import com.kacper.krakgo.model.ConversationDetails
-import com.kacper.krakgo.model.ForumMessage
+import com.kacper.krakgo.model.Message
 import com.kacper.krakgo.model.UserDetails
 import com.kacper.krakgo.mvp.MvpPresenterImpl
 import com.kacper.krakgo.screens.main.base_chat.BaseChatContract
@@ -29,7 +29,7 @@ open class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
     lateinit var mConversationID: String
 
     override fun sendMessage(message: String) {
-        val forumMessage = ForumMessage(message, getCurrentUser()!!)
+        val forumMessage = Message(message, getCurrentUser()!!)
         getDatabaseReference()
                 .child(dataBase)
                 .child(mConversationID)
@@ -55,10 +55,10 @@ open class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
-                        val values: ArrayList<ForumMessage> = ArrayList()
+                        val values: ArrayList<Message> = ArrayList()
                         if (p0!!.exists()) {
                             p0.children.mapTo(values) {
-                                it.getValue(ForumMessage::class.java)!!
+                                it.getValue(Message::class.java)!!
                             }
                         }
                         mView?.onMessagesDownload(values)
@@ -81,7 +81,8 @@ open class ChatPresenter : MvpPresenterImpl<BaseChatContract.View>(),
 
                     override fun onDataChange(p0: DataSnapshot?) {
                         if (p0!!.exists()) {
-                            mConversationID = p0.getValue(ConversationDetails::class.java)!!.conversationID
+                            mConversationID =
+                                    p0.getValue(ConversationDetails::class.java)!!.conversationID
                         } else {
                             mConversationID = getDatabaseReference()
                                     .child(FirebaseDatabaseHelper.USER_CONVERSATIONS)

@@ -9,7 +9,7 @@ import java.util.Date
  * Created by kacper on 25/01/2018.
  */
 
-class ForumMessage {
+class Message {
 
     lateinit var message_text: String
     lateinit var userID: String

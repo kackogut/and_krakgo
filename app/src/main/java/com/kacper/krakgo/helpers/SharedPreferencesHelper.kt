@@ -19,9 +19,11 @@ object SharedPreferencesHelper {
         val editor = sharedPref?.edit()
         editor?.putBoolean(key, value)
         editor?.apply()
+
     }
 
-    private fun getBoolean(context: Context, key: String, defaultValue: Boolean): Boolean {
+    private fun getBoolean(context: Context,
+                           key: String, defaultValue: Boolean): Boolean {
         val sharedPref = context.getSharedPreferences(PREFERENCES_NAME, 0)
         return sharedPref.getBoolean(key, defaultValue)
     }

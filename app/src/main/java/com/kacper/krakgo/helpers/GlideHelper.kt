@@ -35,8 +35,7 @@ object GlideHelper {
         progressBar.visibility = View.VISIBLE
         imageView.isEnabled = false
 
-
-        if(context!= null) {
+        if (context != null) {
             Glide.with(context)
                     .load(photoUri)
                     .apply(myOptions)
@@ -59,6 +58,7 @@ object GlideHelper {
                     })
                     .into(imageView)
         }
+
     }
 
     fun load(imageView: ImageView, photoUrl: String) {

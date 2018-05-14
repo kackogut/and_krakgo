@@ -10,7 +10,6 @@ import com.theartofdev.edmodo.cropper.CropImageView
  */
 
 object PhotoHelper {
-
     fun startCircleCropPhoto(fragment: Fragment) {
         CropImage.activity()
                 .setCropShape(CropImageView.CropShape.OVAL)
