@@ -95,8 +95,8 @@ class MessagesAdapter
             listener.onClick(view, adapterPosition)
         }
 
-        val mAvatar: ImageView = itemView.findViewById(R.id.civ_message_avatar)
-        val mUserName: TextView = itemView.findViewById(R.id.tv_message_name)
+        private val mAvatar: ImageView = itemView.findViewById(R.id.civ_message_avatar)
+        private val mUserName: TextView = itemView.findViewById(R.id.tv_message_name)
         var mMessage: Message? = null
 
         override fun bind(message: Message, isFirstMessage: Boolean) {

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl_toolbar_chat"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/rl_toolbar_chat"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
 
@@ -16,28 +15,28 @@
             android:id="@+id/civ_chat_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_user_logo_register"/>
+            android:src="@drawable/ic_user_logo_register" />
 
         <TextView
+            android:id="@+id/tv_chat_username"
+            style="@style/TextLabelBigBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextLabelBigBold"
-            android:id="@+id/tv_chat_username"
             android:layout_centerInParent="true"
-            tools:text="John Williams"
+            android:layout_gravity="center"
 
-            android:layout_gravity="center"/>
+            tools:text="John Williams" />
     </RelativeLayout>
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_toolbar_chat"/>
+        android:layout_below="@+id/rl_toolbar_chat" />
 
 </RelativeLayout>

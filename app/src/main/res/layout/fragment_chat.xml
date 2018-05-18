@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/forum_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:id="@+id/forum_main_layout"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -16,24 +15,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_forum_messages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_above="@id/ll_forum_message"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_above="@id/ll_forum_message"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
         <LinearLayout
             android:id="@+id/ll_forum_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:layout_alignParentBottom="true"
             android:background="@drawable/round_corner_layout"
             android:orientation="horizontal">
 
@@ -46,7 +45,7 @@
                 android:hint="@string/write_message"
                 android:textColor="@color/colorBackground"
                 android:textColorHint="@color/colorBackground"
-                android:theme="@style/TextLabelDark"/>
+                android:theme="@style/TextLabelDark" />
 
             <ImageView
                 android:id="@+id/iv_forum_send_arrow"
@@ -56,7 +55,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="0.2"
                 android:src="@drawable/ic_send"
-                android:tint="@color/colorBackground"/>
+                android:tint="@color/colorBackground" />
 
         </LinearLayout>
     </RelativeLayout>

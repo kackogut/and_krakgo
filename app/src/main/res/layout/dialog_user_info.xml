@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/dialog_background">
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
 
-    <include layout="@layout/item_user_basic_info"
-             android:id="@+id/layout_user_info"/>
+    <include
+        android:id="@+id/layout_user_info"
+        layout="@layout/item_user_basic_info" />
 
     <RelativeLayout
         android:id="@+id/profile_expendable_main"
@@ -22,9 +22,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginBottom="@dimen/margin_size_big"
-            android:layout_marginLeft="@dimen/margin_size_medium"
+            android:layout_marginStart="@dimen/margin_size_medium"
             android:layout_marginTop="@dimen/margin_size_big"
-            android:src="@drawable/full_circle"/>
+            android:src="@drawable/full_circle" />
 
         <TextView
             android:id="@+id/tv_dialog_map_status_label"
@@ -33,19 +33,21 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            tools:text="Dostępny"/>
+            tools:text="Dostępny" />
 
     </RelativeLayout>
-    <View
-        style="@style/separator"/>
+
+    <View style="@style/Separator" />
+
     <TextView
+        android:id="@+id/tv_dialog_about_me"
+        style="@style/TextLabelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextLabelStyle"
-        android:textColor="@color/colorWhite"
-        tools:text="O mnie"
         android:layout_gravity="center"
-        android:id="@+id/tv_dialog_about_me"/>
+        android:textColor="@color/colorWhite"
+        tools:text="O mnie" />
+
     <FrameLayout
         android:id="@+id/fl_send_message_button"
         style="@style/RoundButton"
@@ -57,7 +59,7 @@
 
         <TextView
             style="@style/ButtonTransparentText"
-            android:text="@string/send_message"/>
+            android:text="@string/send_message" />
     </FrameLayout>
 
 </LinearLayout>

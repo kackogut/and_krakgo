@@ -1,50 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorBackground"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/sign_toolbar"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:visibility="gone"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/sign_toolbar"
-        android:orientation="horizontal">
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <ImageView
             android:id="@+id/arrow_back"
             android:layout_width="0dp"
             android:layout_height="42dp"
-            android:src="@drawable/left_arrow"
-            android:tint="@color/colorBeer"
             android:layout_gravity="center"
-            android:layout_weight="0.3"/>
+            android:layout_weight="0.3"
+            android:src="@drawable/left_arrow"
+            android:tint="@color/colorBeer" />
 
         <ImageView
             android:id="@+id/register_logo_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_text_only"
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
-            android:layout_weight="0.7"/>
+            android:layout_weight="0.7"
+            android:src="@drawable/logo_text_only" />
 
     </LinearLayout>
+
     <TextView
+        android:id="@+id/sign_button"
         style="@style/BottomFullButton"
         android:layout_alignParentBottom="true"
-        android:text="@string/dont_have_account_sign_label"
-        android:id="@+id/sign_button"/>
+        android:text="@string/dont_have_account_sign_label" />
 
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sign_toolbar"
-        android:layout_above="@id/sign_button"/>
-
+        android:layout_above="@id/sign_button"
+        android:layout_below="@id/sign_toolbar" />
 
 
 </RelativeLayout>

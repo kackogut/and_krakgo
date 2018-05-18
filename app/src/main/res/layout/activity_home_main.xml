@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_bar" />
+
     <View
-        style="@style/separator"
-        android:layout_above="@id/bottom_bar"/>
+        style="@style/Separator"
+        android:layout_above="@id/bottom_bar" />
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottom_bar"
@@ -22,6 +23,6 @@
         app:itemBackground="@color/colorPrimaryDark"
         app:itemIconTint="@drawable/bottombar_selector"
         app:itemTextColor="@drawable/bottombar_selector"
-        app:menu="@menu/bottom_menu"/>
+        app:menu="@menu/bottom_menu" />
 
 </RelativeLayout>
